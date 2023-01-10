@@ -10,7 +10,7 @@ z = height/2
 
 def Create_World():
     pyrosim.Start_SDF("world.sdf")
-    pyrosim.Send_Cube(name="Box", pos=[x, y, z] , size=[length, width, height])
+    pyrosim.Send_Cube(name="Box", pos=[x-3, y+3, z] , size=[length, width, height])
     pyrosim.End()
 
 def Create_Robot():
