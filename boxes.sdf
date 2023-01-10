@@ -16,14 +16,14 @@
             <collision>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>1.0 1.0 1.0</size>
                    </box>
                 </geometry>
             </collision>
             <visual>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>1.0 1.0 1.0</size>
                    </box>
                 </geometry>
             </visual>
@@ -46,14 +46,14 @@
             <collision>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.9 0.9 0.9</size>
                    </box>
                 </geometry>
             </collision>
             <visual>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.9 0.9 0.9</size>
                    </box>
                 </geometry>
             </visual>
@@ -76,14 +76,14 @@
             <collision>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.81 0.81 0.81</size>
                    </box>
                 </geometry>
             </collision>
             <visual>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.81 0.81 0.81</size>
                    </box>
                 </geometry>
             </visual>
@@ -106,14 +106,14 @@
             <collision>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.7290000000000001 0.7290000000000001 0.7290000000000001</size>
                    </box>
                 </geometry>
             </collision>
             <visual>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.7290000000000001 0.7290000000000001 0.7290000000000001</size>
                    </box>
                 </geometry>
             </visual>
@@ -136,14 +136,14 @@
             <collision>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.6561 0.6561 0.6561</size>
                    </box>
                 </geometry>
             </collision>
             <visual>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.6561 0.6561 0.6561</size>
                    </box>
                 </geometry>
             </visual>
@@ -166,14 +166,14 @@
             <collision>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.5904900000000001 0.5904900000000001 0.5904900000000001</size>
                    </box>
                 </geometry>
             </collision>
             <visual>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.5904900000000001 0.5904900000000001 0.5904900000000001</size>
                    </box>
                 </geometry>
             </visual>
@@ -196,14 +196,14 @@
             <collision>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.531441 0.531441 0.531441</size>
                    </box>
                 </geometry>
             </collision>
             <visual>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.531441 0.531441 0.531441</size>
                    </box>
                 </geometry>
             </visual>
@@ -226,14 +226,14 @@
             <collision>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.4782969000000001 0.4782969000000001 0.4782969000000001</size>
                    </box>
                 </geometry>
             </collision>
             <visual>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.4782969000000001 0.4782969000000001 0.4782969000000001</size>
                    </box>
                 </geometry>
             </visual>
@@ -256,14 +256,14 @@
             <collision>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.4304672100000001 0.4304672100000001 0.4304672100000001</size>
                    </box>
                 </geometry>
             </collision>
             <visual>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.4304672100000001 0.4304672100000001 0.4304672100000001</size>
                    </box>
                 </geometry>
             </visual>
@@ -286,14 +286,14 @@
             <collision>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.3874204890000001 0.3874204890000001 0.3874204890000001</size>
                    </box>
                 </geometry>
             </collision>
             <visual>
                 <geometry>
                    <box>
-                      <size>1 1 1</size>
+                      <size>0.3874204890000001 0.3874204890000001 0.3874204890000001</size>
                    </box>
                 </geometry>
             </visual>
