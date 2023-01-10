@@ -30,7 +30,7 @@
         </link>
     </model>
     <model name="Box2">
-        <pose>0 0 0.5 0 0 0 </pose>
+        <pose>1 0 1.5 0 0 0 </pose>
         <link name="Box2">
             <inertial>
                 <mass>1.0</mass>
