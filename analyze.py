@@ -6,11 +6,12 @@ frontLegSensorValues = np.load('data/frontLegSensorValues.npy')
 
 # print(backLegSensorValues)
 
-plt.plot(backLegSensorValues, linewidth=3, label='Back Leg')
-plt.plot(frontLegSensorValues, linewidth=1.5, label='Front Leg')
+plt.plot(backLegSensorValues, linewidth=4, label='Back Leg')
+plt.plot(frontLegSensorValues, linewidth=2, label='Front Leg')
 plt.legend()
 plt.xlabel('Time Steps')
-plt.ylabel('Books Read')
+plt.ylabel('Touch Sensor Value')
+plt.savefig('data\my_plot.png', dpi=500)
 
 plt.show()
 
