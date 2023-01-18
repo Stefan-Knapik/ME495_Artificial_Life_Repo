@@ -1,11 +1,9 @@
 from world import WORLD
 from robot import ROBOT
 import constants as c
+import time
 import pybullet as p
 import pybullet_data
-import pyrosim.pyrosim as pyrosim
-import time
-import numpy as np
 
 class SIMULATION:
 
@@ -22,25 +20,18 @@ class SIMULATION:
         for i in range(c.num_steps):
             p.stepSimulation()
             
-            self.robot.Sense()
+            self.robot.Sense(i)
+            self.robot.Act(i)
             
-            
-            # pyrosim.Set_Motor_For_Joint(
-            #     bodyIndex = robotId,
-            #     jointName = 'Torso_BackLeg',
-            #     controlMode = p.POSITION_CONTROL,
-            #     targetPosition = targetAnglesBackLeg[i],
-            #     maxForce = c.maxForceBackLeg)
-            
-            # pyrosim.Set_Motor_For_Joint(
-            #     bodyIndex = robotId,
-            #     jointName = 'Torso_FrontLeg',
-            #     controlMode = p.POSITION_CONTROL,
-            #     targetPosition = targetAnglesFrontLeg[i],
-            #     maxForce = c.maxForceFrontLeg)
 
             print(i)
             time.sleep(c.wait_time)
+            
+        for linkName in self.robot.sensors:
+            self.robot.sensors[linkName].Save_Values()
+            
+        for jointName in self.robot.motors:
+            self.robot.motors[jointName].Save_Values()
             
     def __del__(self):
         p.disconnect()

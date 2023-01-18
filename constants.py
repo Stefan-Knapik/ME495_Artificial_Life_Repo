@@ -5,12 +5,7 @@ wait_time = 1/240
 
 gravity = -9.8
 
-maxForceBackLeg = 20
-amplitudeBackLeg = pi/6
-frequencyBackLeg = 13
-phaseOffsetBackLeg = pi/12
-
-maxForceFrontLeg = 20
-amplitudeFrontLeg = pi/6
-frequencyFrontLeg = 13
-phaseOffsetFrontLeg = 0
+maxForce = 20
+amplitude = pi/6
+frequency = 13
+phaseOffset = pi/12
