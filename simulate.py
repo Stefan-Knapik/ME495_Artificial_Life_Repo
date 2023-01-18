@@ -8,23 +8,10 @@
 # import constants as c
 from simulation import SIMULATION
 
-
-# num_steps = 1000
-# wait_time = 1/240
-
 simulation = SIMULATION()
+simulation.Run()
 
-# physicsClient = p.connect(p.GUI)
-# p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
-# p.setGravity(0,0,c.gravity)
-# planeId = p.loadURDF("plane.urdf")
-# p.loadSDF("world.sdf")
-# robotId = p.loadURDF("body.urdf")
-
-# pyrosim.Prepare_To_Simulate(robotId)
-# backLegSensorValues = np.zeros(num_steps)
-# frontLegSensorValues = np.zeros(num_steps)
 
 # targetAnglesBackLeg = c.amplitudeBackLeg * np.sin(c.frequencyBackLeg * np.linspace(0, 2*pi, num_steps) + c.phaseOffsetBackLeg)
 # targetAnglesFrontLeg = c.amplitudeFrontLeg * np.sin(c.frequencyFrontLeg * np.linspace(0, 2*pi, num_steps) + c.phaseOffsetFrontLeg)

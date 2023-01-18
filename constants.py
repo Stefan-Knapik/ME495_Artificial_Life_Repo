@@ -1,5 +1,8 @@
 from math import pi
 
+num_steps = 1000
+wait_time = 1/240
+
 gravity = -9.8
 
 maxForceBackLeg = 20
