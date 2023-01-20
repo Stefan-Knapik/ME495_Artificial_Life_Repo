@@ -24,9 +24,11 @@ class SIMULATION:
             p.stepSimulation()
             
             self.robot.Sense(i)
+            self.robot.Think()
             self.robot.Act(i)
             
             time.sleep(c.wait_time)
+            # print(i)
             pbar.update(1)
         pbar.close()
             
