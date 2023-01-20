@@ -1,7 +1,7 @@
 from math import pi
 
 num_steps = 200
-wait_time = 1/240
+wait_time = 1/50
 
 gravity = -9.8
 

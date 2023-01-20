@@ -4,9 +4,8 @@ import constants as c
 import time
 import pybullet as p
 import pybullet_data
-
-from progress.bar import IncrementalBar as progress_bar # IncrementalBar, PixelBar, FillingSquaresBar, StefosBar
-# tqdm progress bar, rec from Jesse (Muchen)
+# from progress.bar import IncrementalBar as progress_bar # IncrementalBar, PixelBar, FillingSquaresBar
+from tqdm import tqdm
 
 class SIMULATION:
 
@@ -20,7 +19,9 @@ class SIMULATION:
         self.robot = ROBOT()
         
     def Run(self):
-        progress_obj = progress_bar('Simulation Progress', max = c.num_steps, color = 'cyan', suffix = '%(percent)d%%')
+        # progress_obj = progress_bar('Simulation Progress', max = c.num_steps, color = 'cyan', suffix = '%(percent)d%%')
+        pbar = tqdm(total = c.num_steps, colour = 'cyan', 
+                    desc = 'Simulation Progress', unit = 'steps')
         for i in range(c.num_steps):
             p.stepSimulation()
             
@@ -30,9 +31,11 @@ class SIMULATION:
             # print(i)
             
             time.sleep(c.wait_time)
+            pbar.update(1)
             
-            progress_obj.next()
-        progress_obj.finish()
+            # progress_obj.next()
+        pbar.close()
+        # progress_obj.finish()
             
         for linkName in self.robot.sensors:
             self.robot.sensors[linkName].Save_Values()
