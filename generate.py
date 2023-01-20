@@ -43,8 +43,8 @@ def Generate_Brain():
     pyrosim.Send_Synapse(sourceNeuronName = 2 , targetNeuronName = 3 , weight = 0.0)
     pyrosim.Send_Synapse(sourceNeuronName = 1 , targetNeuronName = 4 , weight = 0.0)
     pyrosim.Send_Synapse(sourceNeuronName = 2 , targetNeuronName = 4 , weight = magn)
-    pyrosim.Send_Synapse(sourceNeuronName = 0 , targetNeuronName = 3 , weight = magn * 1.8)
-    pyrosim.Send_Synapse(sourceNeuronName = 0 , targetNeuronName = 4 , weight = magn * 1.8)
+    pyrosim.Send_Synapse(sourceNeuronName = 0 , targetNeuronName = 3 , weight = magn * 1.8 )
+    pyrosim.Send_Synapse(sourceNeuronName = 0 , targetNeuronName = 4 , weight = magn * 1.8 )
     
     pyrosim.End()
 
