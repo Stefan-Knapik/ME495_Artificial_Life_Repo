@@ -18,14 +18,15 @@ class SIMULATION:
         
     def Run(self):
         pbar = tqdm(total = c.num_steps, colour = 'cyan', 
-                    desc = 'Simulation Progress', unit = 'steps')
+                    desc = 'Simulation Progress', unit = 'steps',
+                    disable = True)
         
         for i in range(c.num_steps):
             p.stepSimulation()
             
             self.robot.Sense(i)
             self.robot.Think()
-            self.robot.Act(i)
+            self.robot.Act()
             
             time.sleep(c.wait_time)
             # print(i)
