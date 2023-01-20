@@ -6,6 +6,7 @@ import pybullet as p
 import pybullet_data
 
 from progress.bar import IncrementalBar as progress_bar # IncrementalBar, PixelBar, FillingSquaresBar, StefosBar
+# tqdm progress bar, rec from Jesse (Muchen)
 
 class SIMULATION:
 
