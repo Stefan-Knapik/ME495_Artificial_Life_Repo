@@ -72,7 +72,7 @@ class NEURON:
     
     # SCK added method -----------------------------------------------    
     def Update_Hidden_Or_Motor_Neuron(self):
-        self.Set_Value(0)
+        self.Set_Value(math.pi/4)
 
 # -------------------------- Private methods -------------------------
 
