@@ -36,8 +36,8 @@ class SIMULATION:
         for linkName in self.robot.sensors:
             self.robot.sensors[linkName].Save_Values()
             
-        for jointName in self.robot.motors:
-            self.robot.motors[jointName].Save_Values()
+        # for jointName in self.robot.motors:
+        #     self.robot.motors[jointName].Save_Values()
             
     def __del__(self):
         p.disconnect()
