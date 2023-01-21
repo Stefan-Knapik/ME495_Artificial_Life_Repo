@@ -19,7 +19,7 @@ class SIMULATION:
     def Run(self):
         pbar = tqdm(total = c.num_steps, colour = 'cyan', 
                     desc = 'Simulation Progress', unit = 'steps',
-                    disable = True)
+                    disable = not c.progress_bar)
         
         for i in range(c.num_steps):
             p.stepSimulation()

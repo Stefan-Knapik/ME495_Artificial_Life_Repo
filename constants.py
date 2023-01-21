@@ -1,6 +1,8 @@
 from math import pi
 
-num_steps = 1000
+progress_bar = True
+
+num_steps = 300
 wait_time = 1/240
 
 gravity = -9.8
