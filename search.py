@@ -1,8 +1,13 @@
 import os
+from hillclimber import HILL_CLIMBER
 
-for i in range(5):
+hc = HILL_CLIMBER()
+
+
+
+# for i in range(5):
     
-    os.system("python generate.py")
+#     os.system("python generate.py")
 
-    os.system("python simulate.py")
+#     os.system("python simulate.py")
     
