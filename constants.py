@@ -1,20 +1,19 @@
 from math import pi
 
-progress_bar = False
+progress_bar = True
 
-numberOfGenerations = 10
+numberOfGenerations = 100
 
-num_steps = 100
-wait_time = 1/240
+num_steps = 1000
+sleep_time = 1/1000
 
 gravity = -9.8
+
+maxForce = 50
 
 # maxForce = 20
 # amplitude = pi/6
 # frequency = 13
 # phaseOffset = pi/12
 
-maxForce = 50
-amplitude = pi/6
-frequency = 10
-phaseOffset = 0
+

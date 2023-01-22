@@ -33,7 +33,7 @@ class HILL_CLIMBER:
             self.parent = self.child
             
     def Print(self):
-        print('\n', self.parent.fitness, self.child.fitness, sep = '    ')
+        print('\n------------', self.parent.fitness, self.child.fitness, '------------', sep = '    ')
         
     def Show_Best(self):
         self.parent.Evaluate("GUI")
