@@ -16,11 +16,11 @@ class SOLUTION:
         
         self.weights = 2 * np.random.rand(3,2) - 1
            
-    def Evaluate(self):
+    def Evaluate(self, render_graphics):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system("python simulate.py")
+        os.system("python simulate.py " + render_graphics)
         f = open("fitness.txt", "r")
         self.fitness = float(f.read())
         f.close()

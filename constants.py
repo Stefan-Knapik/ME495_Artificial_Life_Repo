@@ -1,10 +1,10 @@
 from math import pi
 
-progress_bar = True
+progress_bar = False
 
-numberOfGenerations = 2
+numberOfGenerations = 10
 
-num_steps = 200
+num_steps = 100
 wait_time = 1/240
 
 gravity = -9.8
