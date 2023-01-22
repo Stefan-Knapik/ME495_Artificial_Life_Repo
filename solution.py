@@ -15,7 +15,7 @@ class SOLUTION:
     def __init__(self):
         
         self.weights = 2 * np.random.rand(3,2) - 1
-    
+           
     def Evaluate(self):
         self.Create_World()
         self.Create_Body()

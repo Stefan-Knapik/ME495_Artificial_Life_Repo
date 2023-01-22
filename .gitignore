@@ -1,3 +1,4 @@
 .vscode/settings.json
 data/**
 brain.nndf
+fitness.txt

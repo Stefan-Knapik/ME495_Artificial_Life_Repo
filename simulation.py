@@ -38,6 +38,9 @@ class SIMULATION:
             
         # for jointName in self.robot.motors:
         #     self.robot.motors[jointName].Save_Values()
+        
+    def GET_FITNESS(self):
+        return self.robot.Get_Fitness()
             
     def __del__(self):
         p.disconnect()
