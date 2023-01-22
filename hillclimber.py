@@ -2,6 +2,7 @@ from solution import SOLUTION
 import constants as c
 import copy
 import time
+from tqdm import tqdm
 
 class HILL_CLIMBER:
 
@@ -12,8 +13,15 @@ class HILL_CLIMBER:
     def Evolve(self):
         self.parent.Evaluate("GUI")
         
+        pbar_evo = tqdm(total = c.numberOfGenerations, colour = 'green', 
+                        desc = 'Evolution Progress', unit = 'generations',
+                        disable = not c.progress_bar)
+        
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
+            
+            pbar_evo.update(1)
+        pbar_evo.close()
             
     def Evolve_For_One_Generation(self):
         self.Spawn()
