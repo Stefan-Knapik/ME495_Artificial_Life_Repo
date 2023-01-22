@@ -37,7 +37,7 @@ class SIMULATION:
             self.robot.Think()
             self.robot.Act()
             
-            if self.directOrGUI == 'GUI':
+            if self.directOrGUI != 'DIRECT':
                 time.sleep(c.sleep_time)
                 
             pbar_sim.update(1)
