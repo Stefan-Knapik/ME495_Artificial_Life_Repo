@@ -4,7 +4,7 @@ progress_bar = True
 
 numberOfGenerations = 2
 
-num_steps = 300
+num_steps = 200
 wait_time = 1/240
 
 gravity = -9.8

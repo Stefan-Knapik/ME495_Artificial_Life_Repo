@@ -54,3 +54,8 @@ class SOLUTION:
                                     weight = self.weights[currentRow][currentColumn])
         pyrosim.End()
         
+    def Mutate(self):
+        randomRow = np.random.randint(0,3)
+        randomColumn = np.random.randint(0,2)
+        self.weights[randomRow,randomColumn] = np.random.random() * 2 - 1
+        
