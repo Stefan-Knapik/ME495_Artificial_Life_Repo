@@ -2,9 +2,9 @@ from math import pi
 
 progress_bar = True
 
-numberOfGenerations = 100
+numberOfGenerations = 10
 
-num_steps = 1000
+num_steps = 200
 sleep_time = 1/1000
 
 gravity = -9.8

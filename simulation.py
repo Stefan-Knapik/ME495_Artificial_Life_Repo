@@ -10,13 +10,13 @@ class SIMULATION:
 
     def __init__(self, directOrGUI):
         
-        if directOrGUI == 'DIRECT': 
+        self.directOrGUI = directOrGUI
+        
+        if self.directOrGUI == 'DIRECT': 
             self.physicsClient = p.connect(p.DIRECT)
-            self.sleep_time = 0
             self.progress_bar = False
         else: 
             self.physicsClient = p.connect(p.GUI)
-            self.sleep_time = c.sleep_time
             self.progress_bar = True
         
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -37,8 +37,9 @@ class SIMULATION:
             self.robot.Think()
             self.robot.Act()
             
-            time.sleep(self.sleep_time)
-            # print(i)
+            if self.directOrGUI == 'GUI':
+                time.sleep(c.sleep_time)
+                
             pbar_sim.update(1)
         pbar_sim.close()
             
