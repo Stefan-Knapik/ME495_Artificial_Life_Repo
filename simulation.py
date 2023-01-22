@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 class SIMULATION:
 
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionID):
         
         self.directOrGUI = directOrGUI
         
@@ -23,7 +23,7 @@ class SIMULATION:
         p.setGravity(0,0,c.gravity)
         
         self.world = WORLD()
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionID)
         
     def Run(self):
         pbar_sim = tqdm(total = c.num_steps, colour = 'cyan', 
