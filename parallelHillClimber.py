@@ -8,9 +8,12 @@ class PARALLEL_HILL_CLIMBER:
 
     def __init__(self):
         
+        self.nextAvailableID = 0
+        
         self.parents = {}
         for hc in range(c.populationSize):
-            self.parents[hc] = SOLUTION()
+            self.parents[hc] = SOLUTION(self.nextAvailableID)
+            self.nextAvailableID += 1
         
         # self.parent = SOLUTION()
         
@@ -40,6 +43,8 @@ class PARALLEL_HILL_CLIMBER:
         
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)
+        self.child.Set_ID(self.nextAvailableID)
+        self.nextAvailableID += 1
     
     def Mutate(self):
         self.child.Mutate()

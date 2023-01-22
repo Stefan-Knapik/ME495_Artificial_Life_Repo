@@ -5,7 +5,7 @@ progress_bar = True
 numberOfGenerations = 10
 populationSize = 2
 
-num_steps = 200
+num_steps = 500
 sleep_time = 1/1000
 
 gravity = -9.8

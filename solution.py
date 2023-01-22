@@ -12,15 +12,16 @@ z = height/2
 
 class SOLUTION:
 
-    def __init__(self):
+    def __init__(self, nextAvailableID):
         
+        self.myID = nextAvailableID
         self.weights = 2 * np.random.rand(3,2) - 1
            
-    def Evaluate(self, render_graphics):
+    def Evaluate(self, directOrGUI):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system("python simulate.py " + render_graphics)
+        os.system("start /B python simulate.py " + directOrGUI)
         f = open("fitness.txt", "r")
         self.fitness = float(f.read())
         f.close()
@@ -30,6 +31,9 @@ class SOLUTION:
         pyrosim.Send_Cube(name="Box", pos=[x-3, y+3, z] , size=[length, width, height])
         pyrosim.End()
         
+        while not os.path.exists("world.sdf"):
+            time.sleep(0.0001)
+        
     def Create_Body(self):
         pyrosim.Start_URDF("body.urdf")
         pyrosim.Send_Cube(name="Torso", pos=[1.5, 0, 1.5] , size=[length, width, height])
@@ -38,6 +42,9 @@ class SOLUTION:
         pyrosim.Send_Joint(name = "Torso_FrontLeg" , parent= "Torso" , child = "FrontLeg" , type = "revolute", position = [2, 0, 1])
         pyrosim.Send_Cube(name="FrontLeg", pos=[0.5, 0, -0.5] , size=[length, width, height])
         pyrosim.End()
+        
+        while not os.path.exists("body.urdf"):
+            time.sleep(0.0001)
         
     def Create_Brain(self):
         pyrosim.Start_NeuralNetwork("brain.nndf")
@@ -54,8 +61,14 @@ class SOLUTION:
                                     weight = self.weights[currentRow][currentColumn])
         pyrosim.End()
         
+        while not os.path.exists("brain.nndf"):
+            time.sleep(0.0001)
+        
     def Mutate(self):
         randomRow = np.random.randint(0,3)
         randomColumn = np.random.randint(0,2)
         self.weights[randomRow,randomColumn] = np.random.random() * 2 - 1
+        
+    def Set_ID(self, nextAvailableID):
+        self.myID = nextAvailableID
         
