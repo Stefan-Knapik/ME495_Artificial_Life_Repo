@@ -2,6 +2,8 @@ from math import pi
 
 progress_bar = True
 
+numberOfGenerations = 2
+
 num_steps = 300
 wait_time = 1/240
 
