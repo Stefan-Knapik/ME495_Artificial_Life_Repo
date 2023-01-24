@@ -1,8 +1,9 @@
-import os
 from solution import SOLUTION
 import constants as c
+import os
 import copy
 import time
+import pickle
 from tqdm import tqdm
 
 class PARALLEL_HILL_CLIMBER:
@@ -78,12 +79,16 @@ class PARALLEL_HILL_CLIMBER:
             if self.parents[hc].fitness < self.bestParent.fitness:
                 self.bestParent = self.parents[hc]
         
-        # simulate the most fit parent with graphics and print/save its fitness
+        # save the most fit parent
         f = open("BestFitness.txt", "w")
         f.write(str(self.bestParent.fitness))
         f.close()
-        # print(f"\n {self.bestParent.fitness} \n")
+        f = open("BestSolution.obj", "wb")
+        pickle.dump(self.bestParent, f) 
+        f.close()
         
+        
+        # simulate the most fit parent
         self.bestParent.Start_Simulation("GUI")
         
 

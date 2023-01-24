@@ -3,6 +3,8 @@ import time
 import numpy as np
 import pyrosim.pyrosim as pyrosim
 
+identical_worlds_and_bodies = True
+
 length = 1
 width = 1
 height = 1
@@ -19,11 +21,12 @@ class SOLUTION:
         self.weights = 2 * np.random.rand(3,2) - 1
         
     def Start_Simulation(self, directOrGUI):
-        self.Create_World()
-        self.Create_Body()
+        if identical_worlds_and_bodies == False or self.myID == 0:
+            self.Create_World()
+            self.Create_Body()
+        
         self.Create_Brain()
         os.system(f"start /B python simulate.py {directOrGUI} {self.myID}")
-        # time.sleep(0.1)
            
     def Wait_For_Simulation_To_End(self):
         while not os.path.exists(f"fitness{self.myID}.txt"):
