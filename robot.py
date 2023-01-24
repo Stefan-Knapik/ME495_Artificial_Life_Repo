@@ -8,6 +8,7 @@ from pyrosim.neuralNetwork import NEURAL_NETWORK
 class ROBOT:
 
     def __init__(self, solutionID):
+        self.solutionID = solutionID
         self.robotId = p.loadURDF("body.urdf")
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
@@ -46,7 +47,7 @@ class ROBOT:
         positionOfLinkZero = stateOfLinkZero[0]
         xCoordinateOfLinkZero = positionOfLinkZero[0]
         
-        f = open("fitness.txt", "w")
+        f = open(f"fitness{self.solutionID}.txt", "w")
         f.write(str(xCoordinateOfLinkZero))
         f.close()   
         

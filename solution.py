@@ -61,7 +61,7 @@ class SOLUTION:
                                     weight = self.weights[currentRow][currentColumn])
         pyrosim.End()
         
-        while not os.path.exists("brain.nndf"):
+        while not os.path.exists(f"brain{self.myID}.nndf"):
             time.sleep(0.0001)
         
     def Mutate(self):
