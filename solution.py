@@ -22,8 +22,9 @@ class SOLUTION:
         self.Create_Body()
         self.Create_Brain()
         os.system("start /B python simulate.py " + directOrGUI + " " + str(self.myID))
-        f = open("fitness.txt", "r")
+        f = open(f"fitness{self.myID}.txt", "r")
         self.fitness = float(f.read())
+        print(self.fitness)
         f.close()
     
     def Create_World(self):
@@ -61,7 +62,7 @@ class SOLUTION:
                                     weight = self.weights[currentRow][currentColumn])
         pyrosim.End()
         
-        while not os.path.exists("brain.nndf"):
+        while not os.path.exists(f"brain{self.myID}.nndf"):
             time.sleep(0.0001)
         
     def Mutate(self):
@@ -69,6 +70,6 @@ class SOLUTION:
         randomColumn = np.random.randint(0,2)
         self.weights[randomRow,randomColumn] = np.random.random() * 2 - 1
         
-    def Set_ID(self, nextAvailableID):
-        self.myID = nextAvailableID
+    def Set_ID(self, ID):
+        self.myID = ID
         
