@@ -1,11 +1,11 @@
 from math import pi
 
-progress_bar = True
+progress_bar = False
 
-numberOfGenerations = 2
-populationSize = 2
+numberOfGenerations = 10
+populationSize = 10
 
-num_steps = 50
+num_steps = 1000
 sleep_time = 1/1000
 
 gravity = -9.8

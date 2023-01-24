@@ -17,7 +17,7 @@ class SIMULATION:
             self.progress_bar = False
         else: 
             self.physicsClient = p.connect(p.GUI)
-            self.progress_bar = True
+            self.progress_bar = c.progress_bar
         
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0,0,c.gravity)
@@ -50,7 +50,7 @@ class SIMULATION:
         #     self.robot.motors[jointName].Save_Values()
         
     def GET_FITNESS(self):
-        return self.robot.Get_Fitness()
+        self.robot.Get_Fitness()
             
     def __del__(self):
         p.disconnect()

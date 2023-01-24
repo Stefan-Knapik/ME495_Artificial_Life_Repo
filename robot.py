@@ -47,11 +47,12 @@ class ROBOT:
         positionOfLinkZero = stateOfLinkZero[0]
         xCoordinateOfLinkZero = positionOfLinkZero[0]
         
-        f = open(f"fitness{self.solutionID}.txt", "w")
+        f = open(f"tmp{self.solutionID}.txt", "w")
         f.write(str(xCoordinateOfLinkZero))
         f.close()
-        while not os.path.exists(f"fitness{self.solutionID}.txt"):
-            time.sleep(0.0001)
+        os.system(f"rename tmp{self.solutionID}.txt fitness{self.solutionID}.txt")
+        # while not os.path.exists(f"fitness{self.solutionID}.txt"):
+        #     time.sleep(0.0001)
         
             
 

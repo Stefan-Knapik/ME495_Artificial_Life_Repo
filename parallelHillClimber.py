@@ -1,3 +1,4 @@
+import os
 from solution import SOLUTION
 import constants as c
 import copy
@@ -8,6 +9,9 @@ class PARALLEL_HILL_CLIMBER:
 
     def __init__(self):
         
+        os.system("del brain*.nndf")
+        os.system("del fitness*.txt")
+        
         self.nextAvailableID = 0
         
         self.parents = {}
@@ -15,21 +19,16 @@ class PARALLEL_HILL_CLIMBER:
             self.parents[hc] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
         
-        # self.parent = SOLUTION()
-        
     def Evolve(self):
         
-        for hc in self.parents:
-            self.parents[hc].Evaluate("GUI")
+        self.Evaluate(self.parents)
     
-        # self.parent.Evaluate("GUI")
-        
         # pbar_evo = tqdm(total = c.numberOfGenerations, colour = 'green', 
         #                 desc = 'Evolution Progress', unit = 'generations',
         #                 disable = not c.progress_bar)
         
-        # for currentGeneration in range(c.numberOfGenerations):
-        #     self.Evolve_For_One_Generation()
+        for currentGeneration in range(c.numberOfGenerations):
+            self.Evolve_For_One_Generation()
             
         #     pbar_evo.update(1)
         # pbar_evo.close()
@@ -37,28 +36,50 @@ class PARALLEL_HILL_CLIMBER:
     def Evolve_For_One_Generation(self):
         self.Spawn()
         self.Mutate()
-        self.child.Evaluate("DIRECT")
+        self.Evaluate(self.children)
         self.Print()
         self.Select()
         
     def Spawn(self):
-        self.child = copy.deepcopy(self.parent)
-        self.child.Set_ID(self.nextAvailableID)
-        self.nextAvailableID += 1
+        self.children = {}
+        
+        for hc in self.parents:
+            self.children[hc] = copy.deepcopy(self.parents[hc])
+            self.children[hc].Set_ID(self.nextAvailableID)
+            self.nextAvailableID += 1
     
     def Mutate(self):
-        self.child.Mutate()
+        for hc in self.parents:
+            self.children[hc].Mutate()
+            
+    def Evaluate(self, solutions):
+        for hc in solutions:
+            solutions[hc].Start_Simulation("DIRECT")
+            
+        for hc in solutions:
+            solutions[hc].Wait_For_Simulation_To_End()
     
     def Select(self):
-        if self.parent.fitness > self.child.fitness:
-            self.parent = self.child
+        for hc in self.parents:
+            if self.parents[hc].fitness > self.children[hc].fitness:
+                self.parents[hc] = self.children[hc]
             
     def Print(self):
-        print('\n------------', self.parent.fitness, self.child.fitness, '------------', sep = '    ')
+        print()
+        for hc in self.parents:
+            print(self.parents[hc].fitness, self.children[hc].fitness, sep = '    ')
+        print()
         
     def Show_Best(self):
-        pass
-    
-        # self.parent.Evaluate("GUI")
+        # find the most fit parent
+        self.bestParent = self.parents[0]
+        for hc in self.parents:
+            if self.parents[hc].fitness < self.bestParent.fitness:
+                self.bestParent = self.parents[hc]
+        
+        # simulate the most fit parent with graphics and print its fitness
+        self.bestParent.Start_Simulation("GUI")
+        # print(f"\n {self.bestParent.fitness} \n")
+
         
         
