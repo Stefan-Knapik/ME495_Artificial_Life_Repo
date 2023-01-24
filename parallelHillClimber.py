@@ -23,15 +23,15 @@ class PARALLEL_HILL_CLIMBER:
         
         self.Evaluate(self.parents)
     
-        # pbar_evo = tqdm(total = c.numberOfGenerations, colour = 'green', 
-        #                 desc = 'Evolution Progress', unit = 'generations',
-        #                 disable = not c.progress_bar)
+        pbar_evo = tqdm(total = c.numberOfGenerations, colour = 'green', 
+                        desc = 'Evolution Progress', unit = 'generations',
+                        disable = not c.progress_bar)
         
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
             
-        #     pbar_evo.update(1)
-        # pbar_evo.close()
+            pbar_evo.update(1)
+        pbar_evo.close()
             
     def Evolve_For_One_Generation(self):
         self.Spawn()
@@ -65,10 +65,11 @@ class PARALLEL_HILL_CLIMBER:
                 self.parents[hc] = self.children[hc]
             
     def Print(self):
-        print()
-        for hc in self.parents:
-            print(self.parents[hc].fitness, self.children[hc].fitness, sep = '    ')
-        print()
+        if c.printFitness == True:
+            print()
+            for hc in self.parents:
+                print(self.parents[hc].fitness, self.children[hc].fitness, sep = '    ')
+            print()
         
     def Show_Best(self):
         # find the most fit parent
@@ -77,9 +78,14 @@ class PARALLEL_HILL_CLIMBER:
             if self.parents[hc].fitness < self.bestParent.fitness:
                 self.bestParent = self.parents[hc]
         
-        # simulate the most fit parent with graphics and print its fitness
-        self.bestParent.Start_Simulation("GUI")
+        # simulate the most fit parent with graphics and print/save its fitness
+        f = open("BestFitness.txt", "w")
+        f.write(str(self.bestParent.fitness))
+        f.close()
         # print(f"\n {self.bestParent.fitness} \n")
+        
+        self.bestParent.Start_Simulation("GUI")
+        
 
         
         

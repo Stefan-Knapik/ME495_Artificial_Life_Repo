@@ -1,8 +1,9 @@
 from math import pi
 
-progress_bar = False
+progress_bar = True
+printFitness = False
 
-numberOfGenerations = 10
+numberOfGenerations = 200
 populationSize = 10
 
 num_steps = 1000
