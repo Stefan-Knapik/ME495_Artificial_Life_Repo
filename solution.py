@@ -22,7 +22,8 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system("start /B python simulate.py " + directOrGUI + " " + str(self.myID))
+        os.system(f"start /B python simulate.py {directOrGUI} {self.myID}")
+        # time.sleep(0.1)
            
     def Wait_For_Simulation_To_End(self):
         while not os.path.exists(f"fitness{self.myID}.txt"):
