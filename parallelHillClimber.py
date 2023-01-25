@@ -12,6 +12,7 @@ class PARALLEL_HILL_CLIMBER:
         
         os.system("del brain*.nndf")
         os.system("del fitness*.txt")
+        os.system("del tmp*.txt")
         
         self.nextAvailableID = 0
         
@@ -92,9 +93,5 @@ class PARALLEL_HILL_CLIMBER:
     def Show_Best(self):
         self.Save_Best()
         # simulate the most fit parent
-        self.bestParent.Start_Simulation("GUI")
-        
-        
-
-        
+        self.bestParent.Show_Simulation()
         

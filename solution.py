@@ -85,3 +85,9 @@ class SOLUTION:
     def Set_ID(self, ID):
         self.myID = ID
         
+    def Show_Simulation(self):
+        self.Create_World()
+        self.Create_Body()
+        self.Create_Brain()
+        os.system(f"start /B python simulate.py GUI {self.myID} > nul")
+        # os.system(f"start /B python simulate.py {directOrGUI} {self.myID}")
