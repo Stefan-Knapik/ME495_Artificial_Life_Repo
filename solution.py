@@ -26,7 +26,8 @@ class SOLUTION:
             self.Create_Body()
         
         self.Create_Brain()
-        os.system(f"start /B python simulate.py {directOrGUI} {self.myID}")
+        os.system(f"start /B python simulate.py {directOrGUI} {self.myID} > nul 2> nul")
+        # os.system(f"start /B python simulate.py {directOrGUI} {self.myID}")
            
     def Wait_For_Simulation_To_End(self):
         while not os.path.exists(f"fitness{self.myID}.txt"):
@@ -44,7 +45,7 @@ class SOLUTION:
         pyrosim.End()
         
         while not os.path.exists("world.sdf"):
-            time.sleep(0.0001)
+            time.sleep(0.001)
         
     def Create_Body(self):
         pyrosim.Start_URDF("body.urdf")
@@ -56,7 +57,7 @@ class SOLUTION:
         pyrosim.End()
         
         while not os.path.exists("body.urdf"):
-            time.sleep(0.0001)
+            time.sleep(0.001)
         
     def Create_Brain(self):
         pyrosim.Start_NeuralNetwork(f"brain{self.myID}.nndf")
@@ -74,7 +75,7 @@ class SOLUTION:
         pyrosim.End()
         
         while not os.path.exists(f"brain{self.myID}.nndf"):
-            time.sleep(0.0001)
+            time.sleep(0.001)
         
     def Mutate(self):
         randomRow = np.random.randint(0,3)

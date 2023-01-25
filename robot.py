@@ -50,9 +50,8 @@ class ROBOT:
         f = open(f"tmp{self.solutionID}.txt", "w")
         f.write(str(xCoordinateOfLinkZero))
         f.close()
-        os.system(f"rename tmp{self.solutionID}.txt fitness{self.solutionID}.txt")
-        # while not os.path.exists(f"fitness{self.solutionID}.txt"):
-        #     time.sleep(0.0001)
+        # os.system(f"rename tmp{self.solutionID}.txt fitness{self.solutionID}.txt")
+        os.rename(f"tmp{self.solutionID}.txt", f"fitness{self.solutionID}.txt")
         
             
 

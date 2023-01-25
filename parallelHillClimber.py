@@ -30,6 +30,7 @@ class PARALLEL_HILL_CLIMBER:
         
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
+            self.Save_Best()
             
             pbar_evo.update(1)
         pbar_evo.close()
@@ -72,7 +73,7 @@ class PARALLEL_HILL_CLIMBER:
                 print(self.parents[hc].fitness, self.children[hc].fitness, sep = '    ')
             print()
         
-    def Show_Best(self):
+    def Save_Best(self):
         # find the most fit parent
         self.bestParent = self.parents[0]
         for hc in self.parents:
@@ -83,13 +84,16 @@ class PARALLEL_HILL_CLIMBER:
         f = open("BestFitness.txt", "w")
         f.write(str(self.bestParent.fitness))
         f.close()
+        
         f = open("BestSolution.obj", "wb")
         pickle.dump(self.bestParent, f) 
         f.close()
         
-        
+    def Show_Best(self):
+        self.Save_Best()
         # simulate the most fit parent
         self.bestParent.Start_Simulation("GUI")
+        
         
 
         
