@@ -7,11 +7,11 @@ numberOfGenerations = 10
 populationSize = 10
 
 num_steps = 1000
-sleep_time = 1/1000
+sleep_time = 1/240
 
 gravity = -9.8
 
-maxForce = 40 # 50
+maxForce = 50 # 50
 
 # maxForce = 20
 # amplitude = pi/6
