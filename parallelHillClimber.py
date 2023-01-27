@@ -10,9 +10,9 @@ class PARALLEL_HILL_CLIMBER:
 
     def __init__(self):
         
-        os.system("del brain*.nndf")
-        os.system("del fitness*.txt")
-        os.system("del tmp*.txt")
+        os.system("del brain*.nndf > nul 2> nul")
+        os.system("del fitness*.txt > nul 2> nul")
+        os.system("del tmp*.txt > nul 2> nul")
         
         self.nextAvailableID = 0
         
@@ -71,7 +71,7 @@ class PARALLEL_HILL_CLIMBER:
         if c.printFitness == True:
             print()
             for hc in self.parents:
-                print(self.parents[hc].fitness, self.children[hc].fitness, sep = '    ')
+                print(f'Parent & Child Fitness: {self.parents[hc].fitness:11.6f} {self.children[hc].fitness:11.6f}')
             print()
         
     def Save_Best(self):
