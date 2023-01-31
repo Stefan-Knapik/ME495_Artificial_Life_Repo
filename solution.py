@@ -26,9 +26,14 @@ class SOLUTION:
         
         fpath = f"temp\\fitness{self.myID}.txt"
         
-        while not os.path.exists(fpath):
+        # while not os.path.exists(fpath):
+        #     time.sleep(0.001)
+        for i in range(1000):
+            if os.path.exists(fpath):
+                break
             time.sleep(0.001)
-        assert os.path.isfile(fpath)
+        
+        # assert os.path.isfile(fpath)
         
         f = open(fpath, "r")
         self.fitness = float(f.read())
