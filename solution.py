@@ -25,8 +25,11 @@ class SOLUTION:
     def Wait_For_Simulation_To_End(self):
         while not os.path.exists(f"fitness{self.myID}.txt"):
             time.sleep(0.001)
-            
-        f = open(f"fitness{self.myID}.txt", "r")
+        
+        path = f"fitness{self.myID}.txt"
+        assert os.path.isfile(path)
+        
+        f = open(path, "r")
         self.fitness = float(f.read())
         f.close()
         # print(f"\n{self.myID}   {self.fitness}  ----------------------")

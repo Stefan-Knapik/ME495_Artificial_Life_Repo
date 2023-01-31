@@ -1,10 +1,10 @@
 from math import pi
 
 progress_bar = True
-printFitness = True
+printFitness = False
 
-numberOfGenerations = 50
-populationSize = 10
+numberOfGenerations = 1
+populationSize = 1
 
 num_steps = 1000
 sleep_time = 1/240
