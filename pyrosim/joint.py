@@ -16,7 +16,7 @@ class JOINT:
 
         self.depth = 1
 
-    def Save(self,f):
+    def Save(self,f,jointAxis):
 
         Save_Whitespace(self.depth,f)
         f.write('<joint name="' + self.name + '" type="' + self.type + '">' + '\n')
@@ -31,8 +31,10 @@ class JOINT:
         originString = str(self.position[0]) + " " + str(self.position[1]) + " " + str(self.position[2])
         f.write('   <origin rpy="0 0 0" xyz="' + originString + '" />\n')
 
+        # SCK modified to allow for joint axis to be specified
         Save_Whitespace(self.depth,f)
-        f.write('   <axis xyz="0 1 0"/>\n')
+        # f.write('   <axis xyz="0 1 0"/>\n')
+        f.write(' <axis xyz="' + jointAxis + '"/>\n')
 
         Save_Whitespace(self.depth,f)
         f.write('   <limit effort="0.0" lower="-3.14159" upper="3.14159" velocity="0.0"/>\n')
