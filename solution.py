@@ -23,28 +23,29 @@ class SOLUTION:
         # os.system(f"start /B python simulate.py {directOrGUI} {self.myID}")
            
     def Wait_For_Simulation_To_End(self):
-        while not os.path.exists(f"fitness{self.myID}.txt"):
+        
+        fpath = f"temp\\fitness{self.myID}.txt"
+        
+        while not os.path.exists(fpath):
             time.sleep(0.001)
+        assert os.path.isfile(fpath)
         
-        path = f"fitness{self.myID}.txt"
-        assert os.path.isfile(path)
-        
-        f = open(path, "r")
+        f = open(fpath, "r")
         self.fitness = float(f.read())
         f.close()
         # print(f"\n{self.myID}   {self.fitness}  ----------------------")
-        os.system(f"del fitness{self.myID}.txt")
+        os.system(f"del temp\\fitness{self.myID}.txt")
     
     def Create_World(self):
-        pyrosim.Start_SDF("world.sdf")
+        pyrosim.Start_SDF("temp\\world.sdf")
         # pyrosim.Send_Cube(name="Box", pos=[-3, 3, 0.5] , size=[1, 1, 1])
         pyrosim.End()
         
-        while not os.path.exists("world.sdf"):
+        while not os.path.exists("temp\\world.sdf"):
             time.sleep(0.001)
         
     def Create_Body(self):
-        pyrosim.Start_URDF("body.urdf")
+        pyrosim.Start_URDF("temp\\body.urdf")
         
         pyrosim.Send_Cube(name="Torso", pos=[0.0, 0.0, 1.0] , size=[1.0, 1.0, 1.0])
         
@@ -82,11 +83,11 @@ class SOLUTION:
         
         pyrosim.End()
         
-        while not os.path.exists("body.urdf"):
+        while not os.path.exists("temp\\body.urdf"):
             time.sleep(0.001)
         
     def Create_Brain(self):
-        pyrosim.Start_NeuralNetwork(f"brain{self.myID}.nndf")
+        pyrosim.Start_NeuralNetwork(f"temp\\brain{self.myID}.nndf")
         n_num = 0
         pyrosim.Send_Sensor_Neuron(name = n_num , linkName = "Torso"); n_num += 1
         
@@ -117,7 +118,7 @@ class SOLUTION:
                                     weight = self.weights[currentRow][currentColumn])
         pyrosim.End()
         
-        while not os.path.exists(f"brain{self.myID}.nndf"):
+        while not os.path.exists(f"temp\\brain{self.myID}.nndf"):
             time.sleep(0.001)
         
     def Mutate(self):

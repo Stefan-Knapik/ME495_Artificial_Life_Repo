@@ -12,4 +12,3 @@ phc.Show_Best()
 #     os.system("python generate.py")
 
 #     os.system("python simulate.py")
-    

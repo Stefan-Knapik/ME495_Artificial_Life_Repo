@@ -4,7 +4,7 @@ progress_bar = True
 printFitness = False
 
 numberOfGenerations = 10
-populationSize = 10
+populationSize = 1
 
 num_steps = 1000
 sleep_time = 1/240

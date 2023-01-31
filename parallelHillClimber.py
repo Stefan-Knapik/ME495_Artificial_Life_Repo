@@ -10,9 +10,11 @@ class PARALLEL_HILL_CLIMBER:
 
     def __init__(self):
         
-        os.system("del brain*.nndf > nul 2> nul")
-        os.system("del fitness*.txt > nul 2> nul")
-        os.system("del tmp*.txt > nul 2> nul")
+        # os.system("del brain*.nndf > nul 2> nul")
+        # os.system("del fitness*.txt > nul 2> nul")
+        # os.system("del tmp*.txt > nul 2> nul")
+        os.system("rmdir temp /s /q")
+        os.system("mkdir temp")
         
         self.nextAvailableID = 0
         
