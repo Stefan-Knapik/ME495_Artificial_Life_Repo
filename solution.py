@@ -2,6 +2,7 @@ import os
 import time
 import numpy as np
 import pyrosim.pyrosim as pyrosim
+import constants as c
 
 identical_worlds_and_bodies = True
 
@@ -67,10 +68,10 @@ class SOLUTION:
         pyrosim.Send_Motor_Neuron(name = 3 , jointName = "Torso_BackLeg")
         pyrosim.Send_Motor_Neuron(name = 4 , jointName = "Torso_FrontLeg")
         
-        for currentRow in [0, 1, 2]:
-            for currentColumn in [0, 1]:
+        for currentRow in range(0,c.numSensorNeurons):
+            for currentColumn in range(0,c.numMotorNeurons):
                 pyrosim.Send_Synapse(sourceNeuronName = currentRow , 
-                                    targetNeuronName = currentColumn + 3 , 
+                                    targetNeuronName = currentColumn + c.numSensorNeurons, 
                                     weight = self.weights[currentRow][currentColumn])
         pyrosim.End()
         
@@ -78,8 +79,8 @@ class SOLUTION:
             time.sleep(0.001)
         
     def Mutate(self):
-        randomRow = np.random.randint(0,3)
-        randomColumn = np.random.randint(0,2)
+        randomRow = np.random.randint(0,c.numSensorNeurons)
+        randomColumn = np.random.randint(0,c.numMotorNeurons)
         self.weights[randomRow,randomColumn] = np.random.random() * 2 - 1
         
     def Set_ID(self, ID):
