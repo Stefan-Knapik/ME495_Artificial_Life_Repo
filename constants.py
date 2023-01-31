@@ -12,8 +12,8 @@ sleep_time = 1/240
 gravity = -9.8
 maxForce = 50
 
-numSensorNeurons = 3
-numMotorNeurons = 2
+numSensorNeurons = 6
+numMotorNeurons = 5
 
 # maxForce = 20
 # amplitude = pi/6
