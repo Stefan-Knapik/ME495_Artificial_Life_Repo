@@ -3,15 +3,15 @@ from math import pi
 progress_bar = True
 printFitness = True
 
-numberOfGenerations = 200
-populationSize = 10
+numberOfGenerations = 300
+populationSize = 20
 
 num_steps = 1000
 sleep_time = 1/240
 
 gravity = -9.8
-maxForce = 100
-motorJointRange = 0.2
+maxForce = 50
+motorJointRange = 0.3
 
 numSensorNeurons = 5
 numMotorNeurons = 8
