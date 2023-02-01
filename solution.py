@@ -33,7 +33,7 @@ class SOLUTION:
                 break
             time.sleep(0.001)
         
-        # assert os.path.isfile(fpath)
+        assert os.path.isfile(fpath)
         
         f = open(fpath, "r")
         self.fitness = float(f.read())
