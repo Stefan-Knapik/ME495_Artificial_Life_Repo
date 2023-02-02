@@ -10,9 +10,11 @@ class PARALLEL_HILL_CLIMBER:
 
     def __init__(self):
         
-        os.system("del brain*.nndf > nul 2> nul")
-        os.system("del fitness*.txt > nul 2> nul")
-        os.system("del tmp*.txt > nul 2> nul")
+        # os.system("del brain*.nndf > nul 2> nul")
+        # os.system("del fitness*.txt > nul 2> nul")
+        # os.system("del tmp*.txt > nul 2> nul")
+        os.system("rmdir temp /s /q")
+        os.system("mkdir temp")
         
         self.nextAvailableID = 0
         
@@ -40,7 +42,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children)
-        self.Print()
+        if c.printFitness: self.Print()
         self.Select()
         
     def Spawn(self):
@@ -68,11 +70,10 @@ class PARALLEL_HILL_CLIMBER:
                 self.parents[hc] = self.children[hc]
             
     def Print(self):
-        if c.printFitness == True:
-            print()
-            for hc in self.parents:
-                print(f'Parent & Child Fitness: {self.parents[hc].fitness:11.6f} {self.children[hc].fitness:11.6f}')
-            print()
+        print()
+        for hc in self.parents:
+            print(f'Parent & Child Fitness: {self.parents[hc].fitness:11.6f} {self.children[hc].fitness:11.6f}')
+        print()
         
     def Save_Best(self):
         # find the most fit parent
