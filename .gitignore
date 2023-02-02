@@ -1,8 +1,5 @@
-BestFitness.txt
-BestSolution.obj
 .vscode/settings.json
 data/**
 temp/**
-
-
-
+BestSolution.obj
+BestFitness.txt
