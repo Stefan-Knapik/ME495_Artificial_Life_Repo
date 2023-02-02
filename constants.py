@@ -3,7 +3,7 @@ from math import pi
 progress_bar = True
 printFitness = False
 
-numberOfGenerations = 100
+numberOfGenerations = 200
 populationSize = 10
 
 num_steps = 1000
