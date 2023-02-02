@@ -1,7 +1,8 @@
+BestFitness.txt
+BestSolution.obj
 .vscode/settings.json
 data/**
 temp/**
-BestFitness.txt
-BestSolution.obj
-brain.nndf
-fitness.txt
+
+
+
