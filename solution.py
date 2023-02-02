@@ -12,6 +12,7 @@ class SOLUTION:
         
         self.myID = nextAvailableID
         self.weights = 2 * np.random.rand(c.numSensorNeurons,c.numMotorNeurons) - 1
+        self.age = 0
         
     def Start_Simulation(self, directOrGUI):
         if identical_worlds_and_bodies == False or self.myID == 0:

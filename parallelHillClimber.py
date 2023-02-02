@@ -51,6 +51,7 @@ class PARALLEL_HILL_CLIMBER:
         for hc in self.parents:
             self.children[hc] = copy.deepcopy(self.parents[hc])
             self.children[hc].Set_ID(self.nextAvailableID)
+            self.children[hc].age = 0
             self.nextAvailableID += 1
     
     def Mutate(self):
@@ -66,14 +67,17 @@ class PARALLEL_HILL_CLIMBER:
     
     def Select(self):
         for hc in self.parents:
+            
             if self.parents[hc].fitness > self.children[hc].fitness:
                 self.parents[hc] = self.children[hc]
+            else:
+                self.parents[hc].age += 1
             
     def Print(self):
         if c.printFitness == True:
             print()
             for hc in self.parents:
-                print(f'Parent & Child Fitness: {self.parents[hc].fitness:11.6f} {self.children[hc].fitness:11.6f}')
+                print(f'Parent & Child Fitness: {self.parents[hc].fitness:11.6f} {self.children[hc].fitness:11.6f}  {self.parents[hc].age}')
             print()
         
     def Save_Best(self):
