@@ -77,7 +77,7 @@ class PARALLEL_HILL_CLIMBER:
         if c.printFitness == True:
             print()
             for hc in self.parents:
-                print(f'Parent & Child Fitness: {self.parents[hc].fitness:11.6f} {self.children[hc].fitness:11.6f}  {self.parents[hc].age}')
+                print(f'Parent & Child Fitness: {self.parents[hc].fitness:11.6f} {self.children[hc].fitness:11.6f}    Age: {self.parents[hc].age}')
             print()
         
     def Save_Best(self):
