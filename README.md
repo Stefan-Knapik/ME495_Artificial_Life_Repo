@@ -1,6 +1,6 @@
 # ME495 Artificial Life Assignment 5
 
-## Roly Pollie Robot Evolution
+## Rolly Pollie Robot Evolution
 
 ### Observed Behavior
 These robots can roll, gallop, walk, jump, or crawl like an inchworm. Their emergent behavior depends on the strength, flexibility, and number of body segments we choose to grant them.
