@@ -53,10 +53,9 @@ class SOLUTION:
         
         pyrosim.Start_URDF("temp\\body.urdf")
         
-        radius = 0.5 # radius of circumscribed circle
-        thickness = 0.05 # thickness of the loop, radial
-        width = 0.5 # width of the loop, axial
-        
+        radius = c.radius # radius of circumscribed circle
+        thickness = c.thickness # thickness of the loop, radial
+        width = c.width # width of the loop, axial
         
         edge_length = 2*radius*np.tan(np.pi/c.numLinks)
         dimensions = [edge_length, width, thickness]
