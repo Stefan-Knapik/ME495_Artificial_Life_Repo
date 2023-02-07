@@ -1,4 +1,4 @@
-# ME495_Artificial Life Assignment 5
+# ME495 Artificial Life Assignment 5
 
 ## Roly Pollie Robot Evolution
 
@@ -7,6 +7,11 @@ These robots can roll, gallop, walk, jump, or crawl like an inchworm. Their emer
 
 ### Body Morphology
 Body links are generated to form a regular n-sided polygon that circumscribes a circle in the x-z plane, where n > 3. Adjacent links are connected via revolute joints to form a broken hoop.
+
+![image](https://user-images.githubusercontent.com/101603342/217189662-632b11ae-1e97-4481-87e1-67da8ab06289.png)
+![image](https://user-images.githubusercontent.com/101603342/217190168-06b4e4fc-6f38-401d-bac9-9be2336b2b71.png)
+![image](https://user-images.githubusercontent.com/101603342/217189928-2e40555a-f464-4b9e-8005-45e99a13abe1.png)
+
  
 ### Optimization
 The objective function for minimization is still the final x-location of the root link.
