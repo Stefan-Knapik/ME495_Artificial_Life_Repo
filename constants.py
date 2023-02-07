@@ -1,6 +1,6 @@
 from math import pi
 
-# Visualisation
+# Visualization
 progress_bar = 1
 printFitness = 0
 
