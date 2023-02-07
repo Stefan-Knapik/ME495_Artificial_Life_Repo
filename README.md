@@ -1,4 +1,6 @@
-# ME495 Artificial Life Assignment 5
+# Assignment 5
+ME495 Artificial Life course at Northwestern University, which utilizes content from the r/ludobots evolutionary robotics subreddit.
+https://www.reddit.com/r/ludobots/
 
 ## Rolly Pollie Robot Evolution
 
