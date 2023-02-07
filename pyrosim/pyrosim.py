@@ -106,7 +106,7 @@ def Prepare_To_Simulate(bodyID):
 
     Prepare_Joint_Dictionary(bodyID)
 
-def Send_Cube(name="default",pos=[0,0,0],size=[1,1,1]):
+def Send_Cube(name="default",pos=[0,0,0],size=[1,1,1],rpy=[0,0,0]):
 
     global availableLinkIndex
 
@@ -120,7 +120,7 @@ def Send_Cube(name="default",pos=[0,0,0],size=[1,1,1]):
 
         links.append(link)
     else:
-        link = LINK_URDF(name,pos,size)
+        link = LINK_URDF(name,pos,size,rpy)
 
         links.append(link)
 
@@ -134,9 +134,9 @@ def Send_Cube(name="default",pos=[0,0,0],size=[1,1,1]):
 
     availableLinkIndex = availableLinkIndex + 1
 
-def Send_Joint(name,parent,child,type,position,jointAxis):
+def Send_Joint(name,parent,child,type,position,jointAxis,rpy=[0,0,0]):
 
-    joint = JOINT(name,parent,child,type,position)
+    joint = JOINT(name,parent,child,type,position,rpy)
 
     joint.Save(f,jointAxis)
 

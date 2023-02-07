@@ -20,10 +20,7 @@ class SOLUTION:
         
         self.Create_Brain()
         # os.system(f"start /B python simulate.py {directOrGUI} {self.myID} > nul 2> nul")
-        print("hello")
         os.system(f"start /B python simulate.py {directOrGUI} {self.myID}")
-        print("hello2")
-        exit()
            
     def Wait_For_Simulation_To_End(self):
         
@@ -56,55 +53,47 @@ class SOLUTION:
         
         pyrosim.Start_URDF("temp\\body.urdf")
         
-        radius = 4 # radius of circumscribed circle
-        thickness = 0.1 # thickness of the loop, radial
-        width = 2 # width of the loop, axial
+        radius = 1 # radius of circumscribed circle
+        thickness = 0.05 # thickness of the loop, radial
+        width = 1 # width of the loop, axial
         
         edge_length = 2*radius*np.tan(np.pi/c.numLinks)
+        dimensions = [edge_length, width, thickness]
+        angle = np.pi/c.numLinks
         
-        center = np.array([0.0, 0.0, thickness])
-        shape = np.array([edge_length, width, thickness])
+        pyrosim.Send_Cube(name="0", pos=[0,0,thickness] , size=dimensions)
+        pyrosim.Send_Joint(name = "0_1" , parent= "0" , child = "1" , type = "revolute", 
+                            position = [-0.5*edge_length, 0.0, thickness], jointAxis = "0 1 0")
         
-        for i in range(c.numLinks):
+        for i in range(1,c.numLinks):
+            angle = i * np.pi/c.numLinks 
+            relative_center = 0.5 * edge_length * np.array([-np.cos(2*angle), 0, np.sin(2*angle)])
+            relative_joint = relative_center * 2
             
-            pyrosim.Send_Cube(name=f"{i}", pos=center.tolist() , size=shape.tolist())
+            print(angle, relative_center, relative_joint)
+        
+            pyrosim.Send_Cube(name=f"{i}", pos=relative_center.tolist() , size=dimensions, rpy = [0.0, angle, 0.0])
             
-            pyrosim.Send_Joint(name = f"{i}_{(i+1)%c.numLinks}" , parent= f"{i}" , child = f"{(i+1)%c.numLinks}" , type = "revolute", 
-                            position = [-0.5*edge_length, 0.0, 0.5*thickness], jointAxis = "0 1 0")
+            if i < c.numLinks - 1:
+                pyrosim.Send_Joint(name = f"{i}_{i+1}" , parent= f"{i}" , child = f"{i+1}" , type = "revolute", 
+                                    position = relative_joint, jointAxis = "0 1 0")
+                print(f"{i}_{i+1}")
+        
+        # for i in range(c.numLinks):
             
-            center += 2
+        #     angle = i * np.pi/c.numLinks 
+            
+        #     center = np.array([0,0,radius+thickness]) + np.array([radius*np.sin(angle), 0, -radius*np.cos(angle)])
+       
+        #     pyrosim.Send_Cube(name=f"{i}", pos=center.tolist() , size=dimensions.tolist()) # , rpy = [0.0, angle, 0.0]
+            
+        #     if i == c.numLinks - 1:
+        #         pyrosim.Send_Joint(name = f"{0}_{i}" , parent= f"{0}" , child = f"{i}" , type = "revolute", 
+        #                         position = [-0.5*edge_length, 0.0, 0.5*thickness], jointAxis = "0 1 0")
+        #     else:
+        #         pyrosim.Send_Joint(name = f"{i}_{(i+1)%c.numLinks}" , parent= f"{i}" , child = f"{(i+1)%c.numLinks}" , type = "revolute", 
+        #                         position = [-0.5*edge_length, 0.0, 0.5*thickness], jointAxis = "0 1 0", rpy=[0.0, angle, 0.0])
 
-            
-            # pyrosim.Send_Cube(name="BackLeg", pos=[0.0, -0.5, 0.0] , size=[0.2, 1.0, 0.2])
-            
-            # pyrosim.Send_Joint(name = "Torso_FrontLeg" , parent= "Torso" , child = "FrontLeg" , type = "revolute", 
-            #                 position = [0.0, 0.5, 1.0], jointAxis = "1 0 0")
-            # pyrosim.Send_Cube(name="FrontLeg", pos=[0.0, 0.5, 0.0] , size=[0.2, 1.0, 0.2])
-            
-            # pyrosim.Send_Joint(name = "Torso_LeftLeg" , parent= "Torso" , child = "LeftLeg" , type = "revolute", 
-            #                 position = [-0.5, 0.0, 1.0], jointAxis = "0 1 0")
-            # pyrosim.Send_Cube(name="LeftLeg", pos=[-0.5, 0.0, 0.0] , size=[1.0, 0.2, 0.2])
-            
-            # pyrosim.Send_Joint(name = "Torso_RightLeg" , parent= "Torso" , child = "RightLeg" , type = "revolute", 
-            #                 position = [0.5, 0.0, 1.0], jointAxis = "0 1 0")
-            # pyrosim.Send_Cube(name="RightLeg", pos=[0.5, 0.0, 0.0] , size=[1.0, 0.2, 0.2])
-            
-            # pyrosim.Send_Joint(name = "BackLeg_BackLowerLeg" , parent= "BackLeg" , child = "BackLowerLeg" , type = "revolute", 
-            #                 position = [0.0, -1.0, 0.0], jointAxis = "1 0 0")
-            # pyrosim.Send_Cube(name="BackLowerLeg", pos=[0.0, 0.0, -0.5] , size=[0.2, 0.2, 1.0])
-            
-            # pyrosim.Send_Joint(name = "FrontLeg_FrontLowerLeg" , parent= "FrontLeg" , child = "FrontLowerLeg" , type = "revolute", 
-            #                 position = [0.0, 1.0, 0.0], jointAxis = "1 0 0")
-            # pyrosim.Send_Cube(name="FrontLowerLeg", pos=[0.0, 0.0, -0.5] , size=[0.2, 0.2, 1.0])
-            
-            # pyrosim.Send_Joint(name = "LeftLeg_LeftLowerLeg" , parent= "LeftLeg" , child = "LeftLowerLeg" , type = "revolute", 
-            #                 position = [-1.0, 0.0, 0.0], jointAxis = "0 1 0")
-            # pyrosim.Send_Cube(name="LeftLowerLeg", pos=[0.0, 0.0, -0.5] , size=[0.2, 0.2, 1.0])
-            
-            # pyrosim.Send_Joint(name = "RightLeg_RightLowerLeg" , parent= "RightLeg" , child = "RightLowerLeg" , type = "revolute", 
-            #                 position = [1.0, 0.0, 0.0], jointAxis = "0 1 0")
-            # pyrosim.Send_Cube(name="RightLowerLeg", pos=[0.0, 0.0, -0.5] , size=[0.2, 0.2, 1.0])
-        
         pyrosim.End()
         
         while not os.path.exists("temp\\body.urdf"):
