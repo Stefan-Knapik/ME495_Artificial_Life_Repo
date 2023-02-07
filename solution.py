@@ -19,8 +19,8 @@ class SOLUTION:
             self.Create_Body()
         
         self.Create_Brain()
-        # os.system(f"start /B python simulate.py {directOrGUI} {self.myID} > nul 2> nul")
-        os.system(f"start /B python simulate.py {directOrGUI} {self.myID}")
+        os.system(f"start /B python simulate.py {directOrGUI} {self.myID} > nul 2> nul")
+        # os.system(f"start /B python simulate.py {directOrGUI} {self.myID}")
            
     def Wait_For_Simulation_To_End(self):
         
@@ -61,9 +61,9 @@ class SOLUTION:
         dimensions = [edge_length, width, thickness]
         angleJoint = 2*np.pi/c.numLinks
         
-        pyrosim.Send_Cube(name="0", pos=[0,0,thickness] , size=dimensions)
+        pyrosim.Send_Cube(name="0", pos=[0,0,0.5*thickness] , size=dimensions)
         pyrosim.Send_Joint(name = "0_1" , parent= "0" , child = "1" , type = "revolute", 
-                            position = [-0.5*edge_length, 0.0, thickness], jointAxis = "0 1 0", rpy = [0.0, angleJoint, 0.0])
+                            position = [-0.5*edge_length, 0.0, 0.5*thickness], jointAxis = "0 1 0", rpy = [0.0, angleJoint, 0.0])
         
         for i in range(1,c.numLinks):
  
