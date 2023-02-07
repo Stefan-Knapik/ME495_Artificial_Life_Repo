@@ -53,40 +53,49 @@ class SOLUTION:
         
         pyrosim.Start_URDF("temp\\body.urdf")
         
-        radius = 1 # radius of circumscribed circle
+        radius = 0.5 # radius of circumscribed circle
         thickness = 0.05 # thickness of the loop, radial
-        width = 1 # width of the loop, axial
+        width = 0.5 # width of the loop, axial
+        
         
         edge_length = 2*radius*np.tan(np.pi/c.numLinks)
         dimensions = [edge_length, width, thickness]
-        angle = np.pi/c.numLinks
+        angleJoint = 2*np.pi/c.numLinks
         
         pyrosim.Send_Cube(name="0", pos=[0,0,thickness] , size=dimensions)
         pyrosim.Send_Joint(name = "0_1" , parent= "0" , child = "1" , type = "revolute", 
-                            position = [-0.5*edge_length, 0.0, thickness], jointAxis = "0 1 0")
+                            position = [-0.5*edge_length, 0.0, thickness], jointAxis = "0 1 0", rpy = [0.0, angleJoint, 0.0])
         
         for i in range(1,c.numLinks):
-            angle = i * np.pi/c.numLinks 
-            relative_center = 0.5 * edge_length * np.array([-np.cos(2*angle), 0, np.sin(2*angle)])
-            relative_joint = relative_center * 2
-            
-            print(angle, relative_center, relative_joint)
-        
-            pyrosim.Send_Cube(name=f"{i}", pos=relative_center.tolist() , size=dimensions, rpy = [0.0, angle, 0.0])
+ 
+            pyrosim.Send_Cube(name=f"{i}", pos=[-0.5 * edge_length, 0, 0]  , size=dimensions) #, rpy = [0.0, angle, 0.0])
             
             if i < c.numLinks - 1:
                 pyrosim.Send_Joint(name = f"{i}_{i+1}" , parent= f"{i}" , child = f"{i+1}" , type = "revolute", 
-                                    position = relative_joint, jointAxis = "0 1 0")
-                print(f"{i}_{i+1}")
+                                    position = [-edge_length, 0, 0], jointAxis = "0 1 0", rpy = [0.0, angleJoint, 0.0])
+        
+        # angle = np.pi/c.numLinks
+        
+        # pyrosim.Send_Cube(name="0", pos=[0,0,thickness] , size=dimensions)
+        # pyrosim.Send_Joint(name = "0_1" , parent= "0" , child = "1" , type = "revolute", 
+        #                     position = [-0.5*edge_length, 0.0, thickness], jointAxis = "0 1 0")
+        
+        # for i in range(1,c.numLinks):
+        #     angle = i * np.pi/c.numLinks
+        #     relative_center = 0.5 * edge_length * np.array([-np.cos(2*angle), 0, np.sin(2*angle)])
+        #     relative_joint = relative_center * 2
+        
+        #     pyrosim.Send_Cube(name=f"{i}", pos=relative_center.tolist() , size=dimensions) #, rpy = [0.0, angle, 0.0])
+            
+        #     if i < c.numLinks - 1:
+        #         pyrosim.Send_Joint(name = f"{i}_{i+1}" , parent= f"{i}" , child = f"{i+1}" , type = "revolute", 
+        #                             position = relative_joint, jointAxis = "0 1 0")
+        #         print(f"{i}_{i+1}")
         
         # for i in range(c.numLinks):
-            
         #     angle = i * np.pi/c.numLinks 
-            
         #     center = np.array([0,0,radius+thickness]) + np.array([radius*np.sin(angle), 0, -radius*np.cos(angle)])
-       
         #     pyrosim.Send_Cube(name=f"{i}", pos=center.tolist() , size=dimensions.tolist()) # , rpy = [0.0, angle, 0.0]
-            
         #     if i == c.numLinks - 1:
         #         pyrosim.Send_Joint(name = f"{0}_{i}" , parent= f"{0}" , child = f"{i}" , type = "revolute", 
         #                         position = [-0.5*edge_length, 0.0, 0.5*thickness], jointAxis = "0 1 0")
@@ -104,7 +113,8 @@ class SOLUTION:
         
         for i in range(c.numLinks):
             pyrosim.Send_Sensor_Neuron(name = i , linkName = f"{i}"); 
-            pyrosim.Send_Motor_Neuron(name = i + c.numLinks , jointName = f"{i}_{(i+1)%c.numLinks}");
+            if i < c.numLinks - 1:
+                pyrosim.Send_Motor_Neuron(name = i + c.numLinks , jointName = f"{i}_{i+1}");
             
         for currentRow in range(0,c.numSensorNeurons):
             for currentColumn in range(0,c.numMotorNeurons):

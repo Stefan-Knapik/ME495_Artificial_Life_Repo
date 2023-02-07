@@ -14,7 +14,7 @@ num_steps = 1000
 sleep_time = 1/240
 
 gravity = -9.8
-maxForce = 0
+maxForce = 1000
 motorJointRange = 0.001
 
 # maxForce = 20
