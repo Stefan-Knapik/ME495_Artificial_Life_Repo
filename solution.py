@@ -15,7 +15,7 @@ class SOLUTION:
         self.min_len = 0.5
         self.max_len = 1
         self.number_of_links = np.random.randint(4, 10)
-        self.links_shape = np.zeros(self.number_of_links) # All zeros for all cubes
+        self.links_shape = np.random.randint(0,2, size=self.number_of_links) # All zeros for all cubes
         
         self.links_sizes = self.min_len + (self.max_len - self.min_len) * np.random.rand(self.number_of_links, 3) + self.min_len * np.outer(np.ones(self.number_of_links), np.array([1,0,0]))
         self.links_sensor = np.random.randint(0,2, size=self.number_of_links)
@@ -66,11 +66,11 @@ class SOLUTION:
         
         # Root link and first joint (absolute coords)
         current_link_size = self.links_sizes[0,:].tolist()
-        current_joint_loc = (np.array([-0.5, 0, 0]) * self.links_sizes[0,0] + np.array([0, 0, self.max_len])).tolist()
+        current_joint_loc = (np.array([-0.5, 0, 0]) * self.links_sizes[0,0] + np.array([0, 0, 0.5*max(self.links_sizes[:,2])])).tolist()
         colorname = 'green' if self.links_sensor[0] == 1 else 'blue'
-        pyrosim.Send_Cube(name="0", pos=[0.0, 0.0, self.max_len] , size=current_link_size, color=colorname)
+        pyrosim.Send_Cube(name="0", pos=[0.0, 0.0, 0.5*max(self.links_sizes[:,2])] , size=current_link_size, color=colorname, shape=self.links_shape[0])
         pyrosim.Send_Joint(name = "0_1" , parent= "0" , child = "1" , type = "revolute", 
-                            position = current_joint_loc, jointAxis = "0 1 0")
+                            position = current_joint_loc, jointAxis = "0 0 1")
         
         for i in range(1, self.number_of_links):
             current_link_size = self.links_sizes[i,:].tolist()
@@ -79,11 +79,11 @@ class SOLUTION:
             colorname = 'green' if self.links_sensor[i] == 1 else 'blue'
             
             pyrosim.Send_Cube(name=f"{i}", pos=current_link_loc
-                              , size=current_link_size , color=colorname)
+                              , size=current_link_size , color=colorname, shape=self.links_shape[i])
             
             if i < self.number_of_links - 1:
                 pyrosim.Send_Joint(name = f"{i}_{i+1}" , parent= f"{i}" , child = f"{i+1}" , type = "revolute", 
-                                    position = current_joint_loc, jointAxis = "0 1 0")
+                                    position = current_joint_loc, jointAxis = "0 0 1")
             
         pyrosim.End()
         

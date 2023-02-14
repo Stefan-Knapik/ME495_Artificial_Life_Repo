@@ -8,8 +8,7 @@
 import os
 from solution import SOLUTION
 
-
-number_of_robots = 3
+number_of_robots = 1
 
 for i in range(number_of_robots):
     
