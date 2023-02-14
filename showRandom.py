@@ -1,7 +1,7 @@
 import os
 from solution import SOLUTION
 
-number_of_robots = 1
+number_of_robots = 5
 
 for i in range(number_of_robots):
     
