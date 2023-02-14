@@ -15,11 +15,13 @@ class SOLUTION:
         self.min_len = 0.2
         self.max_len = 1
         self.number_of_links = np.random.randint(4, 20)
-        self.links_shape = np.random.randint(0,2, size=self.number_of_links) # All zeros for all cubes
-        self.joint_direction = np.random.randint(0,2, size=self.number_of_links)
+        self.links_shape = np.random.randint(0,2, size=self.number_of_links) # 0 = box, 1 = cylinder
+        self.joint_direction = np.random.randint(0,2, size=self.number_of_links) # 0 = z, 1 = y
         
-        self.links_sizes = self.min_len + (self.max_len - self.min_len) * np.random.rand(self.number_of_links, 3) + self.min_len * np.outer(np.ones(self.number_of_links), np.array([1,0,0]))
-        self.links_sensor = np.random.randint(0,2, size=self.number_of_links)
+        self.links_sizes = self.min_len + \
+                            (self.max_len - self.min_len) * np.random.rand(self.number_of_links, 3) + \
+                            self.min_len * np.outer(np.ones(self.number_of_links), np.array([1,0,0])) # bias longer in x direction
+        self.links_sensor = np.random.randint(0,2, size=self.number_of_links) # 0 = no sensor, 1 = sensor
         
         self.numSensorNeurons = sum(self.links_sensor)
         self.numMotorNeurons = self.number_of_links - 1

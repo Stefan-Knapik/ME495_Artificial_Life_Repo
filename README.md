@@ -14,4 +14,4 @@ This branch of the repository explores the generation of random creature morphol
 Run __showRandom.py__ to generate and visualize a sequence of random creature morphologies.
 Modifiying Parameters
 - Simulation parameters, including maximum joint forces and angles, can be set in __constants.py__
-- Random morphology generation parameters, such as the distributions of link number, size, and shape, can be set in the initialization of the SOLUTION class defined in __solution.py__
+- Random morphology generation parameters, such as the distributions of link number, size, and shape, can be set in the constructor of the SOLUTION class defined in __solution.py__
