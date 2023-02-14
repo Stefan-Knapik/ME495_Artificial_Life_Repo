@@ -6,15 +6,15 @@ printFitness = False
 numberOfGenerations = 1
 populationSize = 1
 
-num_steps = 100
+num_steps = 300
 sleep_time = 1/240
 
 gravity = -9.8
 maxForce = 100
 motorJointRange = 0.2
 
-numSensorNeurons = 5
-numMotorNeurons = 8
+# numSensorNeurons = 5
+# numMotorNeurons = 8
 
 # maxForce = 20
 # amplitude = pi/6

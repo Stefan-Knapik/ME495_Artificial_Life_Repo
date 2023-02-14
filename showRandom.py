@@ -9,9 +9,9 @@ import os
 from solution import SOLUTION
 
 
-number_of_robots = 2
+number_of_robots = 1
 
-for i in range(2):
+for i in range(number_of_robots):
     
     # Reset temp folder
     os.system("rmdir temp /s /q")
@@ -24,5 +24,6 @@ for i in range(2):
     rand_robot.Create_Body()
     rand_robot.Create_Brain()
     
-    os.system(f"python simulate.py GUI {i} > nul 2> nul")
+    os.system(f"python simulate.py GUI {i}")
+    # os.system(f"python simulate.py GUI {i} > nul 2> nul")
     
