@@ -12,9 +12,9 @@ class SOLUTION:
         
         self.myID = nextAvailableID
         
-        self.min_len = 0.1
-        self.max_len = 1
-        self.number_of_links = np.random.randint(3, 8)
+        self.min_len = 0.5
+        self.max_len = 2
+        self.number_of_links = np.random.randint(4, 10)
         self.links_shape = np.zeros(self.number_of_links) # All zeros for all cubes
         
         self.links_sizes = self.min_len + (self.max_len - self.min_len) * np.random.rand(self.number_of_links, 3)
@@ -66,9 +66,9 @@ class SOLUTION:
         
         # Root link and first joint (absolute coords)
         current_link_size = self.links_sizes[0,:].tolist()
-        current_joint_loc = (np.array([-0.5, 0, 0]) * self.links_sizes[0,0]).tolist()
+        current_joint_loc = (np.array([-0.5, 0, 0]) * self.links_sizes[0,0] + np.array([0, 0, self.max_len])).tolist()
         colorname = 'green' if self.links_sensor[0] == 1 else 'blue'
-        pyrosim.Send_Cube(name="0", pos=[0.0, 0.0, 0.0] , size=current_link_size, color=colorname)
+        pyrosim.Send_Cube(name="0", pos=[0.0, 0.0, self.max_len] , size=current_link_size, color=colorname)
         pyrosim.Send_Joint(name = "0_1" , parent= "0" , child = "1" , type = "revolute", 
                             position = current_joint_loc, jointAxis = "0 1 0")
         
@@ -95,13 +95,12 @@ class SOLUTION:
         pyrosim.Start_NeuralNetwork(f"temp\\brain{self.myID}.nndf")
         n_num = 0
         
-        for i in self.links_sensor:
-            if i == 1:
-                pyrosim.Send_Sensor_Neuron(name = n_num , linkName = f"{n_num}"); n_num += 1
+        for i in range(len(self.links_sensor)):
+            if self.links_sensor[i] == 1:
+                pyrosim.Send_Sensor_Neuron(name = n_num , linkName = f"{i}"); n_num += 1
                 
-        for i in self.links_sensor:
-            pyrosim.Send_Motor_Neuron(name = n_num , jointName = f"{n_num}"); n_num += 1
-            
+        for i in range(self.number_of_links - 1):
+            pyrosim.Send_Motor_Neuron(name = n_num , jointName = f"{i}_{i+1}"); n_num += 1
             
         for currentRow in range(0,self.numSensorNeurons):
             for currentColumn in range(0,self.numMotorNeurons):
