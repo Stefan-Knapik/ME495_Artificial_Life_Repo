@@ -13,11 +13,11 @@ class SOLUTION:
         self.myID = nextAvailableID
         
         self.min_len = 0.5
-        self.max_len = 2
+        self.max_len = 1
         self.number_of_links = np.random.randint(4, 10)
         self.links_shape = np.zeros(self.number_of_links) # All zeros for all cubes
         
-        self.links_sizes = self.min_len + (self.max_len - self.min_len) * np.random.rand(self.number_of_links, 3)
+        self.links_sizes = self.min_len + (self.max_len - self.min_len) * np.random.rand(self.number_of_links, 3) + self.min_len * np.outer(np.ones(self.number_of_links), np.array([1,0,0]))
         self.links_sensor = np.random.randint(0,2, size=self.number_of_links)
         
         self.numSensorNeurons = sum(self.links_sensor)
