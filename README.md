@@ -10,6 +10,14 @@ This branch of the repository explores the generation of random creature morphol
 - joint directions (parallel to y or z)
 - sensation (green links "feel", blue links are "numb")
 
+![image](https://user-images.githubusercontent.com/101603342/218656723-7c701f06-679c-4356-9591-0cd3550835a7.png)
+![image](https://user-images.githubusercontent.com/101603342/218656777-4b86f993-9b94-4784-bff9-a6b91dcba712.png)
+![image](https://user-images.githubusercontent.com/101603342/218656802-b000b42e-e5c9-4cb6-be5f-613b62869d14.png)
+![image](https://user-images.githubusercontent.com/101603342/218656824-899005a0-72f5-437c-b905-07b20b8694ff.png)
+
+
+
+
 ## Run the code (Windows)
 Run __showRandom.py__ to generate and visualize a sequence of random creature morphologies.
 
