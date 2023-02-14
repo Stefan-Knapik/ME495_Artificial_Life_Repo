@@ -4,7 +4,7 @@ import numpy as np
 import pyrosim.pyrosim as pyrosim
 import constants as c
 
-identical_worlds_and_bodies = True
+identical_worlds_and_bodies = False
 
 class SOLUTION:
 
