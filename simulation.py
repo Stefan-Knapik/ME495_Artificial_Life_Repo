@@ -17,6 +17,7 @@ class SIMULATION:
             self.progress_bar = False
         else: 
             self.physicsClient = p.connect(p.GUI)
+            p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
             self.progress_bar = c.progress_bar
         
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
