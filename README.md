@@ -2,8 +2,8 @@
 ME495 Artificial Life course at Northwestern University, which utilizes content from the r/ludobots evolutionary robotics subreddit.
 https://www.reddit.com/r/ludobots/
 
-## Generate Random 1D Creature Morphologies
-This branch explores the generation of random creature morphologies. Random parameters include:
+## Generate random 1D creature morphologies
+This branch of the repository explores the generation of random creature morphologies. Random parameters include:
 - number of body segments
 - shape of body segments (box or cylinder)
 - size of body segments
