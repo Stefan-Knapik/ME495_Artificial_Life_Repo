@@ -6,7 +6,7 @@ printFitness = False
 numberOfGenerations = 1
 populationSize = 1
 
-num_steps = 150
+num_steps = 120
 sleep_time = 1/240
 
 gravity = -9.8

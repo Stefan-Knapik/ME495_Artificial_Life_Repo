@@ -2,7 +2,7 @@ import os
 from solution2 import SOLUTION
 import numpy as np
 
-number_of_robots = 3
+number_of_robots = 6
 
 for i in range(number_of_robots):
     

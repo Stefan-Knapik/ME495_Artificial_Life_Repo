@@ -15,7 +15,7 @@ class SOLUTION:
         
         self.min_len = 0.5
         self.max_len = 1
-        self.root_height = 1.5
+        self.root_height = 1.2
         
         self.prob_sensor = 0.5
         
