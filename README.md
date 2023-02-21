@@ -24,11 +24,13 @@ Here we limit ourselves to spherical body segments for the sake of simple collis
 5. Accept the randomly generated joint-link pair.
 6. Repeat from Step 2 until the number of links is satisfied.
 
-<img src="https://user-images.githubusercontent.com/101603342/218656723-7c701f06-679c-4356-9591-0cd3550835a7.png" height="150"
-img src="https://user-images.githubusercontent.com/101603342/218656723-7c701f06-679c-4356-9591-0cd3550835a7.png" height="150" />
+<img src="https://user-images.githubusercontent.com/101603342/220268996-d46b12c3-8011-4e0b-941c-9acd234cd08e.png" height="150"
+img src="https://user-images.githubusercontent.com/101603342/220268996-d46b12c3-8011-4e0b-941c-9acd234cd08e.png" height="150" />
 <img src="https://user-images.githubusercontent.com/101603342/218656777-4b86f993-9b94-4784-bff9-a6b91dcba712.png" height="150" />
 <img src="https://user-images.githubusercontent.com/101603342/218656802-b000b42e-e5c9-4cb6-be5f-613b62869d14.png" height="150" />
 <img src="https://user-images.githubusercontent.com/101603342/218656824-899005a0-72f5-437c-b905-07b20b8694ff.png" height="150" />
+
+
 
 
 ## Run the code (Windows)
