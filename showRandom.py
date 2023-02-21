@@ -11,7 +11,7 @@ for i in range(number_of_robots):
     os.system("mkdir temp")
         
     # Create new robot and show a simulation
-    number_of_links = np.random.randint(5, 20)
+    number_of_links = np.random.randint(5, 30)
     max_children_per_parent = np.random.randint(1, 4)
     
     rand_robot = SOLUTION(i, number_of_links, max_children_per_parent)
