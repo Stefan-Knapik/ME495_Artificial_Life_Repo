@@ -22,6 +22,8 @@ Here we limit ourselves to spherical body segments for the sake of simple collis
 
 **Number of links**, **maximum children per link**, and **maximum link tree depth** are prescribed for each robot. **Link radius** is uniformly randomly chosen for each link. **Joint locations** are uniformly randomly tried over the spherical link surfaces via some fun math (search spherically symmetric distributions to learn more)! **Joint axis directions** are uniformly randomly generated, but constrained to be tangential to the spherical link surfaces. Link **sensation** occurs at a fixed probability over all the links.
 
+Note: If the maximum number of children per child prescribed as 1, this project degenerates to a 1D case suitable for Assignment 6.
+
 ## Procedure
 1. Create the root link at a specified location.
 2. Randomly choose an existing link that is eligible to have a child. Links can be disqualified from further parenthood if they have too many children or are too deep in the tree.
