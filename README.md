@@ -39,3 +39,5 @@ Run __showRandom.py__ to generate and visualize a sequence of random creature mo
 
 - Simulation parameters, including maximum joint forces and angles, can be set in __constants.py__
 - Random morphology generation parameters can be set in the constructor of the SOLUTION class defined in __solution2.py__
+
+If simulating with global collision detection, the "connect_factor" variable in __solution2.py__ should be set to $1 + $\epsilon$$
