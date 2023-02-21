@@ -26,12 +26,9 @@ Here we limit ourselves to spherical body segments for the sake of simple collis
 
 <img src="https://user-images.githubusercontent.com/101603342/220268996-d46b12c3-8011-4e0b-941c-9acd234cd08e.png" height="150"
 img src="https://user-images.githubusercontent.com/101603342/220268996-d46b12c3-8011-4e0b-941c-9acd234cd08e.png" height="150" />
-<img src="https://user-images.githubusercontent.com/101603342/218656777-4b86f993-9b94-4784-bff9-a6b91dcba712.png" height="150" />
-<img src="https://user-images.githubusercontent.com/101603342/218656802-b000b42e-e5c9-4cb6-be5f-613b62869d14.png" height="150" />
-<img src="https://user-images.githubusercontent.com/101603342/218656824-899005a0-72f5-437c-b905-07b20b8694ff.png" height="150" />
-
-
-
+<img src="https://user-images.githubusercontent.com/101603342/220269218-7c00e2d5-df58-4e8b-8b6f-c8db53be3de5.png" height="150" />
+<img src="https://user-images.githubusercontent.com/101603342/220269318-3275684b-3892-4ffd-8a16-16e25d6c50de.png" height="150" />
+<img src="https://user-images.githubusercontent.com/101603342/220269447-df648bc3-5b17-4d87-b228-af66d73ce344.png" height="150" />
 
 ## Run the code (Windows)
 Run __showRandom.py__ to generate and visualize a sequence of random creature morphologies.
