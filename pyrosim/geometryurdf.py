@@ -11,9 +11,12 @@ class GEOMETRY_URDF:
         if shape == 0:
             sizeString = str(size[0]) + " " + str(size[1]) + " " + str(size[2])
             self.string2 = '    <box size="' + sizeString + '" />'
-        else:
+        elif shape == 1:
             sizeString = 'length="' + str(size[0]) + '" radius="' + str(0.5 * size[1]) + '"'
             self.string2 = '    <cylinder ' + sizeString + ' />'
+        elif shape == 2:
+            sizeString = 'radius="' + str(0.5 * size) + '"'
+            self.string2 = '    <sphere ' + sizeString + ' />'
             
 
         self.string3 = '</geometry>'

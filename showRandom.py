@@ -1,7 +1,7 @@
 import os
-from solution import SOLUTION
+from solution2 import SOLUTION
 
-number_of_robots = 8
+number_of_robots = 1
 
 for i in range(number_of_robots):
     
@@ -14,7 +14,7 @@ for i in range(number_of_robots):
     
     rand_robot.Create_World()
     rand_robot.Create_Body()
-    rand_robot.Create_Brain()
+    #  rand_robot.Create_Brain()
     
     # os.system(f"python simulate.py GUI {i}")
     os.system(f"python simulate.py GUI {i} > nul 2> nul")
