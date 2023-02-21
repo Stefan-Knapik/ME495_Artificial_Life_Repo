@@ -8,7 +8,7 @@ class ORIGIN_URDF:
 
         posString = str(pos[0]) + " " + str(pos[1]) + " " + str(pos[2])
         
-        if shape == 0:
+        if shape == 0 or shape == 2:
             self.string = '<origin xyz="' + posString + '" rpy="0 0 0"/>'
         else:
             self.string = '<origin xyz="' + posString + '" rpy="0 1.57079632679 0"/>'

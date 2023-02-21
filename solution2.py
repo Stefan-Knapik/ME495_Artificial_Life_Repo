@@ -81,7 +81,7 @@ class SOLUTION:
         pyrosim.Start_URDF("temp\\body.urdf")
         
         # Preallocate link parameter storage
-        link_info = np.zeros((self.link_lim, 6)) # idx of dim1 is link number
+        link_info = np.zeros((self.link_lim, 12)) # idx of dim1 is link number
         # 0-2 xyz, 3 diameter, 4 sensor, 5 eligibility, 6-8 parent joint absolute location, 9-11 parent joint direction
         tree_info = pd.DataFrame() # idx of dim1 is link number
         # 0 layer, 1 parent, 2 children
@@ -102,14 +102,14 @@ class SOLUTION:
         colorname = 'green' if s == 1 else 'blue'
         
         pyrosim.Send_Cube(name=f"{i}", pos=[x,y,z], size=d, color=colorname, shape=2)
-        link_info[i,:] = [x, y, z, d, s, e]
+        link_info[i,0:6] = [x, y, z, d, s, e]
         # tree_info[i,:] = [layer, parent, children]
         
         for i in range(1, self.link_lim):
             link_added = False
             while not link_added:
                 # pick a random parent from eligible parents
-                eligible_parents = np.argwhere(link_info[:,5] == 1)
+                eligible_parents = np.squeeze(np.argwhere(link_info[:,5] == 1), axis=1)
                 parent = np.random.choice(eligible_parents)
                 
                 # randomly spawn a joint location
@@ -120,36 +120,43 @@ class SOLUTION:
                 
                 # randomly spawn a link
                 d = self.min_len + (self.max_len - self.min_len) * np.random.rand()
-                center = link_info[parent,0:2] + 0.5*(link_info[parent,3]+d)*direction
+                
+                center = link_info[parent,0:3] + 0.5*(link_info[parent,3]+d)*direction
                 
                 # check for collision with floor or other sphere, and if so, try again
                 if center[2] <= 0.5*d:
-                    break
-                vecd = center - link_info[0:i-1,0:2]
+                    continue
+                vecd = center - link_info[0:i,0:3]
                 distance = np.linalg.norm(vecd, axis=1)
-                sum_radii = 0.5 * (link_info[0:i-1,3] + d)
+                sum_radii = 0.5 * (link_info[0:i,3] + d)
                 if min(distance-sum_radii) <= 0:
-                    break
+                    continue
                 
                 # if no collision, add joint and link
-                link_info[i,:] = [x, y, z, d, s, e]
-                tree_info[i,:] = [layer, parent, children]  
+                link_info[i,0:6] = [x, y, z, d, s, 1]
+                # tree_info[i,:] = [layer, parent, children]  
                 
                 if parent == 0:
-                    link_info[i,6:8] = link_info[0,0:2] + 0.5*link_info[0,3]*direction
-                    link_info[i,9:11] = direction
-                    current_link_loc = (link_info[0,0:2] + 0.5*(link_info[0,3] + d)*direction).tolist()
-                    current_joint_loc = (link_info[i,6:8]).tolist()
-                else:
-                    link_info[i,6:8] = link_info[parent,6:8] + 0.5*(link_info[parent,3]*link_info[parent,9:11] + d*direction)
-                    link_info[i,9:11] = direction
+                    # print(direction)
+                    # print(link_info[i,9:])
+                    # print(link_info[i,:])
+                    # exit()
                     
-                    current_link_loc = (link_info[i,0:2] - link_info[parent,6:8]).tolist()
-                    current_joint_loc = (link_info[i,6:8] - link_info[parent,6:8]).tolist()
+                    
+                    link_info[i,6:9] = link_info[0,0:3] + 0.5*link_info[0,3]*direction
+                    link_info[i,9:] = direction
+                    current_link_loc = (link_info[0,0:3] + 0.5*(link_info[0,3] + d)*direction).tolist()
+                    current_joint_loc = (link_info[i,6:9]).tolist()
+                else:
+                    link_info[i,6:9] = link_info[parent,6:9] + 0.5*(link_info[parent,3]*link_info[parent,9:] + d*direction)
+                    link_info[i,9:] = direction
+                    
+                    current_link_loc = (link_info[i,0:3] - link_info[parent,6:9]).tolist()
+                    current_joint_loc = (link_info[i,6:9] - link_info[parent,6:9]).tolist()
                     
                 pyrosim.Send_Joint(name = f"{parent}_{i}" , parent= f"{parent}" , child = f"{i}" , type = "revolute", 
                                     position = current_joint_loc, jointAxis = "0 0 1")
-                pyrosim.Send_Ball(name=f"{i}", pos=current_link_loc, size=d, color=colorname, shape=2)
+                pyrosim.Send_Cube(name=f"{i}", pos=current_link_loc, size=d, color=colorname, shape=2)
         
                 link_added = True
             
