@@ -10,7 +10,7 @@ num_steps = 150
 sleep_time = 1/240
 
 gravity = -9.8
-maxForce = 20
+maxForce = 50
 motorJointRange = 0.5
 
 # numSensorNeurons = 5
