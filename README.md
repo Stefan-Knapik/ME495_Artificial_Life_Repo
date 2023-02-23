@@ -2,6 +2,8 @@
 ME495 Artificial Life course at Northwestern University, which utilizes content from the r/ludobots evolutionary robotics subreddit.
 https://www.reddit.com/r/ludobots/
 
+[![Watch the video](https://user-images.githubusercontent.com/101603342/220821102-70b140b1-9d35-4765-b92a-1ba98e7db73c.png)](https://youtu.be/7ybpkGDg9C0?t=9)
+
 ## Generate random 3D creature morphologies
 This branch of the repository explores the generation of random creature morphologies. Random parameters include:
 - number of spherical body segments
