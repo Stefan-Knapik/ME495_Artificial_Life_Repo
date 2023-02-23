@@ -109,6 +109,8 @@ class SOLUTION:
         link_info[i,0:6] = [x, y, z, d, s, 1]
         # tree_info[i,0:3] = [layer, parent, children]
         
+        collision_counter = [0,0]
+        
         for i in range(1, self.link_lim):
             link_added = False
             while not link_added:
@@ -129,7 +131,8 @@ class SOLUTION:
                 
                 # check for collision with floor or other sphere, and if so, try again
                 if center[2] <= 0.5*d:
-                    print("floor collision")
+                    print(f"{collision_counter[0]} floor collision")
+                    collision_counter[0] += 1
                     continue
                 
                 if i > 1:
@@ -142,7 +145,8 @@ class SOLUTION:
                     distance = np.linalg.norm(vecd, axis=1)
                     sum_radii = 0.5 * (links_to_check[:,3] + d)
                     if min(distance-sum_radii) <= -0.1:
-                        print("link collision")
+                        print(f"{collision_counter[1]} link collision")
+                        collision_counter[1] += 1
                         continue
                 
                 # if no collision, add joint and link
