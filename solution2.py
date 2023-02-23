@@ -9,18 +9,18 @@ identical_worlds_and_bodies = False
 
 class SOLUTION:
 
-    def __init__(self, nextAvailableID, num_links, max_children):
+    def __init__(self, nextAvailableID, num_links, max_children, layer_lim):
         
         self.myID = nextAvailableID
         
-        self.min_len = 0.5
-        self.max_len = 1
+        self.min_len = 0.2
+        self.max_len = 0.5
         self.root_height = 1.2
         
         self.prob_sensor = 0.5
         
         self.link_lim = num_links # max number of links
-        self.layer_lim = 3 # max number of layers
+        self.layer_lim = layer_lim # max number of layers
         self.children_lim = max_children # max number of children per link
         
         self.connect_factor = 0.9 # bring spheres together by this factor
@@ -82,8 +82,10 @@ class SOLUTION:
         pyrosim.Start_URDF("temp\\body.urdf")
         
         # Preallocate link parameter storage
-        link_info = np.zeros((self.link_lim, 12)) # idx of dim1 is link number
-        # 0-2 xyz, 3 diameter, 4 sensor, 5 eligibility, 6-8 parent joint absolute location, 9-11 parent joint direction
+        link_info = np.zeros((self.link_lim, 13)) # idx of dim1 is link number
+        # 0-2 xyz, 3 diameter, 4 sensor, 5 eligibility, 
+        # 6-8 parent joint absolute location, 9-11 parent joint direction
+        # 12 layer number
         children = np.empty((self.link_lim,), dtype=object)
         joints = np.empty((self.link_lim - 1,2) ,dtype=int)
         
@@ -149,7 +151,9 @@ class SOLUTION:
                 # tree_info[i,:] = [layer, parent, children]  
                 
                 link_info[i,6:9] = link_info[parent,0:3] + 0.5*link_info[parent,3]*direction
-                link_info[i,9:] = direction
+                link_info[i,9:12] = direction
+                link_info[i,12] = link_info[parent,12] + 1
+                
                 current_link_loc = (0.5*self.connect_factor*d*direction).tolist()
                 if parent == 0:
                     current_joint_loc = (link_info[i,6:9]).tolist()
@@ -166,7 +170,7 @@ class SOLUTION:
                 joint_axis = np.array2string(joint_axis, separator=' ')[2:-1]
                 
                 # generate a joint axis aligned with its direction
-                # joint_axis = np.array2string(link_info[i,9:], separator=' ')[2:-1] 
+                # joint_axis = np.array2string(link_info[i,9:12], separator=' ')[2:-1] 
                     
                 pyrosim.Send_Joint(name = f"{parent}_{i}" , parent= f"{parent}" , child = f"{i}" , type = "revolute", 
                                     position = current_joint_loc, jointAxis = joint_axis)
@@ -180,6 +184,8 @@ class SOLUTION:
                 num_children = (joints[:,0] == parent).sum() # counts children of parent
                 if num_children >= self.children_lim:
                     link_info[parent,5] = 0
+                if link_info[i,12] >= self.layer_lim:
+                    link_info[i,5] = 0
                 
                 link_added = True
             

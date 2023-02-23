@@ -11,7 +11,7 @@ sleep_time = 1/240
 
 gravity = -9.8
 maxForce = 50
-motorJointRange = 0.5
+motorJointRange = 0.2
 
 # numSensorNeurons = 5
 # numMotorNeurons = 8
