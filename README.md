@@ -1,7 +1,7 @@
 # Assignment 7
 
-[![Example Video](https://user-images.githubusercontent.com/101603342/220821102-70b140b1-9d35-4765-b92a-1ba98e7db73c.png)]
-(https://youtu.be/7ybpkGDg9C0)
+![Example Video](https://user-images.githubusercontent.com/101603342/220821102-70b140b1-9d35-4765-b92a-1ba98e7db73c.png)
+[yes sir](https://youtu.be/7ybpkGDg9C0 "link title")
 
 ME495 Artificial Life course at Northwestern University, which utilizes content from the r/ludobots evolutionary robotics subreddit.
 https://www.reddit.com/r/ludobots/
