@@ -9,7 +9,7 @@ identical_worlds_and_bodies = False
 
 class SOLUTION:
 
-    def __init__(self, nextAvailableID, num_links, max_children, layer_lim):
+    def __init__(self, nextAvailableID, num_links=10, max_children=2, layer_lim=99):
         
         self.myID = nextAvailableID
         
@@ -23,7 +23,7 @@ class SOLUTION:
         self.layer_lim = layer_lim # max number of layers
         self.children_lim = max_children # max number of children per link
         
-        self.connect_factor = 0.9 # bring spheres together by this factor
+        self.connect_factor = 0.99 # bring spheres together by this factor
         
         # self.number_of_links = np.random.randint(4, 5)
         # self.links_shape = np.random.randint(0,2, size=self.number_of_links) # 0 = box, 1 = cylinder
