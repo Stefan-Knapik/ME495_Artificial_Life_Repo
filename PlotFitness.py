@@ -2,13 +2,16 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 
-for seed in range(1,6):
-    list[seed-1] = np.load(f"FitnessProgress{seed}.npy")
+fitness_progress = np.load(f"save/FitnessProgress1.npy")
+fitness_progress = np.expand_dims(fitness_progress, axis=0)
+
+for seed in range(1,2):
+    temp = np.load(f"save/FitnessProgress{seed}.npy")
+    fitness_progress = np.append(fitness_progress, np.expand_dims(temp, axis=0), axis=0)
 
 plt.figure(1)
-plt.hold(True)
-for fitness_progress in list:
-    plt.plot(fitness_progress.min(axis=1))
+for seed in range(1,2):
+    plt.plot(fitness_progress[seed,:,:].min(axis=1))
 plt.ylabel('Best Fitness')
 plt.xlabel('Generation')
 plt.show()
