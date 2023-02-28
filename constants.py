@@ -7,15 +7,15 @@ progress_bar = True
 printFitness = False
 printCollision = False
 
-numberOfGenerations = 2000
-populationSize = 100
+numberOfGenerations = 100
+populationSize = 20
 
 num_steps = 1600
 sleep_time = 1/240
 
 gravity = -9.8
-maxForce = 80
-motorJointRange = 0.8
+maxForce = 50
+motorJointRange = 1
 
 # numSensorNeurons = 5
 # numMotorNeurons = 8
