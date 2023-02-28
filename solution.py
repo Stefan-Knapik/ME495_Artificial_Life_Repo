@@ -12,21 +12,21 @@ class SOLUTION:
     def __init__(self, nextAvailableID):
         
         # Parameters
-        self.min_len = 0.2
-        self.max_len = 0.5
+        self.min_len = 0.3
+        self.max_len = 0.8
         self.root_height = 1.2
         
-        self.num_links = np.random.randint(5, 15)
+        self.num_links = np.random.randint(9, 19)
         self.layer_lim = 99 #np.random.randint(10)
-        self.children_lim = np.random.randint(3, 4)
+        self.children_lim = np.random.randint(2, 5)
         
-        self.num_links = 5
-        self.layer_lim = 99 
-        self.children_lim = 3
+        # self.num_links = 5
+        # self.layer_lim = 99 
+        # self.children_lim = 3
         
         self.sensor_prob = 0.5
         
-        self.wiggle_room = 0
+        self.wiggle_room = 0.1
         self.connect_factor = 0.99 # bring spheres together by this factor
         
         # Initialize ID
@@ -242,6 +242,8 @@ class SOLUTION:
         
         #                 N  SS  SM  ARS  CJA  AL  CD  CJD  RL
         probs = np.array([1, 1,  1,  1,   3,   3,  2,  0,   3])
+        probs = np.array([1, 1,  1,  1,   0,   0,  0,  0,   0])
+        probs = np.array([0, 0,  0,  0,   0,   0,  0,  0,   1])
         
         probs = probs / probs.sum()
         mutation_type = np.random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8], p=probs)
@@ -287,14 +289,14 @@ class SOLUTION:
             
         # DIFFICULT TO IMPLEMENT WELL
         # add a link
-        elif mutation_type == 5 and self.num_links < 5:
+        elif mutation_type == 5 and self.num_links < 30:
             self.num_links += 1
             self.links = np.append(self.links, np.zeros((1,17)), axis=0)
             self.joints = np.append(self.joints, np.zeros((1,2),dtype=int), axis=0)
             self.Add_A_Link(self.num_links-1)
             self.links[self.num_links-1,4] = np.random.choice([0,1], p=[1-self.sensor_prob, self.sensor_prob]) # sensor?
             # add motor to brain
-            self.weights = np.append(self.weights, np.random.random((self.numSensorNeurons,1))*2-1, axis=1)
+            self.weights = np.append(self.weights, np.random.random((self.weights.shape[0],1))*2-1, axis=1)
             self.numMotorNeurons = self.num_links - 1
             # add sensor to brain
             if self.links[self.num_links-1,4] == 1:
@@ -315,7 +317,7 @@ class SOLUTION:
             joint = np.random.randint(0,self.num_links-1)
             self.links[joint,11:14] = axis
         # remove a link (leaf link)
-        elif mutation_type == 8 and self.num_links > 2:
+        elif mutation_type == 8 and self.num_links > 3:
             leaf_links = np.setdiff1d(self.joints[:,1], self.joints[:,0])
             link = np.random.choice(leaf_links)
             
@@ -330,8 +332,9 @@ class SOLUTION:
             self.links = np.delete(self.links, link, axis=0)
             self.weights = np.delete(self.weights, link-1, axis=1)
             
-            self.joints = np.delete(self.joints, link-1, axis=0)
             self.joints = np.where(self.joints > link, self.joints-1, self.joints)
+            self.joints = np.delete(self.joints, link-1, axis=0)
+            
             
             # self.num_links = self.links.shape[0]
             # self.numSensorNeurons = self.weights.shape[0]

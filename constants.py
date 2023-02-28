@@ -4,10 +4,10 @@ progress_bar = True
 printFitness = False
 printCollision = False
 
-numberOfGenerations = 20
-populationSize = 5
+numberOfGenerations = 10
+populationSize = 3
 
-num_steps = 100
+num_steps = 800
 sleep_time = 1/240
 
 gravity = -9.8
