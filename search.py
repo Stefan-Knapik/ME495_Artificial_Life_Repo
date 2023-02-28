@@ -5,15 +5,14 @@ import numpy as np
 
 for i in range(1,2):
     
-    rand_robot = SOLUTION(0, random_seed = i)
-    rand_robot.Create_World()
-    rand_robot.Create_Body()
-    rand_robot.Create_Brain()
+    # rand_robot = SOLUTION(0, random_seed = i)
+    # rand_robot.Create_World()
+    # rand_robot.Create_Body()
+    # rand_robot.Create_Brain()
     
-    # os.system(f"python simulate.py GUI {i}")
-    os.system(f"python simulate.py GUI {i} > nul 2> nul")
-    exit()
-    
+    # # os.system(f"python simulate.py GUI {i}")
+    # os.system(f"python simulate.py GUI {i} > nul 2> nul")
+    # exit()
     
     
     # Initialize parallel hill climber

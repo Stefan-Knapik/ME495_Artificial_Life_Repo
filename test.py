@@ -4,13 +4,11 @@
         
 # f.close()
 
-
 import numpy as np
+from solution import SOLUTION
 
-# rng = np.random.default_rng(0)
-np.random.seed(1)
+np.random.seed(0)
 
-x = np.random.randint(5, 30)
-y = np.random.randint(5, 30)
 
-print(x, y)
+x = SOLUTION(0)
+x.Start_Simulation('GUI')

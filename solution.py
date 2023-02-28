@@ -9,21 +9,28 @@ identical_worlds_and_bodies = False
 
 class SOLUTION:
 
-    def __init__(self, nextAvailableID, random_seed=0):
+    def __init__(self, nextAvailableID):
         
-        self.myID = nextAvailableID
-        np.random.seed(random_seed)
-        
+        # Parameters
         self.min_len = 0.2
         self.max_len = 0.5
         self.root_height = 1.2
         
-        self.link_lim = np.random.randint(5, 20)
+        self.num_links = np.random.randint(5, 15)
         self.layer_lim = 99 #np.random.randint(10)
-        self.children_lim = np.random.randint(1, 4)
+        self.children_lim = np.random.randint(3, 4)
         
-        self.prob_sensor = 0.5
-        self.connect_factor = 0.99 # bring spheres together by this factor
+        self.sensor_prob = 0.5
+        
+        self.wiggle_room = 0.0
+        self.connect_factor = 0.9 # bring spheres together by this factor
+        
+        # Initialize ID
+        self.myID = nextAvailableID
+        # Initialize Body
+        self.Initialize_Body()
+        # Initialize Brain
+        self.weights = 2 * np.random.rand(self.numSensorNeurons,self.numMotorNeurons) - 1
             
     def Start_Simulation(self, directOrGUI):
         if identical_worlds_and_bodies == False or self.myID == 0:
@@ -60,129 +67,143 @@ class SOLUTION:
         
         while not os.path.exists("temp\\world.sdf"):
             time.sleep(0.001)
+            
+    def Initialize_Body(self):
+        
+        # Preallocate storage
+        self.links = np.zeros((self.num_links, 17)) # dim0 is link number
+                # 0-2 xyz, 3 diameter, 4 sensor, 
+                # 5 eligibility, 6 layer number, 7 parent link number
+                # 8-10 parent joint absolute location, 
+                # 11-13 parent joint absolute direction,
+                # 14-16 parent joint axis
+        self.joints = np.empty((self.num_links-1, 2) ,dtype=int) # dim0 is joint number
+                # 0 parent link, 1 child link
+        collision_counter = [0,0]
+        failed_attempts = 0
+        
+        # Root link (absolute coords)
+        self.links[0,0:8] = [0, 0, self.root_height, self.max_len, 0, 1, 1, -1]
+        
+        # Add links until there are enough
+        for i in range(1, self.num_links):
+            link_added = False
+            while not link_added:
+                if sum(collision_counter) > 500:
+                    self.wiggle_room *= 0.9 # reduce wiggle room
+                    collision_counter = [0,0] # reset collision counter
+                    failed_attempts += 1
+                if failed_attempts > 20:
+                    print("Resetting eligibilities, ignoring child/layer limits")
+                    self.links[:,5] = 1 # reset eligibilities, ignoring rules from constructor
+                    
+                # propose a random parent from eligible parents, 7
+                eligible_parents = np.squeeze(np.argwhere(self.links[:,5]), axis=1)
+                parent = np.random.choice(eligible_parents)
+                
+                # propose a joint direction, 11 12 13
+                seed = np.random.normal(size=3)
+                norm = np.linalg.norm(seed)
+                if norm == 0: seed[0] = 1 # avoid divide by zero, even though will never happen
+                direction = seed/norm 
+                
+                # propose a link diameter, 3
+                d = self.min_len + (self.max_len - self.min_len) * np.random.rand()
+                
+                # calculate link location, 0 1 2
+                center = self.links[parent,0:3] + 0.5*self.connect_factor*(self.links[parent,3]+d)*direction
+                
+                # if floor collision, try again
+                if center[2] <= 0.5*d:
+                    collision_counter[0] += 1
+                    if c.printCollision:
+                        print(f"{collision_counter[0]} floor collision")
+                    continue
+                
+                # if self collision, try again
+                if i > 1:
+                    links_to_check = np.delete(self.links[0:i,0:4],parent,0)
+                    vecd = center - links_to_check[:,0:3]
+                    distance = np.linalg.norm(vecd, axis=1)
+                    sum_radii = 0.5 * (links_to_check[:,3] + d) + self.wiggle_room
+                    if min(distance-sum_radii) <= 0:
+                        collision_counter[1] += 1
+                        if c.printCollision:
+                            print(f"{collision_counter[1]} link collision")
+                        continue
+                    
+                # generate random joint axis
+                seed = np.random.normal(size=3)
+                norm = np.linalg.norm(seed)
+                if norm == 0: seed[0] = 1 # avoid divide by zero, even though will never happen
+                axis = seed/norm 
+                
+                # constrains axis to plane perpendicular to joint direction
+                # axis = axis - np.dot(axis, direction)*direction 
+                
+                # overwrites joint axis to be same as joint direction
+                # axis = direction
+                
+                # store link and joint information
+                self.links[i,0:3] = center # x, y, z
+                self.links[i,3] = d # diameter
+                self.links[i,5] = 1 # eligibility
+                self.links[i,6] = self.links[parent,6] + 1 # layer number
+                self.links[i,7] = parent # parent link number
+                self.links[i,8:11] = self.links[parent,0:3] + 0.5*self.links[parent,3]*direction # parent joint location
+                self.links[i,11:14] = direction # parent joint direction
+                self.links[i,14:] = axis
+                
+                self.joints[i-1,0] = parent
+                self.joints[i-1,1] = i
+                
+                # update eligibility of parent and child
+                num_children = (self.joints[:,0] == parent).sum() # counts children of parent
+                if num_children >= self.children_lim:
+                    self.links[parent,5] = 0
+                if self.links[i,6] >= self.layer_lim:
+                    self.links[i,5] = 0
+                
+                # terminate loop
+                link_added = True 
+        
+        # decide which links will have sensors
+        self.links[:,4] = np.random.choice([0,1], self.links.shape[0], 
+                                           p=[1-self.sensor_prob, self.sensor_prob])
+        
+        # calculate number of neurons
+        self.numSensorNeurons = int(np.sum(self.links[:,4]))
+        self.numMotorNeurons = self.num_links - 1
         
     def Create_Body(self):
         
         pyrosim.Start_URDF(f"temp\\body{self.myID}.urdf")
         
-        # Preallocate link parameter storage
-        link_info = np.zeros((self.link_lim, 13)) # idx of dim1 is link number
-        # 0-2 xyz, 3 diameter, 4 sensor, 5 eligibility, 
-        # 6-8 parent joint absolute location, 9-11 parent joint direction
-        # 12 layer number
-        children = np.empty((self.link_lim,), dtype=object)
-        joints = np.empty((self.link_lim - 1,2) ,dtype=int)
+        # create root link
+        link_loc = (self.links[0,0:3]).tolist()
+        diameter = self.links[0,3]
+        colorname = 'green' if self.links[0,4] == 1 else 'blue'
+        pyrosim.Send_Cube(name="0", pos=link_loc, size=diameter, color=colorname, shape=2)
         
-        # tree_info = pd.DataFrame() # idx of dim1 is link number
-        # 0 layer, 1 parent, 2 children
-        
-        # Root link and first joint (absolute coords)
-        i = 0
-        x = 0
-        y = 0
-        z = self.root_height
-        d = self.max_len
-        s = np.random.randint(0,2) # 0 = no sensor, 1 = sensor
-        
-        # layer = 1
-        # parent = None
-        # children = []
-        
-        colorname = 'green' if s == 1 else 'blue'
-        pyrosim.Send_Cube(name=f"{i}", pos=[x,y,z], size=d, color=colorname, shape=2)
-        link_info[i,0:6] = [x, y, z, d, s, 1]
-        # tree_info[i,0:3] = [layer, parent, children]
-        
-        collision_counter = [0,0]
-        
-        for i in range(1, self.link_lim):
-            link_added = False
-            while not link_added:
-                # pick a random parent from eligible parents
-                eligible_parents = np.squeeze(np.argwhere(link_info[:,5] == 1), axis=1)
-                parent = np.random.choice(eligible_parents)
-                
-                # randomly spawn a joint location
-                seed = np.random.normal(size=3)
-                norm = np.linalg.norm(seed)
-                if norm == 0: seed[0] = 1 
-                direction = seed/norm 
-                
-                # randomly spawn a link
-                d = self.min_len + (self.max_len - self.min_len) * np.random.rand()
-                
-                center = link_info[parent,0:3] + 0.5*self.connect_factor*(link_info[parent,3]+d)*direction
-                
-                # check for collision with floor or other sphere, and if so, try again
-                if center[2] <= 0.5*d:
-                    print(f"{collision_counter[0]} floor collision")
-                    collision_counter[0] += 1
-                    continue
-                
-                if i > 1:
-                    links_to_check = np.delete(link_info[0:i,0:4],parent,0)
-                    # print(links_to_check.shape[0])
-                    # print(np.repeat(center,links_to_check.shape[0],0))
-                    # print(links_to_check)
-                    # exit()
-                    vecd = center - links_to_check[:,0:3]
-                    distance = np.linalg.norm(vecd, axis=1)
-                    sum_radii = 0.5 * (links_to_check[:,3] + d)
-                    if min(distance-sum_radii) <= -0.1:
-                        print(f"{collision_counter[1]} link collision")
-                        collision_counter[1] += 1
-                        continue
-                
-                # if no collision, add joint and link
-                s = np.random.randint(0,2) # 0 = no sensor, 1 = sensor
-                link_info[i,0:6] = [center[0], center[1], center[2], d, s, 1]
-                # tree_info[i,:] = [layer, parent, children]  
-                
-                link_info[i,6:9] = link_info[parent,0:3] + 0.5*link_info[parent,3]*direction
-                link_info[i,9:12] = direction
-                link_info[i,12] = link_info[parent,12] + 1
-                
-                current_link_loc = (0.5*self.connect_factor*d*direction).tolist()
-                if parent == 0:
-                    current_joint_loc = (link_info[i,6:9]).tolist()
-                else:
-                    current_joint_loc = (link_info[i,6:9] - link_info[parent,6:9]).tolist()
-                
-                
-                # generate a random axis perpendicular to the joint direction
-                seed = np.random.normal(size=3)
-                norm = np.linalg.norm(seed)
-                if norm == 0: seed[0] = 1 
-                directionJ = seed/norm 
-                joint_axis = directionJ - np.dot(directionJ, direction)*direction
-                joint_axis = np.array2string(joint_axis, separator=' ')[2:-1]
-                
-                # generate a joint axis aligned with its direction
-                # joint_axis = np.array2string(link_info[i,9:12], separator=' ')[2:-1] 
-                    
-                pyrosim.Send_Joint(name = f"{parent}_{i}" , parent= f"{parent}" , child = f"{i}" , type = "revolute", 
-                                    position = current_joint_loc, jointAxis = joint_axis)
-                
-                colorname = 'green' if s == 1 else 'blue'
-                pyrosim.Send_Cube(name=f"{i}", pos=current_link_loc, size=d, color=colorname, shape=2)
-        
-                joints[i-1,0] = parent
-                joints[i-1,1] = i
-                
-                num_children = (joints[:,0] == parent).sum() # counts children of parent
-                if num_children >= self.children_lim:
-                    link_info[parent,5] = 0
-                if link_info[i,12] >= self.layer_lim:
-                    link_info[i,5] = 0
-                
-                link_added = True
+        # create other links and joints
+        for i in range(1, self.num_links):
             
-        pyrosim.End()
+            parent = int(self.links[i,7])
+            
+            link_loc = (0.5*self.connect_factor*self.links[i,3]*self.links[i,11:14]).tolist()
+            diameter = self.links[i,3]
+            colorname = 'green' if self.links[i,4] == 1 else 'blue'
+            
+            joint_axis = np.array2string(self.links[i,14:], separator=' ')[2:-1]
+            joint_loc = (self.links[i,8:11] - self.links[parent,8:11]).tolist() 
+                # subtracts zero if parent is root anyway, so absolute vs. relative is inconsequential
+                
+            pyrosim.Send_Joint(name = f"{parent}_{i}", parent= f"{parent}", child = f"{i}", type = "revolute", 
+                               position = joint_loc, jointAxis = joint_axis)
+            
+            pyrosim.Send_Cube(name=f"{i}", pos=link_loc, size=diameter, color=colorname, shape=2)
         
-        self.link_info = link_info
-        self.joints = joints
-        self.numSensorNeurons = int(np.sum(link_info[:,4]))
-        self.numMotorNeurons = self.link_lim - 1
+        pyrosim.End()
         
         while not os.path.exists(f"temp\\body{self.myID}.urdf"):
             time.sleep(0.001)
@@ -191,13 +212,12 @@ class SOLUTION:
         
         pyrosim.Start_NeuralNetwork(f"temp\\brain{self.myID}.nndf")
         n_num = 0
-        self.weights = 2 * np.random.rand(self.numSensorNeurons,self.numMotorNeurons) - 1
         
-        for i in range(self.link_lim):
-            if self.link_info[i,4] == 1:
+        for i in range(self.num_links):
+            if self.links[i,4] == 1:
                 pyrosim.Send_Sensor_Neuron(name = n_num , linkName = f"{i}"); n_num += 1
                 
-        for i in range(self.link_lim - 1):
+        for i in range(self.num_links - 1):
             pyrosim.Send_Motor_Neuron(name = n_num , jointName = f"{self.joints[i,0]}_{self.joints[i,1]}"); n_num += 1
             
         for currentRow in range(0,self.numSensorNeurons):
@@ -211,9 +231,14 @@ class SOLUTION:
             time.sleep(0.001)
         
     def Mutate(self):
-        randomRow = np.random.randint(0,c.numSensorNeurons)
-        randomColumn = np.random.randint(0,c.numMotorNeurons)
-        self.weights[randomRow,randomColumn] = np.random.random() * 2 - 1
+        mutation_type = np.random.choice([0,1,2,3])
+        
+        if mutation_type == 0: # brain weights (of NN)
+            randomRow = np.random.randint(0,self.numSensorNeurons)
+            randomColumn = np.random.randint(0,self.numMotorNeurons)
+            self.weights[randomRow,randomColumn] = np.random.random() * 2 - 1
+        elif mutation_type == 1: # link diameter
+            
         
     def Set_ID(self, ID):
         self.myID = ID

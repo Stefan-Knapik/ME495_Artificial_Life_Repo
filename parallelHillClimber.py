@@ -5,19 +5,23 @@ import copy
 import time
 import pickle
 from tqdm import tqdm
+import numpy as np
 
 class PARALLEL_HILL_CLIMBER:
 
     def __init__(self, random_seed=0):
+        
+        self.nextAvailableID = 0
+        self.random_seed = random_seed
         
         # os.system("del brain*.nndf > nul 2> nul")
         # os.system("del fitness*.txt > nul 2> nul")
         # os.system("del tmp*.txt > nul 2> nul")
         os.system("rmdir temp /s /q")
         os.system("mkdir temp")
+        np.random.seed(random_seed)
         
-        self.nextAvailableID = 0
-        
+        self.fitness_progress = np.zeros((c.numberOfGenerations, c.populationSize))
         self.parents = {}
         for hc in range(c.populationSize):
             self.parents[hc] = SOLUTION(self.nextAvailableID)
@@ -33,7 +37,7 @@ class PARALLEL_HILL_CLIMBER:
         
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
-            self.Save_Best()
+            self.Save_Best(currentGeneration)
             
             pbar_evo.update(1)
         pbar_evo.close()
@@ -76,24 +80,27 @@ class PARALLEL_HILL_CLIMBER:
                 print(f'Parent & Child Fitness: {self.parents[hc].fitness:11.6f} {self.children[hc].fitness:11.6f}')
             print()
         
-    def Save_Best(self):
+    def Save_Best(self, currentGeneration):
         # find the most fit parent
         self.bestParent = self.parents[0]
         for hc in self.parents:
+            self.fitness_progress[currentGeneration, hc] = self.parents[hc].fitness
             if self.parents[hc].fitness < self.bestParent.fitness:
                 self.bestParent = self.parents[hc]
         
         # save the most fit parent
-        f = open("BestFitness.txt", "w")
+        f = open(f"BestFitness{self.random_seed}.txt", "w")
         f.write(str(self.bestParent.fitness))
         f.close()
         
-        f = open("BestSolution.obj", "wb")
+        f = open(f"BestSolution{self.random_seed}.obj", "wb")
         pickle.dump(self.bestParent, f) 
         f.close()
         
+        # save the fitness progress
+        np.save(f"FitnessProgress{self.random_seed}.npy", self.fitness_progress)
+        
     def Show_Best(self):
-        self.Save_Best()
         # simulate the most fit parent
         self.bestParent.Show_Simulation()
         
