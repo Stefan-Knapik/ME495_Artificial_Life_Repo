@@ -1,5 +1,5 @@
 import os
-from solution2 import SOLUTION
+from solution import SOLUTION
 import numpy as np
 
 number_of_robots = 6
