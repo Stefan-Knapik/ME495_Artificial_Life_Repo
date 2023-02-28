@@ -51,10 +51,10 @@ class SOLUTION:
         
         # while not os.path.exists(fpath):
         #     time.sleep(0.001)
-        for i in range(1000):
+        for i in range(2000):
             if os.path.exists(fpath):
                 break
-            time.sleep(0.001)
+            time.sleep(0.01)
         
         assert os.path.isfile(fpath)
         
@@ -242,8 +242,7 @@ class SOLUTION:
         
         #                 N  SS  SM  ARS  CJA  AL  CD  CJD  RL
         probs = np.array([1, 1,  1,  1,   3,   3,  2,  0,   3])
-        probs = np.array([1, 1,  1,  1,   0,   0,  0,  0,   0])
-        probs = np.array([0, 0,  0,  0,   0,   0,  0,  0,   1])
+        probs = np.array([1, 1,  1,  1,   1,   1,  1,  0,   0])
         
         probs = probs / probs.sum()
         mutation_type = np.random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8], p=probs)
