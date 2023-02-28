@@ -1,6 +1,6 @@
 from math import pi
 
-trials = 1
+trials = 5
 
 progress_bar = True
 printFitness = False
@@ -13,7 +13,7 @@ num_steps = 1600
 sleep_time = 1/240
 
 gravity = -9.8
-maxForce = 100
+maxForce = 80
 motorJointRange = 0.8
 
 # numSensorNeurons = 5

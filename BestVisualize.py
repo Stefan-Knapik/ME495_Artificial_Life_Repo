@@ -10,3 +10,5 @@ for seed in range(1, c.trials+1):
     f.close()
 
     BestSolution.Start_Simulation("GUI")
+    
+    x = input("Press Enter to continue...")

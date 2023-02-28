@@ -11,3 +11,7 @@ for i in range(1, c.trials+1):
     
     # Show best robot
     # phc.Show_Best()
+
+
+# phc = PARALLEL_HILL_CLIMBER(random_seed=1)
+# phc.Evolve()
