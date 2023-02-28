@@ -7,7 +7,7 @@ progress_bar = True
 printFitness = False
 printCollision = False
 
-numberOfGenerations = 1
+numberOfGenerations = 2000
 populationSize = 100
 
 num_steps = 1600
