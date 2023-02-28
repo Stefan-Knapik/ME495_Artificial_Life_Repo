@@ -102,10 +102,8 @@ class PARALLEL_HILL_CLIMBER:
         if c.trials == 1:
             num = c.num_to_save
             hcs = np.argpartition(self.fitness_progress[currentGeneration,:], num)[:num]
-            print(hcs)
-            hcs = np.sort(hcs)
-            print(hcs)
-            exit()
+            idx_sort = np.argsort(self.fitness_progress[currentGeneration,hcs])
+            hcs = hcs[idx_sort]
             for i in range(num):
                 hc = hcs[i]
                 
