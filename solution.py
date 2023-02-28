@@ -5,7 +5,7 @@ import pyrosim.pyrosim as pyrosim
 import constants as c
 import pandas as pd
 
-identical_worlds_and_bodies = False
+identical_worlds = True
 
 class SOLUTION:
 
@@ -36,10 +36,10 @@ class SOLUTION:
         self.weights = 2 * np.random.rand(self.numSensorNeurons,self.numMotorNeurons) - 1
             
     def Start_Simulation(self, directOrGUI):
-        if identical_worlds_and_bodies == False or self.myID == 0:
+        if identical_worlds == False or self.myID == 0:
             self.Create_World()
-            self.Create_Body()
         
+        self.Create_Body()
         self.Create_Brain()
         os.system(f"start /B python simulate.py {directOrGUI} {self.myID} > nul 2> nul")
         # os.system(f"start /B python simulate.py {directOrGUI} {self.myID}")

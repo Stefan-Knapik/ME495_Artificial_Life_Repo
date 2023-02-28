@@ -7,7 +7,7 @@ printFitness = False
 printCollision = False
 
 numberOfGenerations = 2000
-populationSize = 10
+populationSize = 5
 
 num_steps = 1600
 sleep_time = 1/240
