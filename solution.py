@@ -50,14 +50,21 @@ class SOLUTION:
         
         # while not os.path.exists(fpath):
         #     time.sleep(0.001)
-        for i in range(2000):
-            if os.path.exists(fpath):
+        
+        # for i in range(2000):
+        #     if os.path.exists(fpath):
+        #         break
+        #     time.sleep(0.01)
+        # assert os.path.isfile(fpath)
+        # f = open(fpath, "r")
+        
+        while True:
+            try:
+                f = open(fpath, "r")
                 break
-            time.sleep(0.01)
-        
-        assert os.path.isfile(fpath)
-        
-        f = open(fpath, "r")
+            except:
+                time.sleep(0.01)
+                
         self.fitness = float(f.read())
         f.close()
         # print(f"\n{self.myID}   {self.fitness}  ----------------------")

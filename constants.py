@@ -1,13 +1,13 @@
 from math import pi
 
-trials = 10
+trials = 1
 
 progress_bar = True
 printFitness = False
 printCollision = False
 
-numberOfGenerations = 2000
-populationSize = 5
+numberOfGenerations = 1200
+populationSize = 10
 
 num_steps = 1600
 sleep_time = 1/240
