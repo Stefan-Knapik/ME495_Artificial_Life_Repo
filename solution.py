@@ -12,36 +12,19 @@ class SOLUTION:
     def __init__(self, nextAvailableID, random_seed=0):
         
         self.myID = nextAvailableID
-        self.rng = np.random.default_rng(random_seed)
+        np.random.seed(random_seed)
         
         self.min_len = 0.2
         self.max_len = 0.5
         self.root_height = 1.2
         
-        self.prob_sensor = 0.5
-        
-        self.link_lim = np.random.randint(5, 30)
-        self.layer_lim = np.random.randint(10)
+        self.link_lim = np.random.randint(5, 20)
+        self.layer_lim = 99 #np.random.randint(10)
         self.children_lim = np.random.randint(1, 4)
         
+        self.prob_sensor = 0.5
         self.connect_factor = 0.99 # bring spheres together by this factor
-        
-        # self.number_of_links = np.random.randint(4, 5)
-        # self.links_shape = np.random.randint(0,2, size=self.number_of_links) # 0 = box, 1 = cylinder
-        # self.joint_direction = np.random.randint(0,2, size=self.number_of_links) # 0 = z, 1 = y
-        
-        # self.links_sizes = self.min_len + \
-        #                     (self.max_len - self.min_len) * np.random.rand(self.number_of_links, 3) + \
-        #                     self.min_len * np.outer(np.ones(self.number_of_links), np.array([1,0,0])) # bias longer in x direction
-        # self.links_sensor = np.random.randint(0,2, size=self.number_of_links) # 0 = no sensor, 1 = sensor
-        
-        # self.numSensorNeurons = sum(self.links_sensor)
-        # self.numMotorNeurons = self.number_of_links - 1
-        # self.weights = 2 * np.random.rand(self.numSensorNeurons,self.numMotorNeurons) - 1
-        
-        
-        
-        
+            
     def Start_Simulation(self, directOrGUI):
         if identical_worlds_and_bodies == False or self.myID == 0:
             self.Create_World()
@@ -80,7 +63,7 @@ class SOLUTION:
         
     def Create_Body(self):
         
-        pyrosim.Start_URDF("temp\\body.urdf")
+        pyrosim.Start_URDF(f"temp\\body{self.myID}.urdf")
         
         # Preallocate link parameter storage
         link_info = np.zeros((self.link_lim, 13)) # idx of dim1 is link number
@@ -201,7 +184,7 @@ class SOLUTION:
         self.numSensorNeurons = int(np.sum(link_info[:,4]))
         self.numMotorNeurons = self.link_lim - 1
         
-        while not os.path.exists("temp\\body.urdf"):
+        while not os.path.exists(f"temp\\body{self.myID}.urdf"):
             time.sleep(0.001)
         
     def Create_Brain(self):

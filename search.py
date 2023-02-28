@@ -5,7 +5,7 @@ import numpy as np
 
 for i in range(1,2):
     
-    rand_robot = SOLUTION(0, i)
+    rand_robot = SOLUTION(0, random_seed = i)
     rand_robot.Create_World()
     rand_robot.Create_Body()
     rand_robot.Create_Brain()
