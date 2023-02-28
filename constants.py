@@ -1,6 +1,6 @@
 from math import pi
 
-trials = 5
+trials = 10
 
 progress_bar = True
 printFitness = False
