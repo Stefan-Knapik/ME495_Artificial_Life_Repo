@@ -1,13 +1,14 @@
 from math import pi
 
 trials = 1
+num_to_save = 10
 
 progress_bar = True
 printFitness = False
 printCollision = False
 
-numberOfGenerations = 1000
-populationSize = 10
+numberOfGenerations = 1
+populationSize = 100
 
 num_steps = 1600
 sleep_time = 1/240

@@ -89,13 +89,29 @@ class PARALLEL_HILL_CLIMBER:
                 self.bestParent = self.parents[hc]
         
         # save the most fit parent
-        f = open(f"save/BestFitness{self.random_seed}.txt", "w")
-        f.write(str(self.bestParent.fitness))
-        f.close()
+        if c.trials > 1:
+            f = open(f"save/BestFitness{self.random_seed}.txt", "w")
+            f.write(str(self.bestParent.fitness))
+            f.close()
+
+            f = open(f"save/BestSolution{self.random_seed}.obj", "wb")
+            pickle.dump(self.bestParent, f) 
+            f.close()
         
-        f = open(f"save/BestSolution{self.random_seed}.obj", "wb")
-        pickle.dump(self.bestParent, f) 
-        f.close()
+        # save the n best parents
+        if c.trials == 1:
+            num = c.num_to_save
+            hcs = np.argpartition(self.fitness_progress[currentGeneration,:], num)[:num]
+            for i in range(num):
+                hc = hcs[i]
+                
+                f = open(f"save/BestFitness{i}.txt", "w")
+                f.write(str(self.parents[hc].fitness))
+                f.close()
+
+                f = open(f"save/BestSolution{i}.obj", "wb")
+                pickle.dump(self.parents[hc], f) 
+                f.close()
         
         # save the fitness progress
         np.save(f"save/FitnessProgress{self.random_seed}.npy", self.fitness_progress)
