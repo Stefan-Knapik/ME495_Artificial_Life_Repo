@@ -9,9 +9,10 @@ identical_worlds_and_bodies = False
 
 class SOLUTION:
 
-    def __init__(self, nextAvailableID, num_links=10, max_children=2, layer_lim=99):
+    def __init__(self, nextAvailableID, random_seed=0):
         
         self.myID = nextAvailableID
+        self.rng = np.random.default_rng(random_seed)
         
         self.min_len = 0.2
         self.max_len = 0.5
@@ -19,9 +20,9 @@ class SOLUTION:
         
         self.prob_sensor = 0.5
         
-        self.link_lim = num_links # max number of links
-        self.layer_lim = layer_lim # max number of layers
-        self.children_lim = max_children # max number of children per link
+        self.link_lim = np.random.randint(5, 30)
+        self.layer_lim = np.random.randint(10)
+        self.children_lim = np.random.randint(1, 4)
         
         self.connect_factor = 0.99 # bring spheres together by this factor
         

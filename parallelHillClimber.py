@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 class PARALLEL_HILL_CLIMBER:
 
-    def __init__(self):
+    def __init__(self, random_seed=0):
         
         # os.system("del brain*.nndf > nul 2> nul")
         # os.system("del fitness*.txt > nul 2> nul")
