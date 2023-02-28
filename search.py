@@ -3,7 +3,7 @@ from parallelHillClimber import PARALLEL_HILL_CLIMBER
 from solution import SOLUTION
 import numpy as np
 
-for i in range(1,2):
+for i in range(1,6):
     
     # Initialize parallel hill climber
     phc = PARALLEL_HILL_CLIMBER(random_seed=10)
