@@ -13,13 +13,13 @@ class PARALLEL_HILL_CLIMBER:
         
         self.nextAvailableID = 0
         self.random_seed = random_seed
+        np.random.seed(random_seed)
         
         # os.system("del brain*.nndf > nul 2> nul")
         # os.system("del fitness*.txt > nul 2> nul")
         # os.system("del tmp*.txt > nul 2> nul")
         os.system("rmdir temp /s /q")
         os.system("mkdir temp")
-        np.random.seed(random_seed)
         
         self.fitness_progress = np.zeros((c.numberOfGenerations, c.populationSize))
         self.parents = {}
@@ -63,7 +63,7 @@ class PARALLEL_HILL_CLIMBER:
             
     def Evaluate(self, solutions):
         for hc in solutions:
-            solutions[hc].Start_Simulation("DIRECT")
+            solutions[hc].Start_Simulation("GUI")
             
         for hc in solutions:
             solutions[hc].Wait_For_Simulation_To_End()
