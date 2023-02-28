@@ -21,7 +21,7 @@ class SOLUTION:
         self.num_link_min = 4
         
         self.layer_lim = 99 #np.random.randint(10)
-        self.children_lim = np.random.randint(2, 5)
+        self.children_lim = np.random.randint(3, 6)
         
         self.sensor_prob = 0.5
         
