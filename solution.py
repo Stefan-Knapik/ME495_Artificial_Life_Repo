@@ -16,7 +16,7 @@ class SOLUTION:
         self.max_len = 0.8
         self.root_height = 1.2
         
-        self.num_links = np.random.randint(9, 19)
+        self.num_links = np.random.randint(3, 6)
         self.layer_lim = 99 #np.random.randint(10)
         self.children_lim = np.random.randint(2, 5)
         
@@ -85,7 +85,7 @@ class SOLUTION:
                 # 0 parent link, 1 child link
         
         # Root link (absolute coords)
-        self.links[0,0:8] = [0, 0, self.root_height, self.max_len, 0, 1, 1, -1]
+        self.links[0,0:8] = [0, 0, self.root_height, self.max_len, 1, 1, 1, -1]
         
         # Add links until there are enough
         for i in range(1, self.num_links):
@@ -94,6 +94,7 @@ class SOLUTION:
         # decide which links will have sensors
         self.links[:,4] = np.random.choice([0,1], self.links.shape[0], 
                                            p=[1-self.sensor_prob, self.sensor_prob])
+        self.links[0,4] = 1 # guarantee at least one sensor
         
         # calculate number of neurons
         self.numSensorNeurons = int(np.sum(self.links[:,4]))
@@ -271,7 +272,7 @@ class SOLUTION:
         elif mutation_type == 3: 
             link = np.random.randint(0,self.num_links)
             brain_idx = int(self.links[0:link,4].sum())
-            if self.links[link,4] == 1: # remove sensor
+            if self.links[link,4] == 1 and self.links[:,4].sum() > 1: # remove sensor
                 self.links[link,4] = 0
                 np.delete(self.weights, brain_idx, axis=0)
             else: # add sensor
