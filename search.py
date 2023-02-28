@@ -1,14 +1,17 @@
 import os
 from parallelHillClimber import PARALLEL_HILL_CLIMBER
+import numpy as np
 
-phc = PARALLEL_HILL_CLIMBER()
-
-phc.Evolve()
-phc.Show_Best()
-
-
-# for i in range(5):
+for i in range(1,2):
     
-#     os.system("python generate.py")
-
-#     os.system("python simulate.py")
+    # Set seed for robot generation
+    rng = np.random.default_rng(i)
+    
+    # Initialize parallel hill climber
+    phc = PARALLEL_HILL_CLIMBER()
+    
+    # Search for best robot
+    phc.Evolve()
+    
+    # Show best robot
+    phc.Show_Best()
