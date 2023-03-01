@@ -6,7 +6,7 @@ https://www.reddit.com/r/ludobots/
 https://youtu.be/Scpsa_iSDLs
 
 ## Evolve morphology and behavior concurrently (using a parallel hill climber)
-This branch of the repository explores the genetic optimization of creature morphologies and behaviors. 
+This branch of the repository explores the genetic optimization of creature morphologies and behaviors for locomotion in the negative x-direction.
 
 The random design initializations follow the same strategy as the branch for assignment 7.
 
