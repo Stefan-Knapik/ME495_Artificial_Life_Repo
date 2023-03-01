@@ -13,15 +13,15 @@ The random design initializations follow the same strategy as the repository for
 https://github.com/Stefan-Knapik/ME495_Artificial_Life_Repo/tree/HW7-Random3D
 
 For the genetic algorithm, a variety of random mutations are permitted to occur according to a user-defined probability distribution. These include changes that only affect the "brain", only affect the "body", or require modification to both simultaneously. The scope of each type of mutation is summarized below:
--single neuron 
--sensor swap
--motor swap
--add/remove a sensor
--joint axis direction
--add a body segment
--remove a body segment (currently only implemented for leaf links)
--resize a body segment
--joint location (implemented but unused, needs further work to avoid breaking the rules of Assignment 7)
+- single neuron 
+- sensor swap
+- motor swap
+- add/remove a sensor
+- joint axis direction
+- add a body segment
+- remove a body segment (currently only implemented for leaf links)
+- resize a body segment
+- joint location (implemented but unused, needs further work to avoid breaking the rules of Assignment 7)
 
 Hyperparameters are adjustable, but it is noted that most of the robots shown in the YouTube video were initialized with few body segments, and allowed to "grow" as they evolved to encourage the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly searching a massive behavior space from scratch.
 
