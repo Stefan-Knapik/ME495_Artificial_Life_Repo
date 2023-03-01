@@ -9,29 +9,34 @@ https://youtu.be/Scpsa_iSDLs
 This branch of the repository explores the genetic optimization of creature morphologies and behaviors. 
 
 The random design initializations follow the same strategy as the repository for assignment 7.
+
 https://github.com/Stefan-Knapik/ME495_Artificial_Life_Repo/tree/HW7-Random3D
 
+For the genetic algorithm, a variety of random mutations are permitted to occur according to a user-defined probability distribution. These include changes that only affect the "brain", only affect the "body", or require modification to both simultaneously. The scope of each type of mutation is summarized below:
+-single neuron 
+-sensor swap
+-motor swap
+-add/remove a sensor
+-joint axis direction
+-add a body segment
+-remove a body segment (currently only implemented for leaf links)
+-resize a body segment
+-joint location (implemented but unused, needs further work to avoid breaking the rules of Assignment 7)
 
-Here we limit ourselves to spherical body segments for the sake of simple collision detection during body generation. While the default simulation parameters will allow links to intersect as they move, ensuring that links do not initially intersect assures us that we can simulate these robots with global collision detection if we so choose.
+Hyperparameters are adjustable, but it is noted that most of the robots shown in the YouTube video were initialized with few body segments, and allowed to "grow" as they evolved to encourage the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly searching a massive behavior space from scratch.
 
-**Number of links**, **maximum children per link**, and **maximum link tree depth** are prescribed for each robot. **Link radius** is uniformly randomly chosen for each link. **Joint locations** are uniformly randomly tried over the spherical link surfaces via some fun math (search spherically symmetric distributions to learn more)! **Joint axis directions** are uniformly randomly generated, but constrained to be tangential to the spherical link surfaces. Link **sensation** occurs at a fixed probability over all the links.
+Below is an image depicting the progression of fitness through 5 different evolving populations.
 
-Note: If the maximum number of children per link is prescribed as 1, this project degenerates to a 1D case suitable for Assignment 6.
+![BestFitnessObserved](https://user-images.githubusercontent.com/101603342/222029673-3fe8d92c-287e-42f3-91f3-f10a14b3ce61.png)
 
-## Procedure
-1. Create the root link at a specified location.
-2. Randomly choose an existing link that is eligible to have a child. Links can be disqualified from further parenthood if they have too many children or are too deep in the tree.
-3. Propose a random joint and link to stem from the chosen parent.
-4. If spawning this new joint-link pair will create a collision with the floor or other links, go back to Step 2.
-5. Accept the randomly generated joint-link pair.
-6. Repeat from Step 2 until the number of links is satisfied.
-
-![image](https://user-images.githubusercontent.com/101603342/220275338-f7aedc9c-7b06-425b-9f80-417416bdb1ad.png)
 
 ## Run the code (Windows)
-Run __showRandom.py__ to generate and visualize a sequence of random creature morphologies.
+Run __search.py__ to use a parallel hill climber to genetically optimize robots for locomotion in the negative x-direction.
 
 - Simulation parameters, including maximum joint forces and angles, can be set in __constants.py__
-- Random morphology generation parameters can be set in the constructor of the SOLUTION class defined in __solution2.py__
+- Random morphology generation parameters can be set in the constructor of the SOLUTION class defined in __solution.py__
 
-If simulating with global collision detection, the "connect_factor" variable in __solution2.py__ should be set slightly greater than 1 to ensure joint mobility. With a value of 1, the links are exactly touching without collision. The default value is 0.9 for aesthetic purposes, which is unproblematic for simulation without self-collision.
+Run __BestVisualize.py__ serves to easily display optimized creatures.
+Run __PlotFitness.py__ will generate a plot comparable to the one above (after having run __search.py__).
+
+If simulating with global collision detection, the "connect_factor" variable in __solution2.py__ should be set slightly greater than 1 to ensure joint mobility. With a value of 1, the links are exactly touching without collision. The default value is 0.99 for aesthetic purposes, which is unproblematic for simulation without self-collision.
