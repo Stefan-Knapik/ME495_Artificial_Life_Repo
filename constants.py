@@ -1,7 +1,7 @@
 from math import pi
 
-trials = 1
-num_to_save = 5
+trials = 2
+num_to_save = 1
 
 progress_bar = True
 printFitness = False
