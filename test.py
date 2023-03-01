@@ -7,8 +7,7 @@
 import numpy as np
 from solution import SOLUTION
 
-np.random.seed(0)
-
+np.random.seed(9)
 
 x = SOLUTION(0)
 x.Start_Simulation('GUI')

@@ -13,9 +13,11 @@ for seed in range(1, c.trials+1):
 plt.figure(1)
 for seed in range(1, c.trials+1):
     plt.plot(fitness_progress[seed,:,:].max(axis=1))
-plt.ylabel('Best Fitness')
-plt.xlabel('Generation')
-plt.legend(('Seed 1', 'Seed 2', 'Seed 3', 'Seed 4', 'Seed 5'))
+plt.ylabel('Best Fitness', fontsize=14)
+plt.xlabel('Generation', fontsize=14)
+plt.title('Evolutionary Progression of Fitness', fontsize=16)
+plt.legend(('Random Seed 1', 'Random Seed 2', 'Random Seed 3', 'Random Seed 4', 'Random Seed 5'))
+plt.savefig('BestFitnessObserved.png', dpi=300)
 plt.show()
 
 plt.figure(2)

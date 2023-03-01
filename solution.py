@@ -16,7 +16,7 @@ class SOLUTION:
         self.max_len = 0.8
         self.root_height = 1.2
         
-        self.num_links = np.random.randint(6, 10)
+        self.num_links = np.random.randint(5, 13)
         self.num_link_max = 30
         self.num_link_min = 4
         
