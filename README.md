@@ -13,7 +13,7 @@ The random design initializations follow the same strategy as the repository for
 https://github.com/Stefan-Knapik/ME495_Artificial_Life_Repo/tree/HW7-Random3D
 
 For the genetic algorithm, a variety of random mutations are permitted to occur according to a user-defined probability distribution. These include changes that only affect the "brain", only affect the "body", or require modification to both simultaneously. The scope of each type of mutation is summarized below:
-- single neuron 
+- single neuron weight
 - sensor swap
 - motor swap
 - add/remove a sensor
