@@ -8,7 +8,7 @@ https://youtu.be/Scpsa_iSDLs
 ## Evolve morphology and behavior concurrently (using a parallel hill climber)
 This branch of the repository explores the genetic optimization of creature morphologies and behaviors. 
 
-The random design initializations follow the same strategy as the repository for assignment 7.
+The random design initializations follow the same strategy as the branch for assignment 7.
 
 https://github.com/Stefan-Knapik/ME495_Artificial_Life_Repo/tree/HW7-Random3D
 
