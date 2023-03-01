@@ -27,7 +27,7 @@ Hyperparameters are adjustable, but it is noted that most of the robots shown in
 
 Below is an image depicting the progression of fitness through 5 different evolving populations.
 
-<img src="https://user-images.githubusercontent.com/101603342/222029673-3fe8d92c-287e-42f3-91f3-f10a14b3ce61.png" width="150"
+<img src="https://user-images.githubusercontent.com/101603342/222029673-3fe8d92c-287e-42f3-91f3-f10a14b3ce61.png" width="150" />
 
 
 ## Run the code (Windows)
