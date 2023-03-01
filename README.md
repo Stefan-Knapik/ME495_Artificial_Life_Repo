@@ -6,9 +6,9 @@ https://www.reddit.com/r/ludobots/
 https://youtu.be/Scpsa_iSDLs
 
 ## Evolve morphology and behavior concurrently (using a parallel hill climber)
-This branch of the repository explores the genetic optimization of creature morphologies and behaviors. 
+This branch of the repository explores the genetic optimization of creature morphologies and behaviors for locomotion in the negative x-direction.
 
-The random design initializations follow the same strategy as the repository for assignment 7.
+The random design initializations follow the same strategy as the branch for assignment 7.
 
 https://github.com/Stefan-Knapik/ME495_Artificial_Life_Repo/tree/HW7-Random3D
 
@@ -23,7 +23,7 @@ For the genetic algorithm, a variety of random mutations are permitted to occur 
 - resize a body segment
 - joint location (implemented but unused, needs further work to avoid breaking the rules of Assignment 7)
 
-Hyperparameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
+Governing parameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
 
 Below is an image depicting the progression of fitness through 5 different evolving populations.
 
@@ -35,7 +35,7 @@ Run __search.py__ to use a parallel hill climber to genetically optimize robots 
 - Simulation parameters, including maximum joint forces and angles, can be set in __constants.py__
 - Random morphology generation parameters can be set in the constructor of the SOLUTION class defined in __solution.py__
 
-Run __BestVisualize.py__ serves to easily display optimized creatures.
-Run __PlotFitness.py__ will generate a plot comparable to the one above (after having run __search.py__).
+__BestVisualize.py__ serves to easily visualize optimized creatures.
+__PlotFitness.py__ will generate a plot comparable to the one above (after having previously run __search.py__).
 
-If simulating with global collision detection, the "connect_factor" variable in __solution2.py__ should be set slightly greater than 1 to ensure joint mobility. With a value of 1, the links are exactly touching without collision. The default value is 0.99 for aesthetic purposes, which is unproblematic for simulation without self-collision.
+If simulating with global collision detection, the "connect_factor" variable in __solution.py__ should be set slightly greater than 1 to ensure joint mobility. With a value of 1, the links are exactly touching without collision. The default value is 0.99 for aesthetic purposes, which is unproblematic for simulation without self-collision.
