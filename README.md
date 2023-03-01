@@ -23,12 +23,11 @@ For the genetic algorithm, a variety of random mutations are permitted to occur 
 - resize a body segment
 - joint location (implemented but unused, needs further work to avoid breaking the rules of Assignment 7)
 
-Hyperparameters are adjustable, but it is noted that most of the robots shown in the YouTube video were initialized with few body segments, and allowed to "grow" as they evolved to encourage the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly searching a massive behavior space from scratch.
+Hyperparameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
 
 Below is an image depicting the progression of fitness through 5 different evolving populations.
 
 <img src="https://user-images.githubusercontent.com/101603342/222029673-3fe8d92c-287e-42f3-91f3-f10a14b3ce61.png" width="600" />
-
 
 ## Run the code (Windows)
 Run __search.py__ to use a parallel hill climber to genetically optimize robots for locomotion in the negative x-direction.
