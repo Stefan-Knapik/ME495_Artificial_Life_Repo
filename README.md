@@ -1,24 +1,16 @@
-# Assignment 7
+# Assignment 8
 ME495 Artificial Life course at Northwestern University, which utilizes content from the r/ludobots evolutionary robotics subreddit.
 https://www.reddit.com/r/ludobots/
 
-[![Watch the video](https://user-images.githubusercontent.com/101603342/220821102-70b140b1-9d35-4765-b92a-1ba98e7db73c.png)](https://youtu.be/7ybpkGDg9C0?t=9)
+## YouTube Video
+https://youtu.be/Scpsa_iSDLs
 
-## Generate random 3D creature morphologies
-This branch of the repository explores the generation of random creature morphologies. Random parameters include:
-- number of spherical body segments
-- size of the body segments
-- joint locations
-- joint axis directions
-- sensation (green links "feel", blue links are "numb")
-- maximum number of children per link
-- maximum depth of the link tree
+## Evolve morphology and behavior concurrently (using a parallel hill climber)
+This branch of the repository explores the genetic optimization of creature morphologies and behaviors. 
 
-<img src="https://user-images.githubusercontent.com/101603342/220268996-d46b12c3-8011-4e0b-941c-9acd234cd08e.png" height="150"
-img src="https://user-images.githubusercontent.com/101603342/220268996-d46b12c3-8011-4e0b-941c-9acd234cd08e.png" height="150" />
-<img src="https://user-images.githubusercontent.com/101603342/220269218-7c00e2d5-df58-4e8b-8b6f-c8db53be3de5.png" height="150" />
-<img src="https://user-images.githubusercontent.com/101603342/220269318-3275684b-3892-4ffd-8a16-16e25d6c50de.png" height="150" />
-<img src="https://user-images.githubusercontent.com/101603342/220269447-df648bc3-5b17-4d87-b228-af66d73ce344.png" height="150" />
+The random design initializations follow the same strategy as the repository for assignment 7.
+https://github.com/Stefan-Knapik/ME495_Artificial_Life_Repo/tree/HW7-Random3D
+
 
 Here we limit ourselves to spherical body segments for the sake of simple collision detection during body generation. While the default simulation parameters will allow links to intersect as they move, ensuring that links do not initially intersect assures us that we can simulate these robots with global collision detection if we so choose.
 
