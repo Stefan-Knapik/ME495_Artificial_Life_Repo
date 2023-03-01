@@ -23,7 +23,7 @@ For the genetic algorithm, a variety of random mutations are permitted to occur 
 - resize a body segment
 - joint location (implemented but unused, needs further work to avoid breaking the rules of Assignment 7)
 
-Hyperparameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
+Governing parameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
 
 Below is an image depicting the progression of fitness through 5 different evolving populations.
 
