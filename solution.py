@@ -4,6 +4,7 @@ import numpy as np
 import pyrosim.pyrosim as pyrosim
 import constants as c
 import pandas as pd
+import copy
 
 identical_worlds = True
 
@@ -16,7 +17,7 @@ class SOLUTION:
         self.max_len = 0.8
         self.root_height = 1.2
         
-        self.num_links = np.random.randint(5, 13)
+        self.num_links = np.random.randint(5, 16)
         self.num_link_max = 30
         self.num_link_min = 4
         
@@ -30,6 +31,7 @@ class SOLUTION:
         
         # Initialize ID
         self.myID = nextAvailableID
+        self.age = 0
         # Initialize Body
         self.Initialize_Body()
         # Initialize Brain
@@ -188,7 +190,38 @@ class SOLUTION:
                 
             # terminate loop
             link_added = True 
+            
+    def Recalculate_Body(self, temp_links):
+        for i in range(1, self.num_links):
+            parent = int(temp_links[i,7]) # parent link number
+            direction = temp_links[i,11:14] # parent joint direction
+            d = temp_links[i,3] # link diameter
+            
+            # recalculate link absolute location info
+            temp_links[i,0:3] = temp_links[parent,0:3] + 0.5*self.connect_factor*(temp_links[parent,3]+d)*direction # center
+            temp_links[i,8:11] = temp_links[parent,0:3] + 0.5*temp_links[parent,3]*direction # parent joint location
+        return temp_links
     
+    def Check_Collisions(self, temp_links):
+        for i in range(0, self.num_links):
+            # floor collision
+            if temp_links[i,2] <= 0.5*temp_links[i,3]:
+                return True # collision
+            
+            # self collision
+            if i > 1:
+                parent = int(temp_links[i,7])
+                center = temp_links[i,0:3]
+                d = temp_links[i,3]
+                links_to_check = np.delete(self.links[0:i,0:4],parent,0)
+                vecd = center - links_to_check[:,0:3]
+                distance = np.linalg.norm(vecd, axis=1)
+                sum_radii = 0.5 * (links_to_check[:,3] + d) + self.wiggle_room
+                if min(distance-sum_radii) <= 0:
+                    return True # collision
+                
+        return False # no collisions
+            
     def Create_Body(self):
         
         pyrosim.Start_URDF(f"temp\\body{self.myID}.urdf")
@@ -250,9 +283,11 @@ class SOLUTION:
         #                 N  SS  SM  ARS  CJA  AL  CD  CJD  RL
         probs = np.array([1, 1,  1,  1,   3,   3,  2,  0,   3])
         probs = np.array([1, 1,  1,  1,   4,   3,  1,  0,   2])
+        probs = np.array([1, 1,  1,  1,   2,   2,  2,  3,   2])
         
         probs = probs / probs.sum()
         mutation_type = np.random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8], p=probs)
+        mutation_type = 7
         
         # EASY TO IMPLEMENT
         # single brain weight (of NN)
@@ -290,7 +325,7 @@ class SOLUTION:
             norm = np.linalg.norm(seed)
             if norm == 0: seed[0] = 1 # avoid divide by zero, even though will never happen
             axis = seed/norm 
-            joint = np.random.randint(0,self.num_links-1)
+            joint = np.random.randint(1,self.num_links)
             self.links[joint,14:] = axis
             
         # DIFFICULT TO IMPLEMENT WELL
@@ -312,16 +347,37 @@ class SOLUTION:
         # QUICK BUT JANKY IMPLEMENTATIONS... TO BE FIXED
         # change diameter
         elif mutation_type == 6:
-            link = np.random.randint(0,self.num_links)
-            self.links[link,3] *= np.random.random()*0.22 + 0.9
+            for i in range(100): # attempt to find a valid diameter, if not give up
+                link = np.random.randint(0,self.num_links)
+                temp_links = copy.deepcopy(self.links)
+                
+                temp_links[link,3] *= np.random.random() * 2 + 0.3
+                
+                temp_links = self.Recalculate_Body(temp_links)
+                collision = self.Check_Collisions(temp_links)
+                if not collision:
+                    self.links = temp_links
+                    break
+                
         # change joint direction
         elif mutation_type == 7:
-            seed = np.random.normal(size=3)
-            norm = np.linalg.norm(seed)
-            if norm == 0: seed[0] = 1 # avoid divide by zero, even though will never happen
-            axis = seed/norm 
-            joint = np.random.randint(0,self.num_links-1)
-            self.links[joint,11:14] = axis
+            for i in range(100): # attempt to find a valid direction, if not give up
+                joint = np.random.randint(1,self.num_links)
+                temp_links = copy.deepcopy(self.links)
+                
+                seed = np.random.normal(size=3)
+                norm = np.linalg.norm(seed)
+                if norm == 0: seed[0] = 1 # avoid divide by zero, even though will never happen
+                axis = seed/norm 
+                temp_links[joint,11:14] = axis
+                
+                temp_links = self.Recalculate_Body(temp_links)
+                collision = self.Check_Collisions(temp_links)
+                
+                if not collision:
+                    self.links = temp_links
+                    break
+        
         # remove a link (leaf link)
         elif mutation_type == 8 and self.num_links > self.num_link_min:
             leaf_links = np.setdiff1d(self.joints[:,1], self.joints[:,0])
@@ -348,7 +404,6 @@ class SOLUTION:
         
         # remove a link (and lineage)
 
-        
     def Set_ID(self, ID):
         self.myID = ID
         
