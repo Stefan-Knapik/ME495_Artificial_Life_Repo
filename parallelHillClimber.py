@@ -16,7 +16,7 @@ class PARALLEL_HILL_CLIMBER:
         self.algo = algo
         self.not_pareto_front = []
         self.random_seed = random_seed
-        # random.seed(random_seed)
+        random.seed(random_seed)
         np.random.seed(random_seed)
         
         # os.system("del brain*.nndf > nul 2> nul")
