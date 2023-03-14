@@ -1,9 +1,12 @@
 clc; clear; format compact;
 
 N = 100;
+algo = "AFPO"
 
-video = VideoWriter('video.avi'); %create the video object
-video.FrameRate = 10;
+name = "video_" + algo + "_" + string(N) + ".avi"
+
+video = VideoWriter(name); %create the video object
+video.FrameRate = ceil(N/10);
 
 open(video); %open the file for writing
 

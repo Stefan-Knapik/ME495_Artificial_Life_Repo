@@ -13,16 +13,16 @@ class SOLUTION:
     def __init__(self, nextAvailableID):
         
         # Parameters
-        self.min_len = 0.3
+        self.min_len = 0.2
         self.max_len = 0.8
         self.root_height = 1.2
         
-        self.num_links = np.random.randint(5, 16)
-        self.num_link_max = 30
+        self.num_links = np.random.randint(5, 20)
+        self.num_link_max = 40
         self.num_link_min = 4
         
         self.layer_lim = 99 #np.random.randint(10)
-        self.children_lim = np.random.randint(3, 6)
+        self.children_lim = np.random.randint(3, 7)
         
         self.sensor_prob = 0.5
         

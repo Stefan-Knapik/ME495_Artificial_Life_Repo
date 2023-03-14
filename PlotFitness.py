@@ -6,10 +6,11 @@ import matplotlib.cm as cm
 import matplotlib.animation as animation
 
 font_size = 14
+algo = 'PHC' # 'PHC' or 'AFPO'
     
 fitness_progress = np.zeros((c.trials, c.numberOfGenerations, c.populationSize, 2))
 for seed in range(1, c.trials+1):
-    fitness_progress[seed-1,:,:,:] = np.load(f"savePHC/FitnessProgress_RS{seed}.npy")
+    fitness_progress[seed-1,:,:,:] = np.load(f"save/FitnessProgress_{algo}_RS{seed}.npy")
 fitness_progress[:,:,:,0] = -fitness_progress[:,:,:,0]
 
 plt.figure(1)

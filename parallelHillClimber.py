@@ -10,10 +10,10 @@ import random
 
 class PARALLEL_HILL_CLIMBER:
 
-    def __init__(self, random_seed=0, AFPO=True):
+    def __init__(self, random_seed=0, algo='PHC'):
         
         self.nextAvailableID = 0
-        self.AFPO = AFPO
+        self.algo = algo
         self.not_pareto_front = []
         self.random_seed = random_seed
         # random.seed(random_seed)
@@ -47,18 +47,21 @@ class PARALLEL_HILL_CLIMBER:
         pbar_evo.close()
             
     def Evolve_For_One_Generation(self, currentGeneration):
-        if self.AFPO == False:
+        if self.algo == 'PHC':
             self.Spawn()
             self.Mutate()
             self.Evaluate(self.children)
             self.Print()
             self.Select()
-        else:
+        elif self.algo == 'AFPO':
             self.Spawn_AFPO()
             self.Mutate_AFPO()
             self.Evaluate(self.children)
             self.Print()
             self.Select_AFPO()
+        else:
+            print("Invalid algorithm, choose 'PHC' or 'AFPO'")
+            exit()
         
     def Spawn(self):
         self.children = {}
@@ -115,11 +118,18 @@ class PARALLEL_HILL_CLIMBER:
             criteria[hc, 1] = self.parents[hc].age
         
         # get the pareto front
+        safe_until_age = c.safe_until_age
+        keep_best_percentile = c.keep_best_percentile
+        
         self.not_pareto_front = []
+        fitness_cutoff = np.percentile(criteria[:,0], keep_best_percentile)
         for hc in self.parents:
             better_fitness = criteria[hc,0] < np.delete(criteria[:,0], hc, axis=0)
             better_age = criteria[hc,1] < np.delete(criteria[:,1], hc, axis=0)
-            if np.any(better_fitness + better_age == 0):
+            if np.any(better_fitness + better_age == 0) \
+                and self.parents[hc].age > safe_until_age \
+                and self.parents[hc].fitness > fitness_cutoff:
+                    
                 self.not_pareto_front.append(hc)
         # print(criteria)
         # print(self.not_pareto_front)
@@ -159,16 +169,16 @@ class PARALLEL_HILL_CLIMBER:
         for i in range(num):
             hc = hcs[i]
             
-            f = open(f"savePHC/BestFitness_RS{self.random_seed}_N{i}.txt", "w")
+            f = open(f"save/BestFitness_{self.algo}_RS{self.random_seed}_N{i}.txt", "w")
             f.write(str(self.parents[hc].fitness))
             f.close()
 
-            f = open(f"savePHC/BestSolution_RS{self.random_seed}_N{i}.obj", "wb")
+            f = open(f"save/BestSolution_{self.algo}_RS{self.random_seed}_N{i}.obj", "wb")
             pickle.dump(self.parents[hc], f) 
             f.close()
         
         # save the fitness progress
-        np.save(f"savePHC/FitnessProgress_RS{self.random_seed}.npy", self.fitness_progress)
+        np.save(f"save/FitnessProgress_{self.algo}_RS{self.random_seed}.npy", self.fitness_progress)
         
     def Show_Best(self):
         # simulate the most fit parent
