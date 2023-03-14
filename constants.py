@@ -8,7 +8,7 @@ printFitness = False
 printCollision = False
 
 numberOfGenerations = 1000
-populationSize = 32
+populationSize = 20
 
 num_steps = 1600
 sleep_time = 1/240
@@ -19,5 +19,5 @@ motorJointRange = 1
 
 # AFPO
 safe_until_age = 10
-keep_best_percentile = 25
+keep_best_percentile = 20
 
