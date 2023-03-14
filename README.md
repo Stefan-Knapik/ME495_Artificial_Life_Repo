@@ -1,4 +1,4 @@
-# Assignment 8
+# Final Project
 ME495 Artificial Life course at Northwestern University, which utilizes content from the r/ludobots evolutionary robotics subreddit.
 https://www.reddit.com/r/ludobots/
 
