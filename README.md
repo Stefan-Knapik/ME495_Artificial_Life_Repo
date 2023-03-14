@@ -3,13 +3,16 @@ This is a project for the ME495 Artificial Life course at Northwestern Universit
 https://www.reddit.com/r/ludobots/
 
 ## To Do
+
 Mutation Cleanup
 - recalculation function
 - then recheck for collisions
 - this will make following robust, joint locations, link size, link delete/add on the interior
+- 
 Optimization (AFPO)
 - pareto front calculation
 - select front, random replace
+- 
 Submission
 - Executable
 - Saved robots
