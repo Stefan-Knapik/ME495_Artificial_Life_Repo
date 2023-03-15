@@ -104,10 +104,8 @@ First, evolution is performed with each selection algorithm for 5 different rand
 
 To elucidate why there is no apparent advantage to the Pareto selection algorithm, the members of populations are visualized in the age-fitness-generation space. To generate the video below, one trial of each selection algorithm is performed for 1000 generations with a population size of 20. These parameters correspond to 2x1x20x1000 = 40,000 simulations. We can see that for the Pareto algorithm, the majority of the population is replaced with random initializations very frequently. With the current evolution hyperparameters, there is not a lot of room on the Pareto front to simultaneously pursue many good designs.
 
-Parallel Hill Climber vs. Age-Fitness Pareto Optimization YouTube Video: https://youtu.be/bVtE38cuLeQ
-
-The last frame of the linked video is shown here.
-
+Parallel Hill Climber vs. Age-Fitness Pareto Optimization 
+![selection gif](PHC_vs_AFPO.gif)
 ![Generation1000](https://user-images.githubusercontent.com/101603342/225202931-d445c0bc-536a-413d-9d3e-797bc4eeaa5b.png)
 
 ## Future Work
