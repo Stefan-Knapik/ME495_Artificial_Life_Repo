@@ -67,11 +67,13 @@ The brain of the robot (i.e., the function transforming sensor inputs to motor a
 
 ## Mutation
 There are currently 9 supported modes of genetic mutation, which occur with probabilities defined in **solution.py**.
+
 Brain Mutations
 1. Change a synapse: replace one element in the **SOLUTION.weights** array
 2. Swap sensors: swap two rows in the **SOLUTION.weights** array
 3. Swap motors: swap two columns in the **SOLUTION.weights** array
 4. Add/remove a sensor: insert/delete a row in the **SOLUTION.weights** array and modify **SOLUTION.links** accordingly
+
 Body Mutations
 5. Change joint axis: replace elements 15-17 in one row of the **SOLUTION.links** array
 6. Change link size: replace element 4 in one row of the **SOLUTION.links** array
