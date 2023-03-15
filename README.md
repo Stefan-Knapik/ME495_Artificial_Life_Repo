@@ -43,7 +43,7 @@ Here we limit ourselves to spherical body segments for the sake of simple collis
 ![image](https://user-images.githubusercontent.com/101603342/220275338-f7aedc9c-7b06-425b-9f80-417416bdb1ad.png)
 
 ## Genetic Representation
-All of the information required to define a unique robot body is encoded in the 2-dimensional array stored in **SOLUTION.links**. Each row corresponds to a link and its parent joint. The columns correspond to the following features:
+All of the information required to define a unique robot body is encoded in the 2-dimensional array stored in **SOLUTION.links**. Each row corresponds to a link and its parent joint. The columns correspond to the following features.
 
 1. absolute x-location of link
 2. absolute y-location of link
