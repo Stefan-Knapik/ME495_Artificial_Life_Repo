@@ -66,7 +66,7 @@ It is noted that the absolute location of each link (columns 1-3) and the absolu
 The brain of the robot (i.e., the function transforming sensor inputs to motor actuation) is encoded in the 2-dimensional array stored in **SOLUTION.weights**. These weights correspond to coefficients in a shallow but fully connected neural network between sensors and motors.
 
 ## Mutation
-There are currently 9 supported modes of genetic mutation, which occur with probabilities defined in **solution.py**.
+For the genetic algorithm, a variety of random mutations are permitted to occur according to a user-defined probability distribution. These include changes that primarily affect the "brain" or the "body". There are currently 9 supported modes of genetic mutation which are summarized below.
 
 Brain Mutations
 1. Change a synapse:   replace one element in the **SOLUTION.weights** array
@@ -82,25 +82,17 @@ Body Mutations
 8. Add a link:   add a row to the **SOLUTION.links** array
 9. Remove a link:   remove a row from the **SOLUTION.links** array
 
+Governing parameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
+
+## Selection Algorithms
+### Parallel Hill Climber
+The parallel hill climber algorithm allows for arbitrary population sizes. Each parent robot within a population is copied and mutated to produce a child. Then, each parent competes with its own child and the fittest of the two is included in the population of the next generation. "Parallel" refers to the isolation of each lineage from the rest of the population. Performing 10 trials with a population size of 1 is equivalent to performing 1 trial with a population size of 10.
+
+### Age-Fitness Pareto Optimization
+The implemented age-fitness Pareto algorithm is an extension of the parallel hill-climber. Each parent still competes with its child for survival. However, to encourage exploration over exploitation, at the beginning of each generation the members of the population that are not on the age-fitness Pareto front are replaced with random initialized robots. Individuals are considered to be on the Pareto front if there is no other member in the population that has both a better age (younger) and fitness (moves further). This requirement for survival has the effect of killing off old phenotypes that have persisted through many generations if they have stagnated in improvement, which likely occurs because they have settled into a local optima of the design space. This frees up computational resources to try novel designs, which are likely to be worse at first but may have massive potential for improvement!
+
 ## Evolve morphology and behavior concurrently (using a parallel hill climber)
 This branch of the repository explores the genetic optimization of creature morphologies and behaviors for locomotion in the negative x-direction.
-
-The random design initializations follow the same strategy as the branch for assignment 7.
-
-https://github.com/Stefan-Knapik/ME495_Artificial_Life_Repo/tree/HW7-Random3D
-
-For the genetic algorithm, a variety of random mutations are permitted to occur according to a user-defined probability distribution. These include changes that only affect the "brain", only affect the "body", or require modification to both simultaneously. The scope of each type of mutation is summarized below:
-- single neuron weight
-- sensor swap
-- motor swap
-- add/remove a sensor
-- joint axis direction
-- add a body segment
-- remove a body segment (currently only implemented for leaf links)
-- resize a body segment
-- joint location (implemented but unused, needs further work to avoid breaking the rules of Assignment 7)
-
-Governing parameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
 
 Below is an image depicting the progression of fitness through 5 different evolving populations.
 
