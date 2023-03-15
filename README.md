@@ -97,16 +97,14 @@ The implemented age-fitness Pareto algorithm is an extension of the parallel hil
 
 Additionally, a modification was made to protect individuals at the extreme ends of the spectrum. For the results presented, there are exceptions for individuals less than 3 generations old or in the top 20% of the population by fitness, allowing these individuals to persist even if they are not on the Pareto front.
 
-## Discussion
+## Discussion of Parallel Hill Climber vs. Age-Fitness Pareto Optimization
 First, evolution is performed with each selection algorithm for 5 different random seeds. The population size is 20, and the process spans 500 generations. These parameters correspond to 2x5x20x500 = 100,000 simulations. Plotted below is the maximum fitness over a population varying across generations. Suprisingly, the age-fitness Pareto algorithm did not clearly outperform the parallel hill climber, although it does appear more consistent. Both the best and worst final designs occured in different trials that used the parallel hill climber, while the final designs found by the Pareto algorithm were middle of the pack.
 
 ![BestFitnessObserved](https://user-images.githubusercontent.com/101603342/225200132-0ddc3fe7-194f-4aa3-817c-235e342ccd7e.png)
 
 To elucidate why there is no apparent advantage to the Pareto selection algorithm, the members of populations are visualized in the age-fitness-generation space. To generate the video below, one trial of each selection algorithm is performed for 1000 generations with a population size of 20. These parameters correspond to 2x1x20x1000 = 40,000 simulations. We can see that for the Pareto algorithm, the majority of the population is replaced with random initializations very frequently. With the current evolution hyperparameters, there is not a lot of room on the Pareto front to simultaneously pursue many good designs.
 
-Parallel Hill Climber vs. Age-Fitness Pareto Optimization 
 ![selection gif](PHC_vs_AFPO.gif)
-![Generation1000](https://user-images.githubusercontent.com/101603342/225202931-d445c0bc-536a-413d-9d3e-797bc4eeaa5b.png)
 
 ## Future Work
 
