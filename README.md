@@ -84,7 +84,7 @@ Body Mutations
 8. Add a link:   add a row to the **SOLUTION.links** array
 9. Remove a link:   remove a row from the **SOLUTION.links** array
 
-Governing parameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
+Genetic hyperparameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
 
 ## Selection Algorithms
 The implemented selection criteria is locomotion in the negative x-direction. In other words, the fitness of a robot is measured by the distance it travels into the screen. Two different schemes are used to select for this behavior.
