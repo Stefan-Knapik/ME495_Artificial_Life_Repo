@@ -1,33 +1,9 @@
 # Final Project
 
-## To Do
-
-Mutation Cleanup
-- recalculation function
-- then recheck for collisions
-- this will make following robust, joint locations, link size, link delete/add on the interior
-- 
-Optimization (AFPO)
-- pareto front calculation
-- select front, random replace
-- 
-Submission
-- Executable
-- Saved robots
-- 2 min summary
-- 10 sec teaser
-- Hypothesis
-- Experiment
-- Genotype - Phenotype
-- Results
-- Further results
-- Discussion/Conclusion
-
 ## Summary
+Here we explore the evolutionary optimization of 3-dimensional robots for locomotion. These robots have rigid and spherical body segments, sensors, and motors, and they can evolve to exhibit a variety of locomotion modes including what may be described as walking, jumping, galloping, or rolling.
 
-
-## YouTube Video
-https://youtu.be/Scpsa_iSDLs
+YouTube Video: https://youtu.be/Scpsa_iSDLs
 
 ## Generate random 3D creature morphologies
 This branch of the repository explores the generation of random creature morphologies. Random parameters include:
