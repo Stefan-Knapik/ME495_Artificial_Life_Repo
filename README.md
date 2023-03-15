@@ -40,15 +40,10 @@ Here we limit ourselves to spherical body segments for the sake of simple collis
 
 ![image](https://user-images.githubusercontent.com/101603342/220275338-f7aedc9c-7b06-425b-9f80-417416bdb1ad.png)
 
-### Genetic Representation
+## Genetic Representation and Mutation
+All of the information required to define a unique robot body is encoded in the 2-dimensional array stored in **SOLUTION.links**.
 
-## Run the code (on Windows)
-Run __showRandom.py__ to generate and visualize a sequence of random creature morphologies.
-
-- Simulation parameters, including maximum joint forces and angles, can be set in __constants.py__
-- Random morphology generation parameters can be set in the constructor of the SOLUTION class defined in __solution2.py__
-
-If simulating with global collision detection, the "connect_factor" variable in __solution2.py__ should be set slightly greater than 1 to ensure joint mobility. With a value of 1, the links are exactly touching without collision. The default value is 0.9 for aesthetic purposes, which is unproblematic for simulation without self-collision.
+The brain of the robot (i.e., the function transforming sensor inputs to motor actuation) is encoded in the 2-dimensional array stored in **SOLUTION.weights**.
 
 ## Evolve morphology and behavior concurrently (using a parallel hill climber)
 This branch of the repository explores the genetic optimization of creature morphologies and behaviors for locomotion in the negative x-direction.
