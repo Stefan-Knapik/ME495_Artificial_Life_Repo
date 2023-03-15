@@ -7,7 +7,6 @@ for N in range(0, c.num_to_save):
     for seed in range(1, c.trials+1):
         for algo in ['PHC', 'AFPO']:
             
-            seed = 4
             print(f"save/BestSolution_{algo}_RS{seed}_N{N}.obj")
             x = input("Press Enter to continue...")
             

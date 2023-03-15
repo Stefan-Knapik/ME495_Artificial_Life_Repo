@@ -3,7 +3,7 @@ from solution import SOLUTION
 import numpy as np
 import random
 
-number_of_robots = 1
+number_of_robots = 10
 
 for i in range(number_of_robots):
     # Reset temp folder
@@ -20,6 +20,7 @@ for i in range(number_of_robots):
     rand_robot.Create_Body()
     rand_robot.Create_Brain()
     
+    x = input("Press Enter to continue...")
     # os.system(f"python simulate.py GUI {i}")
     os.system(f"python simulate.py GUI {i} > nul 2> nul")
     
