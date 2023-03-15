@@ -28,12 +28,12 @@ img src="https://user-images.githubusercontent.com/101603342/220268996-d46b12c3-
 
 Here we limit ourselves to spherical body segments for the sake of simple collision detection during body generation. While the default simulation parameters will allow links to intersect as they move, ensuring that links do not initially intersect assures us that we can simulate these robots with global collision detection if we so choose.
 
-**Number of links**, **maximum children per link**, and **maximum link tree depth** are prescribed for each robot. **Link radius** is uniformly randomly chosen for each link. **Joint locations** and **Joint axis directions** are uniformly randomly tried over the spherical link surfaces via some fun math (search spherically symmetric distributions to learn more)!  are  Link **sensation** occurs at a fixed probability over all the links.
+**Number of links**, **maximum children per link**, and **maximum link tree depth** are randomly prescribed for each robot. **Link radius** is uniformly randomly selected for each link. **Joint locations** and **Joint axis directions** are uniformly randomly tried over the spherical link surfaces via some fun math (search spherically symmetric distributions to learn more!) until a collision-free structure is achieved. Link **sensation** occurs at a fixed probability over all the links.
 
-### Initialization Procedure
+### Body Initialization Procedure
 1. Create the root link at a specified location.
 2. Randomly choose an existing link that is eligible to have a child. Links can be disqualified from further parenthood if they have too many children or are too deep in the tree.
-3. Propose a random joint and link to stem from the chosen parent.
+3. Propose a random joint (location and direction) and link (size and sensation) to stem from the chosen parent.
 4. If spawning this new joint-link pair will create a collision with the floor or other links, go back to Step 2.
 5. Accept the randomly generated joint-link pair.
 6. Repeat from Step 2 until the number of links is satisfied.
