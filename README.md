@@ -40,7 +40,7 @@ Here we limit ourselves to spherical body segments for the sake of simple collis
 
 ![image](https://user-images.githubusercontent.com/101603342/220275338-f7aedc9c-7b06-425b-9f80-417416bdb1ad.png)
 
-## Genetic Representation and Mutation
+## Genetic Representation
 All of the information required to define a unique robot body is encoded in the 2-dimensional array stored in **SOLUTION.links**. Each row corresponds to a link and its parent joint. The columns correspond to the following features:
 
 1. absolute x-location of link
@@ -64,6 +64,20 @@ All of the information required to define a unique robot body is encoded in the 
 It is noted that the absolute location of each link (columns 1-3) and the absolute location of each joint (columns 9-11) are determined by the other elements in the array, so these are not mutated directly and are recomputed as needed.
 
 The brain of the robot (i.e., the function transforming sensor inputs to motor actuation) is encoded in the 2-dimensional array stored in **SOLUTION.weights**. These weights correspond to coefficients in a shallow but fully connected neural network between sensors and motors.
+
+## Mutation
+There are currently 9 supported modes of genetic mutation, which occur with probabilities defined in **solution.py**.
+Brain Mutations
+1. Change a synapse: replace one element in the **SOLUTION.weights** array
+2. Swap sensors: swap two rows in the **SOLUTION.weights** array
+3. Swap motors: swap two columns in the **SOLUTION.weights** array
+4. Add/remove a sensor: insert/delete a row in the **SOLUTION.weights** array and modify **SOLUTION.links** accordingly
+Body Mutations
+5. Change joint axis: replace elements 15-17 in one row of the **SOLUTION.links** array
+6. Change link size: replace element 4 in one row of the **SOLUTION.links** array
+7. Change joint locations: replace elements 12-14 in one row of the **SOLUTION.links** array
+8. Add a link: add a row to the **SOLUTION.links** array
+9. Remove a link: remove a row from the **SOLUTION.links** array
 
 ## Evolve morphology and behavior concurrently (using a parallel hill climber)
 This branch of the repository explores the genetic optimization of creature morphologies and behaviors for locomotion in the negative x-direction.
