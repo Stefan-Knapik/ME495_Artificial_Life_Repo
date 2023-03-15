@@ -102,7 +102,7 @@ First, evolution is performed with each selection algorithm for 5 different rand
 
 ![BestFitnessObserved](https://user-images.githubusercontent.com/101603342/225200132-0ddc3fe7-194f-4aa3-817c-235e342ccd7e.png)
 
-To elucidate why there is no apparent advantage to the Pareto selection algorithm, the members of populations are visualized in the age-fitness-generation space. To generate the video below, one trial of each selection algorithm is performed for 1000 generations with a population size of 20. These parameters correspond to 2x1x20x1000 = 40,000 simulations. We can see that for the Pareto algorithm, the majority of the population is replaced with random initializations very frequently. With the current evolution hyperparameters, there is not a lot of room on the Pareto front to simultaneously pursue many good designs. It appears to commit too much to exploration, putting all of its eggs in the basket of only a few high-achieving robots.
+To elucidate why there is no apparent advantage to the Pareto selection algorithm, the members of populations are visualized in the age-fitness-generation space. To generate the video below, one trial of each selection algorithm is performed for 1000 generations with a population size of 20. These parameters correspond to 2x1x20x1000 = 40,000 simulations. We can see that for the Pareto algorithm, the majority of the population is replaced with random initializations very frequently. With the current evolution hyperparameters, there is not a lot of room on the Pareto front to simultaneously pursue many good designs. AFPO appears to commit too much to exploration, putting all of its eggs in the basket of only a few high-achieving robots.
 
 ![selection gif](PHC_vs_AFPO.gif)
 
