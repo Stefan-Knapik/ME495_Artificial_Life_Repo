@@ -17,7 +17,7 @@ class SOLUTION:
         self.max_len = 0.8
         self.root_height = 1.2
         
-        self.num_links = np.random.randint(5, 15)
+        self.num_links = np.random.randint(5, 17)
         self.num_link_max = 40
         self.num_link_min = 4
         
@@ -287,7 +287,6 @@ class SOLUTION:
         
         probs = probs / probs.sum()
         mutation_type = np.random.choice([0, 1, 2, 3, 4, 5, 6, 7, 8], p=probs)
-        mutation_type = 7
         
         # EASY TO IMPLEMENT
         # single brain weight (of NN)

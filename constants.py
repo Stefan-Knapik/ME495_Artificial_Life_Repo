@@ -7,10 +7,10 @@ progress_bar = True
 printFitness = False
 printCollision = False
 
-numberOfGenerations = 1000
+numberOfGenerations = 500
 populationSize = 20
 
-num_steps = 1600
+num_steps = 1200
 sleep_time = 1/240
 
 gravity = -9.8
@@ -18,6 +18,6 @@ maxForce = 60
 motorJointRange = 1
 
 # AFPO
-safe_until_age = 10
+safe_until_age = 3
 keep_best_percentile = 20
 
