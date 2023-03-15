@@ -85,6 +85,8 @@ Body Mutations
 Governing parameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
 
 ## Selection Algorithms
+The implemented selection criteria is locomotion in the negative x-direction. In other words, the fitness of a robot is measured by the distance it travels into the screen. Two different schemes are used to select for this behavior.
+
 ### Parallel Hill Climber (PHC)
 The parallel hill climber algorithm allows for arbitrary population sizes. Each parent robot within a population is copied and mutated to produce a child. Then, each parent competes with its own child and the fittest of the two is included in the population of the next generation. "Parallel" refers to the isolation of each lineage from the rest of the population. Performing 10 trials with a population size of 1 is equivalent to performing 1 trial with a population size of 10.
 
@@ -95,6 +97,7 @@ Additionally, a modification was made to protect individuals at the extreme ends
 
 ## Discussion
 First, evolution is performed with each selection algorithm for 5 different random seeds. The population size is 20, and the process spans 500 generations. These parameters correspond to 2x5x20x500 = 100,000 simulations. Plotted below is the maximum fitness over a population varying across generations. Suprisingly, the age-fitness Pareto algorithm did not clearly outperform the parallel hill climber, although it does appear more consistent. Both the best and worst final designs occured in different trials that used the parallel hill climber, while the final designs found by the Pareto algorithm were middle of the pack.
+
 ![BestFitnessObserved](https://user-images.githubusercontent.com/101603342/225200132-0ddc3fe7-194f-4aa3-817c-235e342ccd7e.png)
 
 To elucidate why there is no apparent advantage to the Pareto selection algorithm, the members of populations are visualized in the age-fitness-generation space. To generate the video below, one trial of each selection algorithm is performed for 1000 generations with a population size of 20. These parameters correspond to 2x1x20x1000 = 40,000 simulations. We can see that for the Pareto algorithm, the majority of the population is replaced with random initializations very frequently. With the current evolution hyperparameters, there is not a lot of room on the Pareto front to simultaneously pursue many good designs.
@@ -102,15 +105,12 @@ To elucidate why there is no apparent advantage to the Pareto selection algorith
 Parallel Hill Climber vs. Age-Fitness Pareto Optimization YouTube Video: https://youtu.be/bVtE38cuLeQ
 
 The last frame of the linked video is shown here.
+
 ![Generation1000](https://user-images.githubusercontent.com/101603342/225202931-d445c0bc-536a-413d-9d3e-797bc4eeaa5b.png)
 
+## Future Work
 
-## Evolve morphology and behavior concurrently (using a parallel hill climber)
-This branch of the repository explores the genetic optimization of creature morphologies and behaviors for locomotion in the negative x-direction.
-
-Below is an image depicting the progression of fitness through 5 different evolving populations.
-
-<img src="https://user-images.githubusercontent.com/101603342/222029673-3fe8d92c-287e-42f3-91f3-f10a14b3ce61.png" width="600" />
+I further hypothesize that the age-fitness Pareto optimization will outperform the parallel hill climber when the population sizes are small or when evolution is allowed to occur over many generations. Either of these hyperparameter changes should create more room on the Pareto front relative to the population size, which I suspect is required for the Pareto algorithm to signifigantly outperform the parallel hill climber. Due to limited time and computational resources, I have not yet seriously interogatted this suspicion.
 
 ## Run the code (Windows)
 
