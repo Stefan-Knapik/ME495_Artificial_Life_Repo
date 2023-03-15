@@ -5,7 +5,8 @@ Here we explore the evolutionary optimization of 3-dimensional robots for locomo
 
 ![teaser gif](teaser.gif)
 
-YouTube Video: https://youtu.be/Scpsa_iSDLs
+## YouTube Video 
+https://youtu.be/HZSNYF7xUm0
 
 ## Hypothesis
 The performance of two evolutionary optimization algorithms, a parallel hill climber and an age-fitness Pareto optimization scheme, are compared.
@@ -78,11 +79,11 @@ Brain Mutations
 
 Body Mutations
 
-5. Change joint axis:   replace elements 15-17 in one row of the **SOLUTION.links** array
-6. Change link size:   replace element 4 in one row of the **SOLUTION.links** array
-7. Change joint locations:   replace elements 12-14 in one row of the **SOLUTION.links** array
-8. Add a link:   add a row to the **SOLUTION.links** array
-9. Remove a link:   remove a row from the **SOLUTION.links** array
+5. Change a joint axis:   replace elements 15-17 in one row of the **SOLUTION.links** array
+6. Change a link size:   replace element 4 in one row of the **SOLUTION.links** array
+7. Change a joint location:   replace elements 12-14 in one row of the **SOLUTION.links** array
+8. Add a link:   add a row to the **SOLUTION.links** array and modify **SOLUTION.weights** accordingly
+9. Remove a link:   remove a row from the **SOLUTION.links** array and modify **SOLUTION.weights** accordingly
 
 Genetic hyperparameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
 
@@ -120,14 +121,14 @@ I further hypothesize that the age-fitness Pareto optimization will outperform t
 
 Ensure all of the files from this repository are present in your working directory (e.g., by cloning this repository or downloading it as a .zip file).
 
-Run __Search.py__ to use a parallel hill climber to genetically optimize robots for locomotion in the negative x-direction.
+Run __Search.py__ to use both algorithms to genetically optimize robots for locomotion in the negative x-direction.
 
 - Simulation parameters, including maximum joint forces and angles, can be set in __constants.py__
 - Random morphology generation parameters can be set in the constructor of the SOLUTION class defined in __solution.py__
 
-__BestVisualize.py__ serves to easily visualize optimized creatures.
-__PlotFitness.py__ will generate plots comparable to those seen above (after having previously run __search.py__).
-__ShowRandom.py__ will generate and visualize a random robot.
+__BestVisualize.py__ serves to easily visualize saved optimized creatures.
+__PlotFitness.py__ will generate plots comparable to those seen above (after having previously run __Search.py__).
+__ShowRandom.py__ will generate and visualize random robots.
 
 If simulating with global collision detection, the "connect_factor" variable in __solution.py__ should be set slightly greater than 1 to ensure joint mobility. With a value of 1, the links are exactly touching without collision. The default value is 0.99 for aesthetic purposes, which is unproblematic for simulation without self-collision.
 
