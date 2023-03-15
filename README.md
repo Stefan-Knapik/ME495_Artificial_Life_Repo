@@ -5,15 +5,20 @@ Here we explore the evolutionary optimization of 3-dimensional robots for locomo
 
 YouTube Video: https://youtu.be/Scpsa_iSDLs
 
-## Generate random 3D creature morphologies
-This branch of the repository explores the generation of random creature morphologies. Random parameters include:
+## Hypothesis
+The performance of two optimization algorithms, a parallel hill climber and an age-fitness Pareto optimization scheme, are compared.
+
+I suspect that the age-fitness Pareto optimization algorithm will be able to find better designs than the parallel hill climber for a given simulation budget because the parallel hill climber has no mechanism to escape local optima that members of its population may settle into.
+
+## Body Generation
+Robots are initially generated randomly according to the following variable parameters.
 - number of spherical body segments
-- size of the body segments
-- joint locations
+- size of each body segment
+- joint locations with respect to parent links
 - joint axis directions
 - sensation (green links "feel", blue links are "numb")
-- maximum number of children per link
-- maximum depth of the link tree
+- maximum number of children per link constraint
+- maximum depth of the link tree constraint
 
 <img src="https://user-images.githubusercontent.com/101603342/220268996-d46b12c3-8011-4e0b-941c-9acd234cd08e.png" height="150"
 img src="https://user-images.githubusercontent.com/101603342/220268996-d46b12c3-8011-4e0b-941c-9acd234cd08e.png" height="150" />
@@ -23,9 +28,9 @@ img src="https://user-images.githubusercontent.com/101603342/220268996-d46b12c3-
 
 Here we limit ourselves to spherical body segments for the sake of simple collision detection during body generation. While the default simulation parameters will allow links to intersect as they move, ensuring that links do not initially intersect assures us that we can simulate these robots with global collision detection if we so choose.
 
-**Number of links**, **maximum children per link**, and **maximum link tree depth** are prescribed for each robot. **Link radius** is uniformly randomly chosen for each link. **Joint locations** are uniformly randomly tried over the spherical link surfaces via some fun math (search spherically symmetric distributions to learn more)! **Joint axis directions** are uniformly randomly generated, but constrained to be tangential to the spherical link surfaces. Link **sensation** occurs at a fixed probability over all the links.
+**Number of links**, **maximum children per link**, and **maximum link tree depth** are prescribed for each robot. **Link radius** is uniformly randomly chosen for each link. **Joint locations** and **Joint axis directions** are uniformly randomly tried over the spherical link surfaces via some fun math (search spherically symmetric distributions to learn more)!  are  Link **sensation** occurs at a fixed probability over all the links.
 
-## Procedure
+### Initialization Procedure
 1. Create the root link at a specified location.
 2. Randomly choose an existing link that is eligible to have a child. Links can be disqualified from further parenthood if they have too many children or are too deep in the tree.
 3. Propose a random joint and link to stem from the chosen parent.
@@ -35,7 +40,9 @@ Here we limit ourselves to spherical body segments for the sake of simple collis
 
 ![image](https://user-images.githubusercontent.com/101603342/220275338-f7aedc9c-7b06-425b-9f80-417416bdb1ad.png)
 
-## Run the code (Windows)
+### Genetic Representation
+
+## Run the code (on Windows)
 Run __showRandom.py__ to generate and visualize a sequence of random creature morphologies.
 
 - Simulation parameters, including maximum joint forces and angles, can be set in __constants.py__
@@ -68,6 +75,9 @@ Below is an image depicting the progression of fitness through 5 different evolv
 <img src="https://user-images.githubusercontent.com/101603342/222029673-3fe8d92c-287e-42f3-91f3-f10a14b3ce61.png" width="600" />
 
 ## Run the code (Windows)
+
+Ensure all of the files from this repository are present in your working directory (e.g., by cloning this repository or downloading it as a ZIP file).
+
 Run __search.py__ to use a parallel hill climber to genetically optimize robots for locomotion in the negative x-direction.
 
 - Simulation parameters, including maximum joint forces and angles, can be set in __constants.py__
