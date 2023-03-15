@@ -91,6 +91,14 @@ The parallel hill climber algorithm allows for arbitrary population sizes. Each 
 ### Age-Fitness Pareto Optimization
 The implemented age-fitness Pareto algorithm is an extension of the parallel hill-climber. Each parent still competes with its child for survival. However, to encourage exploration over exploitation, at the beginning of each generation the members of the population that are not on the age-fitness Pareto front are replaced with random initialized robots. Individuals are considered to be on the Pareto front if there is no other member in the population that has both a better age (younger) and fitness (moves further). This requirement for survival has the effect of killing off old phenotypes that have persisted through many generations if they have stagnated in improvement, which likely occurs because they have settled into a local optima of the design space. This frees up computational resources to try novel designs, which are likely to be worse at first but may have massive potential for improvement!
 
+Additionally, a modification was made to protect individuals at the extreme ends of the spectrum. For the results presented, there are exceptions for individuals less than 3 generations old or in the top 20% of the population by fitness, allowing these individuals to persist even if they are not on the Pareto front.
+
+## Results
+First, evolution is performed with each selection algorithm for 5 different random seeds. The population size is 20, and the process spans 500 generations. These parameters correspond to 2x5x20x500 = 100,000 simulations. Plotted below is the maximum fitness over a population varying across generations.
+
+![BestFitnessObserved](https://user-images.githubusercontent.com/101603342/225200132-0ddc3fe7-194f-4aa3-817c-235e342ccd7e.png)
+
+
 ## Evolve morphology and behavior concurrently (using a parallel hill climber)
 This branch of the repository explores the genetic optimization of creature morphologies and behaviors for locomotion in the negative x-direction.
 
