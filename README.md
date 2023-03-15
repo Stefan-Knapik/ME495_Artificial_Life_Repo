@@ -102,25 +102,26 @@ First, evolution is performed with each selection algorithm for 5 different rand
 
 ![BestFitnessObserved](https://user-images.githubusercontent.com/101603342/225200132-0ddc3fe7-194f-4aa3-817c-235e342ccd7e.png)
 
-To elucidate why there is no apparent advantage to the Pareto selection algorithm, the members of populations are visualized in the age-fitness-generation space. To generate the video below, one trial of each selection algorithm is performed for 1000 generations with a population size of 20. These parameters correspond to 2x1x20x1000 = 40,000 simulations. We can see that for the Pareto algorithm, the majority of the population is replaced with random initializations very frequently. With the current evolution hyperparameters, there is not a lot of room on the Pareto front to simultaneously pursue many good designs.
+To elucidate why there is no apparent advantage to the Pareto selection algorithm, the members of populations are visualized in the age-fitness-generation space. To generate the video below, one trial of each selection algorithm is performed for 1000 generations with a population size of 20. These parameters correspond to 2x1x20x1000 = 40,000 simulations. We can see that for the Pareto algorithm, the majority of the population is replaced with random initializations very frequently. With the current evolution hyperparameters, there is not a lot of room on the Pareto front to simultaneously pursue many good designs. It appears to commit too much to exploration, putting all of its eggs in the basket of only a few high-achieving robots.
 
 ![selection gif](PHC_vs_AFPO.gif)
 
 ## Future Work
 
-I further hypothesize that the age-fitness Pareto optimization will outperform the parallel hill climber when the population sizes are small or when evolution is allowed to occur over many generations. Either of these hyperparameter changes should create more room on the Pareto front relative to the population size, which I suspect is required for the Pareto algorithm to signifigantly outperform the parallel hill climber. Due to limited time and computational resources, I have not yet seriously interogatted this suspicion.
+I further hypothesize that the age-fitness Pareto optimization will outperform the parallel hill climber when the population sizes are smaller or when evolution is allowed to occur over more generations. Either of these hyperparameter changes should create more room on the Pareto front relative to the population size, which I suspect is required for the Pareto algorithm to signifigantly outperform the parallel hill climber. Due to limited time and computational resources, I have not yet seriously interogatted this suspicion.
 
 ## Run the code (Windows)
 
-Ensure all of the files from this repository are present in your working directory (e.g., by cloning this repository or downloading it as a ZIP file).
+Ensure all of the files from this repository are present in your working directory (e.g., by cloning this repository or downloading it as a .zip file).
 
-Run __search.py__ to use a parallel hill climber to genetically optimize robots for locomotion in the negative x-direction.
+Run __Search.py__ to use a parallel hill climber to genetically optimize robots for locomotion in the negative x-direction.
 
 - Simulation parameters, including maximum joint forces and angles, can be set in __constants.py__
 - Random morphology generation parameters can be set in the constructor of the SOLUTION class defined in __solution.py__
 
 __BestVisualize.py__ serves to easily visualize optimized creatures.
-__PlotFitness.py__ will generate a plot comparable to the one above (after having previously run __search.py__).
+__PlotFitness.py__ will generate plots comparable to those seen above (after having previously run __search.py__).
+__ShowRandom.py__ will generate and visualize a random robot.
 
 If simulating with global collision detection, the "connect_factor" variable in __solution.py__ should be set slightly greater than 1 to ensure joint mobility. With a value of 1, the links are exactly touching without collision. The default value is 0.99 for aesthetic purposes, which is unproblematic for simulation without self-collision.
 
