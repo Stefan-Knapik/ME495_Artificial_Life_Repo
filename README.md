@@ -41,9 +41,29 @@ Here we limit ourselves to spherical body segments for the sake of simple collis
 ![image](https://user-images.githubusercontent.com/101603342/220275338-f7aedc9c-7b06-425b-9f80-417416bdb1ad.png)
 
 ## Genetic Representation and Mutation
-All of the information required to define a unique robot body is encoded in the 2-dimensional array stored in **SOLUTION.links**.
+All of the information required to define a unique robot body is encoded in the 2-dimensional array stored in **SOLUTION.links**. Each row corresponds to a link and its parent joint. The columns correspond to the following features:
 
-The brain of the robot (i.e., the function transforming sensor inputs to motor actuation) is encoded in the 2-dimensional array stored in **SOLUTION.weights**.
+1. absolute x-location of link
+2. absolute y-location of link
+3. absolute z-location of link
+4. diameter of link
+5. link sensation
+6. eligibilty to spawn a child link
+7. layer number in the link tree
+8. parent link ID
+9. absolute x-location of joint
+10. absolute y-location of joint
+11. absolute z-location of joint
+12. relative x-location of joint w.r.t. its parent link
+13. relative y-location of joint w.r.t. its parent link
+14. relative z-location of joint w.r.t. its parent link
+15. absolute x-component of joint axis
+16. absolute y-component of joint axis
+17. absolute z-component of joint axis
+
+It is noted that the absolute location of each link (columns 1-3) and the absolute location of each joint (columns 9-11) are determined by the other elements in the array, so these are not mutated directly and are recomputed as needed.
+
+The brain of the robot (i.e., the function transforming sensor inputs to motor actuation) is encoded in the 2-dimensional array stored in **SOLUTION.weights**. These weights correspond to coefficients in a shallow but fully connected neural network between sensors and motors.
 
 ## Evolve morphology and behavior concurrently (using a parallel hill climber)
 This branch of the repository explores the genetic optimization of creature morphologies and behaviors for locomotion in the negative x-direction.
