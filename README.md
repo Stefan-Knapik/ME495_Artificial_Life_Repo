@@ -3,6 +3,8 @@
 ## Summary
 Here we explore the evolutionary optimization of 3-dimensional robots for locomotion. These robots have rigid and spherical body segments, sensors, and motors, and they can evolve to exhibit a variety of locomotion modes including what may be described as walking, jumping, galloping, or rolling.
 
+![](teaser.gif) / ! [](teaser.gif)
+
 YouTube Video: https://youtu.be/Scpsa_iSDLs
 
 ## Hypothesis
