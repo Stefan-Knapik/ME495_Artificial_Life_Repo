@@ -1,6 +1,5 @@
 # Final Project
-This is a project for the ME495 Artificial Life course at Northwestern University, which utilizes content from the r/ludobots evolutionary robotics subreddit.
-https://www.reddit.com/r/ludobots/
+
 
 ## To Do
 
@@ -64,3 +63,11 @@ __BestVisualize.py__ serves to easily visualize optimized creatures.
 __PlotFitness.py__ will generate a plot comparable to the one above (after having previously run __search.py__).
 
 If simulating with global collision detection, the "connect_factor" variable in __solution.py__ should be set slightly greater than 1 to ensure joint mobility. With a value of 1, the links are exactly touching without collision. The default value is 0.99 for aesthetic purposes, which is unproblematic for simulation without self-collision.
+
+## References
+
+Bongard, J. “Education in Evolutionary Robotics” Reddit, https://www.reddit.com/r/ludobots/.
+
+Coumans, E., Bai, Y., Hsu, J., pybullet Python module for physics simulation
+
+Kriegman, S. Artificial Life Course, Northwestern University, Evanston, Illinois, Winter 2023.
