@@ -108,6 +108,8 @@ Bongard, J. “Education in Evolutionary Robotics” Reddit, https://www.reddit.
 
 Bongard, J. pyrosim GitHub repository, https://github.com/jbongard/pyrosim.
 
-Coumans, E., Bai, Y., Hsu, J. pybullet Python module for physics simulation
+Coumans, E., Bai, Y., and Hsu, J. pybullet Python module for physics simulation
 
 Kriegman, S. Artificial Life Course, Northwestern University, Evanston, Illinois, Winter 2023.
+
+Schmidt, M., and Lipson H. “Age-Fitness Pareto Optimization.” Genetic Programming Theory and Practice VIII, 2010, pp. 129–146., https://doi.org/10.1007/978-1-4419-7747-2_8. 
