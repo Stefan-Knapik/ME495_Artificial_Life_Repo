@@ -79,9 +79,9 @@ Brain Mutations
 
 Body Mutations
 
-5. Change joint axis:   replace elements 15-17 in one row of the **SOLUTION.links** array
-6. Change link size:   replace element 4 in one row of the **SOLUTION.links** array
-7. Change joint locations:   replace elements 12-14 in one row of the **SOLUTION.links** array
+5. Change a joint axis:   replace elements 15-17 in one row of the **SOLUTION.links** array
+6. Change a link size:   replace element 4 in one row of the **SOLUTION.links** array
+7. Change a joint location:   replace elements 12-14 in one row of the **SOLUTION.links** array
 8. Add a link:   add a row to the **SOLUTION.links** array
 9. Remove a link:   remove a row from the **SOLUTION.links** array
 
