@@ -1,4 +1,4 @@
-# Final Project
+# Final Project for ME 495 Artificial Life, Winter 2023
 
 ## Summary
 Here we explore the evolutionary optimization of 3-dimensional robots for locomotion. These robots have rigid and spherical body segments, sensors, and motors, and they can evolve to exhibit a variety of locomotion modes including what may be described as walking, jumping, galloping, or rolling.
@@ -8,9 +8,9 @@ Here we explore the evolutionary optimization of 3-dimensional robots for locomo
 YouTube Video: https://youtu.be/Scpsa_iSDLs
 
 ## Hypothesis
-The performance of two optimization algorithms, a parallel hill climber and an age-fitness Pareto optimization scheme, are compared.
+The performance of two evolutionary optimization algorithms, a parallel hill climber and an age-fitness Pareto optimization scheme, are compared.
 
-I suspect that the age-fitness Pareto optimization algorithm will be able to find better designs than the parallel hill climber for a given simulation budget because the parallel hill climber has no mechanism to escape local optima that members of its population may settle into.
+I suspect that the age-fitness Pareto optimization algorithm will be able to find better designs than the parallel hill climber for a given simulation budget because the parallel hill climber has no mechanism to escape local optima that members of the population may settle into.
 
 ## Body Generation
 Robots are initially generated randomly according to the following variable parameters.
