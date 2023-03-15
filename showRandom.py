@@ -3,7 +3,7 @@ from solution import SOLUTION
 import numpy as np
 import random
 
-number_of_robots = 10
+number_of_robots = 1
 
 for i in range(number_of_robots):
     # Reset temp folder
