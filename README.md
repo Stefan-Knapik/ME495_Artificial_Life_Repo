@@ -92,8 +92,12 @@ The implemented selection criteria is locomotion in the negative x-direction. In
 ### Parallel Hill Climber (PHC)
 The parallel hill climber algorithm allows for arbitrary population sizes. Each parent robot within a population is copied and mutated to produce a child. Then, each parent competes with its own child and the fittest of the two is included in the population of the next generation. "Parallel" refers to the isolation of each lineage from the rest of the population. Performing 10 trials with a population size of 1 is equivalent to performing 1 trial with a population size of 10.
 
+![PHC gif](PHC_cartoon.gif)
+
 ### Age-Fitness Pareto Optimization (AFPO)
 The implemented age-fitness Pareto algorithm is an extension of the parallel hill-climber. Each parent still competes with its child for survival. However, to encourage exploration over exploitation, at the beginning of each generation the members of the population that are not on the age-fitness Pareto front are replaced with random initialized robots. Individuals are considered to be on the Pareto front if there is no other member in the population that has both a better age (younger) and fitness (moves further). This requirement for survival has the effect of killing off old phenotypes that have persisted through many generations if they have stagnated in improvement, which likely occurs because they have settled into a local optima of the design space. This frees up computational resources to try novel designs, which are likely to be worse at first but may have massive potential for improvement!
+
+![AFPO gif](AFPO_cartoon.gif)
 
 Additionally, a modification was made to protect individuals at the extreme ends of the spectrum. For the results presented, there are exceptions for individuals less than 3 generations old or in the top 20% of the population by fitness, allowing these individuals to persist even if they are not on the Pareto front.
 
