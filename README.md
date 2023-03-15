@@ -82,8 +82,8 @@ Body Mutations
 5. Change a joint axis:   replace elements 15-17 in one row of the **SOLUTION.links** array
 6. Change a link size:   replace element 4 in one row of the **SOLUTION.links** array
 7. Change a joint location:   replace elements 12-14 in one row of the **SOLUTION.links** array
-8. Add a link:   add a row to the **SOLUTION.links** array
-9. Remove a link:   remove a row from the **SOLUTION.links** array
+8. Add a link:   add a row to the **SOLUTION.links** array and modify **SOLUTION.weights** accordingly
+9. Remove a link:   remove a row from the **SOLUTION.links** array and modify **SOLUTION.weights** accordingly
 
 Genetic hyperparameters are adjustable, and it is noted that most of the robots shown in the YouTube video were initialized with few body segments and allowed to "grow" as they evolved. This harnesses the synergistic advantage of evolving behavior and body together, rather than starting with a large body and randomly (hopelessly?) searching a massive behavior space from scratch.
 
