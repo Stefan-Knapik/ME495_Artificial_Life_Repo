@@ -75,6 +75,7 @@ Brain Mutations
 4. Add/remove a sensor: insert/delete a row in the **SOLUTION.weights** array and modify **SOLUTION.links** accordingly
 
 Body Mutations
+
 5. Change joint axis: replace elements 15-17 in one row of the **SOLUTION.links** array
 6. Change link size: replace element 4 in one row of the **SOLUTION.links** array
 7. Change joint locations: replace elements 12-14 in one row of the **SOLUTION.links** array
