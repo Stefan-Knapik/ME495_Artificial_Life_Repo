@@ -126,9 +126,9 @@ Run __Search.py__ to use both algorithms to genetically optimize robots for loco
 - Simulation parameters, including maximum joint forces and angles, can be set in __constants.py__
 - Random morphology generation parameters can be set in the constructor of the SOLUTION class defined in __solution.py__
 
-__BestVisualize.py__ serves to easily visualize saved optimized creatures.
-__PlotFitness.py__ will generate plots comparable to those seen above (after having previously run __Search.py__).
+__ShowBest.py__ serves to easily visualize saved optimized creatures.
 __ShowRandom.py__ will generate and visualize random robots.
+__PlotFitness.py__ will generate plots comparable to those seen above (after having previously run __Search.py__).
 
 If simulating with global collision detection, the "connect_factor" variable in __solution.py__ should be set slightly greater than 1 to ensure joint mobility. With a value of 1, the links are exactly touching without collision. The default value is 0.99 for aesthetic purposes, which is unproblematic for simulation without self-collision.
 
