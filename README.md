@@ -98,6 +98,8 @@ The implemented age-fitness Pareto algorithm is an extension of the parallel hil
 Additionally, a modification was made to protect individuals at the extreme ends of the spectrum. For the results presented, there are exceptions for individuals less than 3 generations old or in the top 20% of the population by fitness, allowing these individuals to persist even if they are not on the Pareto front.
 
 ## Discussion of Parallel Hill Climber vs. Age-Fitness Pareto Optimization
+To test the hypothesis and determine whether or not AFPO will outperform PHC, otherwise identical evolution processes are run multiple times with new random seeds. The only difference between the AFPO and the PHC trials is the selection process. The body generation, mutation, and simulation hyperparameters are left unchanged.
+
 First, evolution is performed with each selection algorithm for 5 different random seeds. The population size is 20, and the process spans 500 generations. These parameters correspond to 2x5x20x500 = 100,000 simulations. Plotted below is the maximum fitness over a population varying across generations. Suprisingly, the age-fitness Pareto algorithm did not clearly outperform the parallel hill climber, although it does appear more consistent. Both the best and worst final designs occured in different trials that used the parallel hill climber, while the final designs found by the Pareto algorithm were middle of the pack.
 
 ![BestFitnessObserved](https://user-images.githubusercontent.com/101603342/225200132-0ddc3fe7-194f-4aa3-817c-235e342ccd7e.png)
