@@ -7,6 +7,7 @@ Here we explore the evolutionary optimization of 3-dimensional robots for locomo
 
 ## YouTube Video 
 Submitted: https://youtu.be/HZSNYF7xUm0
+
 Revised: https://youtu.be/cs4uScmTYog
 
 ## Hypothesis
