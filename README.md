@@ -6,9 +6,7 @@ Here we explore the evolutionary optimization of 3-dimensional robots for locomo
 ![teaser gif](teaser.gif)
 
 ## YouTube Video 
-Submitted: https://youtu.be/HZSNYF7xUm0
-
-Revised: https://youtu.be/cs4uScmTYog
+https://youtu.be/cs4uScmTYog
 
 ## Hypothesis
 The performance of two evolutionary optimization algorithms, a parallel hill climber and an age-fitness Pareto optimization scheme, are compared.
